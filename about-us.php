@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../includes/config.php';
+require_once __DIR__ . '/includes/config.php';
 $page_title = "Sobre Nosotros | Aloia";
 $activePage = 'nosotros';
 ?>
@@ -112,7 +112,7 @@ $activePage = 'nosotros';
                         </div>
                     </div>
 
-                    <a href="<?php BASE_URL ?>contacto.php"
+                    <a href="<?php echo BASE_URL ?>contacto.php"
                         class="inline-block bg-gradient-to-r from-aloia-orange to-aloia-red text-white font-bold py-3 px-8 rounded-full shadow-lg hover:transform hover:scale-105 transition-all">
                         Contáctanos
                     </a>
@@ -208,7 +208,7 @@ $activePage = 'nosotros';
                 <div class="why-icon">
                     <i class="fas fa-rocket"></i>
                 </div>
-                <h3 class="why-title">Implementacin Express</h3>
+                <h3 class="why-title">Implementación Express</h3>
                 <div class="why-metric">2 <span>semanas</span></div>
                 <p class="text-gray-600">Del concepto al deployment en tiempo récord</p>
             </div>
@@ -411,7 +411,7 @@ $activePage = 'nosotros';
                     <i class="fas fa-university"></i>
                 </div>
                 <h3 class="industry-title">Banca y Finanzas</h3>
-                <p class="industry-text">Soluciones de IA para deteccin de fraude y análisis crediticio</p>
+                <p class="industry-text">Soluciones de IA para detección de fraude y análisis crediticio</p>
             </div>
 
             <div class="industry-card">
@@ -419,7 +419,7 @@ $activePage = 'nosotros';
                     <i class="fas fa-heartbeat"></i>
                 </div>
                 <h3 class="industry-title">Salud</h3>
-                <p class="industry-text">Sistemas inteligentes para agenda médica y telemedicina</p>
+                <p class="industry-text">Sistemas inteligentes para agenda m&eacute;dica y telemedicina</p>
             </div>
 
             <div class="industry-card">
@@ -427,7 +427,7 @@ $activePage = 'nosotros';
                     <i class="fas fa-shopping-cart"></i>
                 </div>
                 <h3 class="industry-title">Retail</h3>
-                <p class="industry-text">Automatizacin de recomendaciones y gestión de inventario</p>
+                <p class="industry-text">Automatización de recomendaciones y gestión de inventario</p>
             </div>
 
             <div class="industry-card">
@@ -483,7 +483,7 @@ $activePage = 'nosotros';
             <p class="cta-text">Descubre cómo nuestras soluciones de inteligencia artificial pueden impulsar tu empresa
                 al siguiente nivel.</p>
             <div class="cta-buttons">
-                <a href="<?php BASE_URL ?>contacto.php" class="btn-white">
+                <a href="<?php echo BASE_URL ?>contacto.php" class="btn-white">
                     Solicita una demostración
                 </a>
                 <a href="herramientas/" class="btn-outline">
