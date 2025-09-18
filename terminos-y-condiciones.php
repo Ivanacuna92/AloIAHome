@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../includes/config.php';
+require_once __DIR__ . '/includes/config.php';
 $page_title = "Terminos y Condiciones | Aloia";
 ?>
 
@@ -143,7 +143,7 @@ $page_title = "Terminos y Condiciones | Aloia";
                         <div>
                             <h3 class="text-lg font-medium text-gray-900 mb-3">1.2 Aceptación de los Términos</h3>
                             <p class="text-gray-700 leading-relaxed">
-                                Al acceder o usar nuestros Servicios, suscribirse a nuestra plataforma, o hacer clic en "Acepto," usted reconoce que ha leído, entendido y acepta estar obligado por estos Trminos. Si no está de acuerdo con estos Términos, no debe acceder ni usar nuestros Servicios.
+                                Al acceder o usar nuestros Servicios, suscribirse a nuestra plataforma, o hacer clic en "Acepto," usted reconoce que ha leído, entendido y acepta estar obligado por estos T&eacute;rminos. Si no está de acuerdo con estos Términos, no debe acceder ni usar nuestros Servicios.
                             </p>
                         </div>
                     </div>

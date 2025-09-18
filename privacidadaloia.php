@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../includes/config.php';
+require_once __DIR__ . '/includes/config.php';
 $page_title = "Aviso de privacidad | Aloia";
 
 ?>
@@ -399,12 +399,12 @@ $page_title = "Aviso de privacidad | Aloia";
 
     <div class="section">
         <h2>9. Menores de Edad</h2>
-        <p>Nuestros servicios estn dirigidos a empresas y profesionales mayores de 18 años. No recopilamos intencionalmente información personal de menores de 18 años.</p>
+        <p>Nuestros servicios est&aacute;n dirigidos a empresas y profesionales mayores de 18 años. No recopilamos intencionalmente información personal de menores de 18 años.</p>
     </div>
 
     <div class="section">
         <h2>10. Cambios a esta Política</h2>
-        <p>Podemos actualizar esta política de privacidad ocasionalmente. Los cambios importantes serán notificados a travs de:</p>
+        <p>Podemos actualizar esta política de privacidad ocasionalmente. Los cambios importantes serán notificados a trav&eacute;s de:</p>
         <ul>
             <li>Actualización de la fecha de "última actualización".</li>
             <li>Notificacin en nuestro sitio web.</li>
