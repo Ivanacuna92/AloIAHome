@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../../includes/config.php';
+require_once __DIR__ . '/../includes/config.php';
 $page_title = "Generador de Enlaces WhatsApp | Aloia";
 $activePage = 'herramientas';
 ?>
