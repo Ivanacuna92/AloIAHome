@@ -5,10 +5,10 @@ $site_name = "Aloia";
 $site_tagline = "Alo al cambio, Alo al futuro";
 
 // 🖥️ Entorno LOCAL
-//define('BASE_URL', '/aloia-refactor/public_html');
+define('BASE_URL', '/aloia-refactor/public_html');
 
 // 🌐 Entorno PRODUCCIÓN (descomenta esta línea y comenta la anterior al subir)
- define('BASE_URL', ''); // o '/' si está en el root del dominio
+// define('BASE_URL', ''); // o '/' si está en el root del dominio
 
 // Rutas públicas absolutas para assets
 define('IMG_PATH', BASE_URL . '/assets/img/');
