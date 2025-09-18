@@ -1,9 +1,0 @@
-RewriteEngine On
-RewriteRule \.log$ - [F,L]
-RewriteEngine On
-RewriteRule ^agente/?(.*)$ http://127.0.0.1:8080/$1 [P,L]
-ProxyPass /agente/ http://127.0.0.1:8080/
-ProxyPassReverse /agente/ http://127.0.0.1:8080/
-RewriteEngine On
-RewriteRule ^agente/(.*)$ http://127.0.0.1:8080/$1 [P,L]
-RewriteRule ^agente$ http://127.0.0.1:8080/ [P,L]
