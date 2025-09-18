@@ -1,6 +1,6 @@
 <?php
 // Include config file first
-include __DIR__ . '/../../includes/config.php';
+include __DIR__ . '/../includes/config.php';
 
 // Set page title for CRM
 $page_title = 'ALO-CRM - Sistema de Gestión de Leads con IA';
