@@ -1,0 +1,92 @@
+/* Estilo del contenedor del chatbot */
+.aloia-bot-container {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    width: 390px;
+    height: 620px;
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    animation: slideIn 0.3s ease-out;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Estilo del iframe */
+.aloia-bot-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    flex-grow: 1;
+}
+
+/* Botón de cierre */
+.aloia-bot-close {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    background: #FD3244;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 10000;
+}
+
+/* Animación al abrir */
+@keyframes slideIn {
+    from {
+        transform: translateY(40px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Deshabilitar scroll del body cuando el chatbot está activo */
+body.bot-open {
+    overflow: hidden;
+}
+
+/* ✅ Responsive en móviles (pantallas pequeñas) */
+@media (max-width: 640px) {
+    .aloia-bot-container {
+        position: fixed;
+        inset: 0; /* top: 0; right: 0; bottom: 0; left: 0 */
+        width: 100vw;
+        height: 100dvh;
+        border-radius: 0;
+        max-height: 100dvh;
+    }
+
+    .aloia-bot-close {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        z-index: 10001;
+    }
+}
+
+
+/* 🌀 Opcional: Landscape tablets */
+@media (max-width: 1024px) and (orientation: landscape) {
+    .aloia-bot-container {
+        width: 100vw;
+        height: 100vh;
+        height: 100dvh;
+        bottom: 0;
+        right: 0;
+        border-radius: 0.5rem;
+    }
+}

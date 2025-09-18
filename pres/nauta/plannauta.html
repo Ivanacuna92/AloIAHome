@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan de Trabajo - Desarrollo Plataforma ASC Nauta</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<style>
+    :root {
+    --primary-color: #F04E59;
+    --primary-dark: #1E1E1E;
+    --primary-light: #F47983;
+    --white: #ffffff;
+    --light-gray: #f5f5f5;
+    --text-light: #e0e0e0;
+    --shadow-color: rgba(0, 0, 0, 0.15);
+    --gradient-start: #F04E59;
+    --gradient-mid: #E94057;
+    --gradient-end: #F04E59;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Space Grotesk', sans-serif;
+    background-color: var(--white);
+    color: var(--primary-dark);
+    overflow: hidden;
+}
+
+.slides-container {
+    height: 100vh;
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+}
+
+.slide {
+    height: 100vh;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    background-color: var(--white);
+}
+
+/* Header styling */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    width: 100%;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-dark);
+}
+
+.client {
+    font-size: 1rem;
+    color: var(--primary-color);
+}
+
+/* Slide content styling */
+.slide-content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 0 2rem;
+}
+
+.slide-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: var(--primary-dark);
+    animation: fadeInUp 1s ease-out;
+}
+
+.slide-subtitle {
+    font-size: 1.8rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+    animation: fadeInUp 1.2s ease-out;
+}
+
+.slide-text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    max-width: 800px;
+    animation: fadeInUp 1.4s ease-out;
+}
+
+/* Card styles */
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-top: 1rem;
+    animation: fadeInUp 1.6s ease-out;
+}
+
+.card {
+    background-color: var(--white);
+    border-radius: 45px;
+    padding: 1.5rem;
+    width: calc(33% - 1.5rem);
+    min-width: 250px;
+    box-shadow: 10px 10px 0 var(--shadow-color);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 15px 15px 0 var(--shadow-color);
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.card-icon {
+    font-size: 1.5rem;
+    margin-right: 1rem;
+    color: var(--primary-color);
+}
+
+.card-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+}
+
+.card-content {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--primary-dark);
+    flex-grow: 1;
+}
+
+.card-tag {
+    display: inline-block;
+    background-color: var(--primary-color);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-top: 1rem;
+    color: var(--white);
+}
+
+/* Feature list styles */
+.features-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-top: 1rem;
+    animation: fadeInUp 1.6s ease-out;
+}
+
+.feature-item {
+    display: flex;
+    align-items: flex-start;
+    width: calc(50% - 0.75rem);
+    margin-bottom: 1rem;
+}
+
+.feature-icon {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    margin-right: 1rem;
+    margin-top: 0.2rem;
+}
+
+.feature-text {
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+/* Footer */
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.5rem;
+    width: 100%;
+    font-size: 0.8rem;
+    color: var(--primary-dark);
+}
+
+.page-number {
+    font-size: 0.9rem;
+    color: var(--primary-dark);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Cover slide specific */
+.cover-slide {
+    background-color: var(--white);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.cover-logo {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    animation: fadeInUp 0.8s ease-out;
+    color: var(--primary-dark);
+}
+
+.cover-title {
+    font-size: 4rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    animation: fadeInUp 1s ease-out;
+    color: var(--primary-dark);
+}
+
+.cover-subtitle {
+    font-size: 1.8rem;
+    font-weight: 400;
+    margin-bottom: 3rem;
+    color: var(--primary-color);
+    animation: fadeInUp 1.2s ease-out;
+}
+
+.cover-client {
+    font-size: 1.2rem;
+    animation: fadeInUp 1.4s ease-out;
+    color: var(--primary-dark);
+}
+
+.progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 5px;
+    background: var(--primary-color);
+    width: 0%;
+    z-index: 100;
+    transition: width 0.3s ease;
+}
+
+.highlight-box {
+    background-color: var(--primary-color);
+    border-radius: 45px;
+    padding: 1.5rem;
+    margin: 0 auto;
+    max-width: 800px;
+    box-shadow: 10px 10px 0 var(--shadow-color);
+}
+
+.highlight-text {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: white;
+    margin: 0;
+    text-align: center;
+}
+
+/* Timeline styles */
+.timeline-container {
+    position: relative;
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 2rem 0;
+}
+
+.timeline-line {
+    position: absolute;
+    top: 30px;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-light), var(--primary-color), var(--primary-light));
+    border-radius: 2px;
+}
+
+.timeline-weeks {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    z-index: 2;
+}
+
+.timeline-week {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: calc(100% / 6);
+    position: relative;
+}
+
+.week-marker {
+    width: 20px;
+    height: 20px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    border: 4px solid white;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+}
+
+.week-marker:hover {
+    transform: scale(1.2);
+    box-shadow: 0 4px 20px rgba(240, 78, 89, 0.4);
+}
+
+.week-number {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.week-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+    text-align: center;
+    margin-bottom: 0.5rem;
+    min-height: 2.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.week-highlights {
+    font-size: 0.85rem;
+    color: var(--primary-dark);
+    text-align: center;
+    line-height: 1.3;
+}
+
+.milestone-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.milestone-badge {
+    background-color: var(--light-gray);
+    border-radius: 25px;
+    padding: 0.8rem 1.5rem;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+    border-left: 4px solid var(--primary-color);
+}
+
+.milestone-badge:hover {
+    background-color: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.milestone-icon {
+    font-size: 1.2rem;
+    margin-right: 0.8rem;
+    color: var(--primary-color);
+}
+
+.milestone-badge:hover .milestone-icon {
+    color: white;
+}
+
+/* Gantt Chart styles */
+.gantt-container {
+    background-color: var(--white);
+    border-radius: 25px;
+    padding: 1.5rem;
+    box-shadow: 10px 10px 0 var(--shadow-color);
+    margin-top: 1rem;
+}
+
+.gantt-header {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--primary-light);
+    padding-bottom: 0.5rem;
+}
+
+.gantt-label {
+    font-weight: 600;
+    color: var(--primary-dark);
+    display: flex;
+    align-items: center;
+    padding-left: 1rem;
+}
+
+.gantt-weeks {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0.5rem;
+}
+
+.gantt-week {
+    text-align: center;
+    font-weight: 600;
+    color: var(--primary-color);
+    padding: 0.5rem;
+    background-color: var(--light-gray);
+    border-radius: 10px;
+}
+
+.gantt-row {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    align-items: center;
+    margin-bottom: 0.8rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.gantt-task {
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--primary-dark);
+    padding-left: 1rem;
+}
+
+.gantt-task i {
+    color: var(--primary-color);
+    margin-right: 0.8rem;
+    font-size: 1rem;
+}
+
+.gantt-timeline {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0.5rem;
+    height: 100%;
+}
+
+.gantt-bar {
+    background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+    border-radius: 10px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(240, 78, 89, 0.3);
+}
+
+.gantt-bar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(240, 78, 89, 0.4);
+}
+
+/* Functionality grid styles */
+.functionality-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.functionality-card {
+    background-color: var(--white);
+    border-radius: 25px;
+    padding: 1.5rem;
+    box-shadow: 8px 8px 0 var(--shadow-color);
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.functionality-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 12px 12px 0 var(--shadow-color);
+    border-color: var(--primary-light);
+}
+
+.functionality-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    gap: 1rem;
+}
+
+.functionality-icon {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    box-shadow: 0 4px 15px rgba(240, 78, 89, 0.3);
+}
+
+.functionality-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--primary-dark);
+}
+
+.functionality-content ul {
+    margin: 0;
+    padding-left: 1.5rem;
+    list-style: none;
+}
+
+.functionality-content li {
+    position: relative;
+    margin-bottom: 0.8rem;
+    color: var(--primary-dark);
+    line-height: 1.4;
+    font-size: 0.95rem;
+}
+
+.functionality-content li::before {
+    content: "✓";
+    color: var(--primary-color);
+    font-weight: bold;
+    position: absolute;
+    left: -1.5rem;
+    font-size: 1.1rem;
+}
+
+.functionality-status {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.phase-completion-note {
+    background: linear-gradient(135deg, var(--light-gray), #f0f0f0);
+    border-radius: 25px;
+    padding: 2rem;
+    border-left: 6px solid var(--primary-color);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.completion-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+}
+
+.completion-content i {
+    color: var(--primary-color);
+    font-size: 2rem;
+    margin-top: 0.2rem;
+}
+
+.completion-content strong {
+    display: block;
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    margin-bottom: 0.8rem;
+}
+
+.completion-content p {
+    margin: 0;
+    line-height: 1.5;
+    color: var(--primary-dark);
+}
+
+/* Methodology styles */
+.methodology-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.methodology-card {
+    background-color: var(--white);
+    border-radius: 25px;
+    padding: 1.5rem;
+    box-shadow: 8px 8px 0 var(--shadow-color);
+    transition: all 0.3s ease;
+    border-left: 5px solid var(--primary-color);
+}
+
+.methodology-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 12px 12px 0 var(--shadow-color);
+}
+
+.methodology-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    gap: 1rem;
+}
+
+.methodology-icon {
+    background-color: var(--primary-color);
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+}
+
+.methodology-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--primary-dark);
+}
+
+.meeting-schedule {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.meeting-item {
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    gap: 1rem;
+    align-items: center;
+    padding: 1rem;
+    background-color: var(--light-gray);
+    border-radius: 15px;
+    transition: all 0.3s ease;
+}
+
+.meeting-item:hover {
+    background-color: var(--primary-light);
+    color: white;
+}
+
+.meeting-week {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.meeting-day {
+    font-weight: 600;
+    color: var(--primary-dark);
+    font-size: 0.95rem;
+}
+
+.meeting-item:hover .meeting-day {
+    color: white;
+}
+
+.meeting-topics {
+    font-size: 0.9rem;
+    color: var(--primary-dark);
+    line-height: 1.3;
+}
+
+.meeting-item:hover .meeting-topics {
+    color: white;
+}
+
+.access-features {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.access-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.8rem;
+    background-color: var(--light-gray);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.access-item:hover {
+    background-color: var(--primary-color);
+    color: white;
+    transform: translateX(5px);
+}
+
+.access-item i {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    width: 20px;
+    text-align: center;
+}
+
+.access-item:hover i {
+    color: white;
+}
+
+/* Contact section */
+.contact-section {
+    margin: 2rem 0;
+}
+
+.contact-card {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+    border-radius: 25px;
+    padding: 2rem;
+    color: white;
+    box-shadow: 0 10px 30px rgba(240, 78, 89, 0.3);
+}
+
+.contact-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.contact-header i {
+    font-size: 2.5rem;
+}
+
+.contact-header h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.contact-header p {
+    opacity: 0.9;
+    margin: 0;
+}
+
+.contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1rem;
+}
+
+.contact-item i {
+    width: 20px;
+    text-align: center;
+}
+
+/* Next steps section */
+.next-steps-section {
+    background-color: var(--light-gray);
+    border-radius: 25px;
+    padding: 2rem;
+    margin-top: 2rem;
+}
+
+.steps-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.step-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: white;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.step-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.step-number {
+    background-color: var(--primary-color);
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.step-content {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.step-title {
+    font-weight: 600;
+    color: var(--primary-dark);
+    line-height: 1.3;
+}
+
+.step-icon {
+    color: var(--primary-color);
+    font-size: 1.2rem;
+}
+
+
+</style>
+
+
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    <div class="slides-container" id="slidesContainer">
+        
+        <!-- Slide 1: Cover -->
+        <section class="slide cover-slide" id="slide1">
+            <div style="margin-bottom: 2rem;">
+                <img src="https://aloia.ai/assets/img/aloia-color.png" alt="Aloia Logo" style="height: 120px; width: auto;">
+            </div>
+            <h1 class="cover-title">PLAN DE TRABAJO<br>PLATAFORMA ASC NAUTA</h1>
+            <div class="cover-subtitle">Desarrollo completo en 6 semanas con equipo de 4 personas</div>
+            <div class="cover-client">Presentado a: Nauta Software<br>Atención: Diego Vargas y Carlos Nova</div>
+            
+            <div class="footer">
+                <div>Plan de Trabajo - Fase 1</div>
+                <div class="page-number">1/10</div>
+            </div>
+        </section>
+        
+        <!-- Slide 2: Objetivo Principal -->
+        <section class="slide" id="slide2">
+            <div class="header">
+                <div class="logo">ALOIA TECH</div>
+                <div class="client">Nauta Software</div>
+            </div>
+            
+            <div class="slide-content">
+                <h2 class="slide-title" style="font-size: 3rem; text-align: center; margin-bottom: 1.5rem;">Objetivo Principal</h2>
+                
+                <div class="highlight-box" style="margin-bottom: 3rem;">
+                    <p class="highlight-text">
+                        <i class="fas fa-bullseye" style="margin-right: 0.5rem;"></i>
+                        Desarrollar una plataforma web que replique y mejore las funcionalidades core de Reportex
+                    </p>
+                </div>
+                
+                <div class="cards-container">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-file-code"></i></div>
+                            <div class="card-title">Conversión ASC</div>
+                        </div>
+                        <div class="card-content">
+                            <p>Sistema robusto para convertir archivos ASC a formato legible con validación y procesamiento de datos.</p>
+                            <div class="card-tag">Core Feature</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+                            <div class="card-title">Reportes Dinámicos</div>
+                        </div>
+                        <div class="card-content">
+                            <p>Generación automática de reportes con gráficos interactivos y capacidades de exportación.</p>
+                            <div class="card-tag">Analytics</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-robot"></i></div>
+                            <div class="card-title">IA Integrada</div>
+                        </div>
+                        <div class="card-content">
+                            <p>Asistente inteligente que proporciona insights y respuestas basadas en los datos procesados.</p>
+                            <div class="card-tag">AI Powered</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 2rem; background-color: var(--light-gray); border-left: 4px solid var(--primary-color); padding: 1.5rem; border-radius: 0 10px 10px 0;">
+                    <p style="font-size: 1.1rem; color: var(--primary-dark);">
+                        <i class="fas fa-info-circle" style="color: var(--primary-color); margin-right: 0.5rem;"></i>
+                        <strong>Nota importante:</strong> Los detalles de costos, recursos técnicos, riesgos y criterios de aceptación se determinarán durante la exploración completa de Reportex en la primera semana.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div>Plan de Trabajo - Fase 1</div>
+                <div class="page-number">2/10</div>
+            </div>
+        </section>
+
+        <!-- Slide 3: Timeline General -->
+        <section class="slide" id="slide3">
+            <div class="header">
+                <div class="logo">ALOIA TECH</div>
+                <div class="client">Nauta Software</div>
+            </div>
+            
+            <div class="slide-content">
+                <h2 class="slide-title" style="font-size: 3rem; text-align: center; margin-bottom: 1rem;">Timeline General - 6 Semanas</h2>
+                
+                <p class="slide-text" style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem;">
+                    Cronograma completo del desarrollo con hitos principales por semana
+                </p>
+                
+                <div class="timeline-container">
+                    <div class="timeline-line"></div>
+                    <div class="timeline-weeks">
+                        <div class="timeline-week">
+                            <div class="week-marker"></div>
+                            <div class="week-number">Semana 1</div>
+                            <div class="week-title">Exploración y Arquitectura</div>
+                            <div class="week-highlights">
+                                • Análisis de Reportex<br>
+                                • Diseño técnico<br>
+                                • Login básico
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-week">
+                            <div class="week-marker"></div>
+                            <div class="week-number">Semana 2</div>
+                            <div class="week-title">Convertidor ASC</div>
+                            <div class="week-highlights">
+                                • Motor de conversión<br>
+                                • Sistema de usuarios<br>
+                                • Panel admin
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-week">
+                            <div class="week-marker"></div>
+                            <div class="week-number">Semana 3</div>
+                            <div class="week-title">Reportes Base</div>
+                            <div class="week-highlights">
+                                • Tablas dinámicas<br>
+                                • Filtros avanzados<br>
+                                • Exportación Excel
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-week">
+                            <div class="week-marker"></div>
+                            <div class="week-number">Semana 4</div>
+                            <div class="week-title">Gráficos e IA</div>
+                            <div class="week-highlights">
+                                • Visualizaciones<br>
+                                • Asistente IA<br>
+                                • Dashboard métricas
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-week">
+                            <div class="week-marker"></div>
+                            <div class="week-number">Semana 5</div>
+                            <div class="week-title">Integración</div>
+                            <div class="week-highlights">
+                                • Flujo completo<br>
+                                • Reportes Reportex<br>
+                                • Optimización
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-week">
+                            <div class="week-marker"></div>
+                            <div class="week-number">Semana 6</div>
+                            <div class="week-title">Entrega Final</div>
+                            <div class="week-highlights">
+                                • Pulimiento UI/UX<br>
+                                • Testing completo<br>
+                                • Capacitación
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="milestone-badges">
+                    <div class="milestone-badge">
+                        <div class="milestone-icon"><i class="fas fa-calendar-check"></i></div>
+                        <span>Reuniones quincenales: Semana 2, 4 y 6</span>
+                    </div>
+                    <div class="milestone-badge">
+                        <div class="milestone-icon"><i class="fas fa-eye"></i></div>
+                        <span>Acceso continuo a ambiente de pruebas</span>
+                    </div>
+                    <div class="milestone-badge">
+                        <div class="milestone-icon"><i class="fas fa-rocket"></i></div>
+                        <span>Entrega final con capacitación incluida</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div>Plan de Trabajo - Fase 1</div>
+                <div class="page-number">3/10</div>
+            </div>
+        </section>
+
+        <!-- Slide 4: Cronograma Detallado -->
+        <section class="slide" id="slide4">
+            <div class="header">
+                <div class="logo">ALOIA TECH</div>
+                <div class="client">Nauta Software</div>
+            </div>
+            
+            <div class="slide-content">
+                <h2 class="slide-title" style="font-size: 2.5rem; text-align: center; margin-bottom: 1rem;">Cronograma Detallado</h2>
+                
+                <p class="slide-text" style="text-align: center; font-size: 1.1rem; margin-bottom: 2rem;">
+                    Distribución de actividades principales por semana
+                </p>
+                
+                <div class="gantt-container">
+                    <div class="gantt-header">
+                        <div class="gantt-label">Actividades</div>
+                        <div class="gantt-weeks">
+                            <div class="gantt-week">S1</div>
+                            <div class="gantt-week">S2</div>
+                            <div class="gantt-week">S3</div>
+                            <div class="gantt-week">S4</div>
+                            <div class="gantt-week">S5</div>
+                            <div class="gantt-week">S6</div>
+                        </div>
+                    </div>
+                    
+                    <div class="gantt-row">
+                        <div class="gantt-task">
+                            <i class="fas fa-search"></i>
+                            Exploración de Reportex
+                        </div>
+                        <div class="gantt-timeline">
+                            <div class="gantt-bar" style="grid-column: 1 / 2;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="gantt-row">
+                        <div class="gantt-task">
+                            <i class="fas fa-drafting-compass"></i>
+                            Arquitectura y Diseño
+                        </div>
+                        <div class="gantt-timeline">
+                            <div class="gantt-bar" style="grid-column: 1 / 3;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="gantt-row">
+                        <div class="gantt-task">
+                            <i class="fas fa-file-code"></i>
+                            Convertidor ASC
+                        </div>
+                        <div class="gantt-timeline">
+                            <div class="gantt-bar" style="grid-column: 2 / 4;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="gantt-row">
+                        <div class="gantt-task">
+                            <i class="fas fa-users"></i>
+                            Sistema de Usuarios
+                        </div>
+                        <div class="gantt-timeline">
+                            <div class="gantt-bar" style="grid-column: 2 / 3;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="gantt-row">
+                        <div class="gantt-task">
+                            <i class="fas fa-chart-bar"></i>
+                            Reportes Dinámicos
+                        </div>
+                        <div class="gantt-timeline">
+                            <div class="gantt-bar" style="grid-column: 3 / 5;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="gantt-row">
+                        <div class="gantt-task">
+                            <i class="fas fa-robot"></i>
+                            Asistente de IA
+                        </div>
+                        <div class="gantt-timeline">
+                            <div class="gantt-bar" style="grid-column: 4 / 6;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="gantt-row">
+                        <div class="gantt-task">
+                            <i class="fas fa-cogs"></i>
+                            Integración y Testing
+                        </div>
+                        <div class="gantt-timeline">
+                            <div class="gantt-bar" style="grid-column: 5 / 7;"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 2rem; background-color: var(--light-gray); border-left: 4px solid var(--primary-color); padding: 1.5rem; border-radius: 0 10px 10px 0;">
+                    <p style="font-size: 1rem; color: var(--primary-dark);">
+                        <i class="fas fa-info-circle" style="color: var(--primary-color); margin-right: 0.5rem;"></i>
+                        <strong>Metodología ágil:</strong> Las actividades pueden solaparse y ajustarse según el progreso y feedback recibido.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div>Plan de Trabajo - Fase 1</div>
+                <div class="page-number">4/10</div>
+            </div>
+        </section>
+
+        <!-- Slide 5: Funcionalidades Incluidas en Fase 1 -->
+        <section class="slide" id="slide5">
+            <div class="header">
+                <div class="logo">ALOIA TECH</div>
+                <div class="client">Nauta Software</div>
+            </div>
+            
+            <div class="slide-content">
+                <h2 class="slide-title" style="font-size: 2.5rem; text-align: center; margin-bottom: 2rem;">Funcionalidades Incluidas en Fase 1</h2>
+                
+                <div class="functionality-grid">
+                    <div class="functionality-card">
+                        <div class="functionality-header">
+                            <div class="functionality-icon"><i class="fas fa-file-code"></i></div>
+                            <div class="functionality-title">Convertidor ASC</div>
+                        </div>
+                        <div class="functionality-content">
+                            <ul>
+                                <li>Conversión de archivos ASC a formato legible</li>
+                                <li>Procesamiento y extracción de información</li>
+                                <li>Validación y manejo de errores</li>
+                                <li>Carga individual y masiva de archivos</li>
+                            </ul>
+                        </div>
+                        <div class="functionality-status">Core Feature</div>
+                    </div>
+                    
+                    <div class="functionality-card">
+                        <div class="functionality-header">
+                            <div class="functionality-icon"><i class="fas fa-chart-line"></i></div>
+                            <div class="functionality-title">Reportes Dinámicos</div>
+                        </div>
+                        <div class="functionality-content">
+                            <ul>
+                                <li>Tablas interactivas con datos procesados</li>
+                                <li>Gráficos y visualizaciones dinámicas</li>
+                                <li>Sistema de filtros avanzados</li>
+                                <li>Exportación a Excel y otros formatos</li>
+                                <li>Dashboard de métricas principales</li>
+                            </ul>
+                        </div>
+                        <div class="functionality-status">Analytics</div>
+                    </div>
+                    
+                    <div class="functionality-card">
+                        <div class="functionality-header">
+                            <div class="functionality-icon"><i class="fas fa-shield-alt"></i></div>
+                            <div class="functionality-title">Sistema de Seguridad</div>
+                        </div>
+                        <div class="functionality-content">
+                            <ul>
+                                <li>Autenticación de usuarios</li>
+                                <li>Gestión de roles y permisos</li>
+                                <li>Panel de administración completo</li>
+                                <li>Control de accesos por módulo</li>
+                            </ul>
+                        </div>
+                        <div class="functionality-status">Security</div>
+                    </div>
+                    
+                    <div class="functionality-card">
+                        <div class="functionality-header">
+                            <div class="functionality-icon"><i class="fas fa-robot"></i></div>
+                            <div class="functionality-title">Asistente de IA</div>
+                        </div>
+                        <div class="functionality-content">
+                            <ul>
+                                <li>Chat inteligente integrado</li>
+                                <li>Consultas sobre datos ASC</li>
+                                <li>Insights automáticos</li>
+                                <li>Respuestas contextuales</li>
+                            </ul>
+                        </div>
+                        <div class="functionality-status">AI Powered</div>
+                    </div>
+                </div>
+                
+                <div class="phase-completion-note">
+                    <div class="completion-content">
+                        <i class="fas fa-trophy"></i>
+                        <div>
+                            <strong>Al finalizar la Fase 1</strong>
+                            <p>Tendrás una plataforma completamente funcional que replica y mejora Reportex en su funcionalidad core. Las funcionalidades adicionales como expediente digital y módulos especializados se desarrollarán en la <strong>Fase 2</strong> posterior a estas 6 semanas.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div>Plan de Trabajo - Fase 1</div>
+                <div class="page-number">5/10</div>
+            </div>
+        </section>
+
+
+        <!-- Slide 6: Metodología de Seguimiento -->
+<section class="slide" id="slide6">
+    <div class="header">
+        <div class="logo">ALOIA TECH</div>
+        <div class="client">Nauta Software</div>
+    </div>
+    
+    <div class="slide-content">
+        <h2 class="slide-title" style="font-size: 2.5rem; text-align: center; margin-bottom: 2rem;">Metodología de Seguimiento</h2>
+        
+        <div class="methodology-grid">
+            <div class="methodology-card">
+                <div class="methodology-header">
+                    <div class="methodology-icon"><i class="fas fa-calendar-check"></i></div>
+                    <div class="methodology-title">Reuniones Quincenales</div>
+                </div>
+                <div class="methodology-content">
+                    <div class="meeting-schedule">
+                        <div class="meeting-item">
+                            <div class="meeting-week">Semana 2</div>
+                            <div class="meeting-day">Viernes</div>
+                            <div class="meeting-topics">Revisión de convertidor y autenticación</div>
+                        </div>
+                        <div class="meeting-item">
+                            <div class="meeting-week">Semana 4</div>
+                            <div class="meeting-day">Viernes</div>
+                            <div class="meeting-topics">Validación de reportes y asistente IA</div>
+                        </div>
+                        <div class="meeting-item">
+                            <div class="meeting-week">Semana 6</div>
+                            <div class="meeting-day">Viernes</div>
+                            <div class="meeting-topics">Entrega final y capacitación</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="methodology-card">
+                <div class="methodology-header">
+                    <div class="methodology-icon"><i class="fas fa-clock"></i></div>
+                    <div class="methodology-title">Acceso Continuo</div>
+                </div>
+                <div class="methodology-content">
+                    <div class="access-features">
+                        <div class="access-item">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Panel de cliente disponible 24/7</span>
+                        </div>
+                        <div class="access-item">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Seguimiento de progreso en tiempo real</span>
+                        </div>
+                        <div class="access-item">
+                            <i class="fas fa-flask"></i>
+                            <span>Acceso a ambientes de prueba</span>
+                        </div>
+                        <div class="access-item">
+                            <i class="fas fa-bell"></i>
+                            <span>Notificaciones de avances importantes</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="contact-section">
+            <div class="contact-card">
+                <div class="contact-header">
+                    <i class="fas fa-user-tie"></i>
+                    <div>
+                        <h3>Punto de Contacto</h3>
+                        <p>Tu enlace directo durante todo el proyecto</p>
+                    </div>
+                </div>
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <i class="fas fa-user"></i>
+                        <span><strong>Responsable:</strong> Ivan Acuña</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-comments"></i>
+                        <span><strong>Comunicación:</strong> WhatsApp + sistema de tickets</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <span><strong>Horario de soporte:</strong> 8 horas/día, 5 días/semana</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="next-steps-section">
+            <h3 style="color: var(--primary-color); font-size: 1.6rem; margin-bottom: 1.5rem; text-align: center;">
+                <i class="fas fa-rocket"></i> Próximos Pasos Inmediatos
+            </h3>
+            <div class="steps-grid">
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <div class="step-title">Confirmación del plan de trabajo</div>
+                        <div class="step-icon"><i class="fas fa-edit"></i></div>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <div class="step-title">Definición de fechas específicas</div>
+                        <div class="step-icon"><i class="fas fa-calendar-alt"></i></div>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <div class="step-title">Acceso a Reportex para exploración</div>
+                        <div class="step-icon"><i class="fas fa-key"></i></div>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <div class="step-title">Kick-off oficial del proyecto</div>
+                        <div class="step-icon"><i class="fas fa-rocket"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <div>Plan de Trabajo - Fase 1</div>
+        <div class="page-number">6/10</div>
+    </div>
+</section>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slidesContainer = document.getElementById('slidesContainer');
+            const progressBar = document.getElementById('progressBar');
+            const totalSlides = document.querySelectorAll('.slide').length;
+            
+            slidesContainer.addEventListener('scroll', function() {
+                const scrollPosition = slidesContainer.scrollTop;
+                const slideHeight = window.innerHeight;
+                const currentSlideIndex = Math.round(scrollPosition / slideHeight) + 1;
+                
+                // Update progress bar
+                const progress = ((currentSlideIndex - 1) / (totalSlides - 1)) * 100;
+                progressBar.style.width = `${progress}%`;
+            });
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                const currentScroll = slidesContainer.scrollTop;
+                const slideHeight = window.innerHeight;
+                
+                if (e.key === 'ArrowDown' || e.key === 'PageDown') {
+                    slidesContainer.scrollTop = currentScroll + slideHeight;
+                    e.preventDefault();
+                } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+                    slidesContainer.scrollTop = currentScroll - slideHeight;
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
+</body>
+</html>                        <i class="fas fa-info-circle" style="color: var(--primary-color); margin-right: 0.5rem;">

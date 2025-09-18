@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voicebot Inteligente para Contact Centers - ServiciosLegaxxi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #F04E59;
+            --primary-dark: #1E1E1E;
+            --primary-light: #F47983;
+            --white: #ffffff;
+            --light-gray: #f5f5f5;
+            --text-light: #e0e0e0;
+            --shadow-color: rgba(0, 0, 0, 0.15);
+            --gradient-start: #F04E59;
+            --gradient-mid: #E94057;
+            --gradient-end: #F04E59;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: var(--white);
+            color: var(--primary-dark);
+            overflow: hidden;
+        }
+        
+        .slides-container {
+            height: 100vh;
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll;
+            scroll-behavior: smooth;
+        }
+        
+        .slide {
+            height: 100vh;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            background-color: var(--white);
+        }
+        
+        /* Header styling */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            width: 100%;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+        
+        .client {
+            font-size: 1rem;
+            color: var(--primary-color);
+        }
+        
+        /* Slide content styling */
+        .slide-content {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            padding: 0 2rem;
+        }
+        
+        .slide-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: var(--primary-dark);
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        .slide-subtitle {
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            animation: fadeInUp 1.2s ease-out;
+        }
+        
+        .slide-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            animation: fadeInUp 1.4s ease-out;
+        }
+        
+        /* Card styles */
+        .cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 1rem;
+            animation: fadeInUp 1.6s ease-out;
+        }
+        
+        .card {
+            background-color: var(--white);
+            border-radius: 45px;
+            padding: 1.5rem;
+            width: calc(33% - 1.5rem);
+            min-width: 250px;
+            box-shadow: 10px 10px 0 var(--shadow-color);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 15px 15px 0 var(--shadow-color);
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .card-icon {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+        
+        .card-content {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: var(--primary-dark);
+            flex-grow: 1;
+        }
+        
+        .card-tag {
+            display: inline-block;
+            background-color: var(--primary-color);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-top: 1rem;
+            color: var(--white);
+        }
+        
+        .promo-tag {
+            display: inline-block;
+            background-color: var(--primary-light);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 1rem;
+            color: var(--white);
+            animation: pulse 2s infinite;
+        }
+        
+        /* Table styles */
+        .table-container {
+            margin-top: 2rem;
+            width: 100%;
+            animation: fadeInUp 1.6s ease-out;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--white);
+            border-radius: 45px;
+            overflow: hidden;
+            box-shadow: 10px 10px 0 var(--shadow-color);
+        }
+        
+        thead {
+            background-color: var(--primary-light);
+            color: var(--white);
+        }
+        
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        th {
+            font-weight: 600;
+        }
+        
+        /* Feature list styles */
+        .features-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 1rem;
+            animation: fadeInUp 1.6s ease-out;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            width: calc(50% - 0.75rem);
+            margin-bottom: 1rem;
+        }
+        
+        .feature-icon {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin-right: 1rem;
+            margin-top: 0.2rem;
+        }
+        
+        .feature-text {
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        
+        /* Footer */
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.5rem;
+            width: 100%;
+            font-size: 0.8rem;
+            color: var(--primary-dark);
+        }
+        
+        .page-number {
+            font-size: 0.9rem;
+            color: var(--primary-dark);
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Cover slide specific */
+        .cover-slide {
+            background-color: var(--white);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .cover-logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            animation: fadeInUp 0.8s ease-out;
+            color: var(--primary-dark);
+        }
+        
+        .cover-title {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease-out;
+            color: var(--primary-dark);
+        }
+        
+        .cover-subtitle {
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+            animation: fadeInUp 1.2s ease-out;
+        }
+        
+        .cover-client {
+            font-size: 1.2rem;
+            animation: fadeInUp 1.4s ease-out;
+            color: var(--primary-dark);
+        }
+        
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 5px;
+            background: var(--primary-color);
+            width: 0%;
+            z-index: 100;
+            transition: width 0.3s ease;
+        }
+        
+        /* Two column layout */
+        .two-column {
+            display: flex;
+            gap: 2rem;
+            margin-top: 1rem;
+            animation: fadeInUp 1.6s ease-out;
+        }
+        
+        .column {
+            flex: 1;
+        }
+        
+        .highlight-box {
+            background-color: var(--primary-color);
+            border-radius: 45px;
+            padding: 1.5rem;
+            margin: 0 auto;
+            max-width: 800px;
+            box-shadow: 10px 10px 0 var(--shadow-color);
+        }
+        
+        .highlight-text {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: white;
+            margin: 0;
+            text-align: center;
+        }
+
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .value-card {
+            background-color: var(--light-gray);
+            border-radius: 25px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 5px 5px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .value-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .value-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .value-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+        }
+        
+        .value-description {
+            font-size: 1rem;
+            color: var(--primary-dark);
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 2rem auto 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 4px;
+            background-color: var(--primary-light);
+            transform: translateX(-50%);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            width: calc(50% - 40px);
+        }
+        
+        .timeline-item:nth-child(odd) {
+            float: left;
+            clear: both;
+        }
+        
+        .timeline-item:nth-child(even) {
+            float: right;
+            clear: both;
+        }
+        
+        .timeline-content {
+            background-color: var(--white);
+            border-radius: 25px;
+            padding: 1.5rem;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .timeline-date {
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .numbered-list {
+            counter-reset: item;
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .numbered-list li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            counter-increment: item;
+        }
+
+        .numbered-list li::before {
+            content: counter(item);
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+            border-radius: 50%;
+            width: 2rem;
+            height: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            flex-shrink: 0;
+            margin-top: 0.2rem;
+        }
+
+        .pricing-highlight {
+            background: linear-gradient(135deg, var(--primary-light), var(--primary-color));
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: 600;
+            display: inline-block;
+            margin-left: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .strikethrough {
+            text-decoration: line-through;
+            color: #666;
+            margin-right: 1rem;
+        }
+
+        .benefits-card {
+    width: 54%; /* 35% más ancho que el 40% original (40% + 35% = 54%) */
+    min-width: 400px;
+    max-width: 600px;
+}
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    <div class="slides-container" id="slidesContainer">
+        
+        <!-- Slide 1: Portada -->
+        <section class="slide cover-slide" id="slide1">
+            <div style="margin-bottom: 2rem;">
+                <img src="https://aloia.ai/assets/img/aloia-color.png" alt="Aloia Logo" style="height: 120px; width: auto;">
+            </div>
+            <h1 class="cover-title">SISTEMA VOICEBOT<br>INTELIGENTE PARA<br>CONTACT CENTERS</h1>
+            <div class="cover-subtitle">Automatización de llamadas con voz natural e inteligencia artificial</div>
+            <div class="cover-client">
+                <strong>Cliente:</strong> Corporativo de Servicios Legaxxi<br>
+                <strong>Presentado por:</strong> Aloia Tech
+            </div>
+            
+            <div class="footer">
+                <div>4 de agosto, 2025</div>
+                <div class="page-number">1/10</div>
+            </div>
+        </section>
+        
+        <!-- Slide 2: Resumen Ejecutivo -->
+        <section class="slide" id="slide2">
+            <div class="header">
+                <div class="logo">ALOIA VOICEBOT</div>
+                <div class="client">Corporativo de Servicios Legaxxi</div>
+            </div>
+            
+            <div class="slide-content">
+                <h2 class="slide-title" style="font-size: 3rem; text-align: center; margin-bottom: 1.5rem;">Resumen Ejecutivo</h2>
+                <h3 class="slide-subtitle" style="text-align: center; margin-bottom: 2rem;">Transforme sus operaciones de contact center con IA</h3>
+                
+                <div class="value-grid">
+                    <div class="value-card">
+                        <div class="value-icon"><i class="fas fa-robot"></i></div>
+                        <div class="value-title">Automatización Total</div>
+                        <div class="value-description">Llamadas salientes y entrantes completamente automatizadas</div>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon"><i class="fas fa-microphone"></i></div>
+                        <div class="value-title">Voz Natural</div>
+                        <div class="value-description">Indistinguible de agente humano con IA avanzada</div>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon"><i class="fas fa-chart-line"></i></div>
+                        <div class="value-title">Reducción de Costos</div>
+                        <div class="value-description">Hasta 60% menos en costos operativos</div>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon"><i class="fas fa-clock"></i></div>
+                        <div class="value-title">Operación 24/7</div>
+                        <div class="value-description">Sin descansos ni rotación de personal</div>
+                    </div>
+                </div>
+                
+                <div class="highlight-box" style="margin-top: 2rem;">
+                    <div class="highlight-text">
+                        <strong>Beneficio inmediato:</strong> Libere agentes humanos para casos complejos y mantenga consistencia total en el mensaje
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div>Solución Automatizada de Llamadas con IA</div>
+                <div class="page-number">2/10</div>
+            </div>
+        </section>
+        
+        <!-- Slide 3: Análisis de Necesidades -->
+        <section class="slide" id="slide3">
+            <div class="header">
+                <div class="logo">ALOIA VOICEBOT</div>
+                <div class="client">Corporativo de Servicios Legaxxi</div>
+            </div>
+            
+            <div class="slide-content">
+                <h2 class="slide-title" style="font-size: 3rem; text-align: center; margin-bottom: 2rem;">Análisis de Necesidades</h2>
+                <h3 class="slide-subtitle" style="text-align: center; margin-bottom: 2rem;">El desafío actual en contact centers</h3>
+                
+                <div class="two-column">
+                    <div class="column">
+                        <h3 style="font-size: 2rem; color: var(--primary-color); margin-bottom: 1.5rem; text-align: center;">
+                            <i class="fas fa-exclamation-triangle" style="margin-right: 0.5rem;"></i>
+                            Problemas Identificados
+                        </h3>
+                        <div class="features-list" style="flex-direction: column;">
+                            <div class="feature-item" style="width: 100%;">
+                                <div class="feature-icon"><i class="fas fa-dollar-sign"></i></div>
+                                <div class="feature-text">Alto costo por agente (sueldos + carga social)</div>
+                            </div>
+                            <div class="feature-item" style="width: 100%;">
+                                <div class="feature-icon"><i class="fas fa-user-times"></i></div>
+                                <div class="feature-text">Rotación constante de personal</div>
+                            </div>
+                            <div class="feature-item" style="width: 100%;">
+                                <div class="feature-icon"><i class="fas fa-file-alt"></i></div>
+                                <div class="feature-text">Inconsistencia en scripts y mensajes</div>
+                            </div>
+                            <div class="feature-item" style="width: 100%;">
+                                <div class="feature-icon"><i class="fas fa-clock"></i></div>
+                                <div class="feature-text">Limitaciones de horarios de operación</div>
+                            </div>
+                            <div class="feature-item" style="width: 100%;">
+                                <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                                <div class="feature-text">Dificultad para escalar rápidamente</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="column">
+                        <h3 style="font-size: 2rem; color: var(--primary-color); margin-bottom: 1.5rem; text-align: center;">
+                            <i class="fas fa-bullseye" style="margin-right: 0.5rem;"></i>
+                            Oportunidad
+                        </h3>
+                        <div style="background-color: var(--light-gray); border-radius: 25px; padding: 2rem;">
+                            <div class="features-list" style="flex-direction: column; gap: 1.5rem;">
+                                <div class="feature-item" style="width: 100%;">
+                                    <div class="feature-icon"><i class="fas fa-phone"></i></div>
+                                    <div class="feature-text">Automatizar llamadas de primer contacto</div>
+                                </div>
+                                <div class="feature-item" style="width: 100%;">
+                                    <div class="feature-icon"><i class="fas fa-handshake"></i></div>
+                                    <div class="feature-text">Mantener agentes humanos solo para negociación</div>
+                                </div>
+                                <div class="feature-item" style="width: 100%;">
+                                    <div class="feature-icon"><i class="fas fa-arrow-down"></i></div>
+                                    <div class="feature-text">Reducir costo por contacto efectivo</div>
+                                </div>
+                                <div class="feature-item" style="width: 100%;">
+                                    <div class="feature-icon"><i class="fas fa-rocket"></i></div>
+                                    <div class="feature-text">Mejorar productividad general del contact center</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div>Solución Automatizada de Llamadas con IA</div>
+                <div class="page-number">3/10</div>
+            </div>
+        </section>
+        
+        <!-- Slide 4: Características Principales -->
+        <section class="slide" id="slide4">
+            <div class="header">
+                <div class="logo">ALOIA VOICEBOT</div>
+                <div class="client">Corporativo de Servicios Legaxxi</div>
+            </div>
+            
+            <div class="slide-content">
+                <h2 class="slide-title" style="font-size: 2.5rem; text-align: center; margin-bottom: 1rem;">Voicebot - Características Principales</h2>
+                <h3 class="slide-subtitle" style="text-align: center; margin-bottom: 2rem;">Motor de Conversación Inteligente</h3>
+                
+                <div class="cards-container">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-phone-alt"></i></div>
+                            <div class="card-title">Llamadas Salientes</div>
+                        </div>
+                        <div class="card-content">
+                            Ejecución automática de campañas con voz natural y comprensión contextual avanzada.
+                        </div>
+                        <div class="card-tag">Automatizado</div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-phone"></i></div>
+                            <div class="card-title">Llamadas Entrantes</div>
+                        </div>
+                        <div class="card-content">
+                            Recepción y clasificación inteligente con capacidad de escalamiento automático.
+                        </div>
+                        <div class="card-tag">Inteligente</div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-microphone"></i></div>
+                            <div class="card-title">Voz Natural</div>
+                        </div>
+                        <div class="card-content">
+                            Tecnología de síntesis avanzada que comprende respuestas en lenguaje natural.
+                        </div>
+                        <div class="card-tag">Avanzado</div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-tags"></i></div>
+                            <div class="card-title">Tipificación Automática</div>
+                        </div>
+                        <div class="card-content">
+                            Clasificacin inteligente de resultados con reportes en tiempo real.
+                        </div>
+                        <div class="card-tag">Tiempo Real</div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-chart-bar"></i></div>
+                            <div class="card-title">Dashboard</div>
+                        </div>
+                        <div class="card-content">
+                            Métricas y resultados en tiempo real con exportación automatizada.
+                        </div>
+                        <div class="card-tag">Analytics</div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-plug"></i></div>
+                            <div class="card-title">Integración</div>
+                        </div>
+                        <div class="card-content">
+                            API para carga de bases de datos y compatible con CRMs existentes.
+                        </div>
+                        <div class="card-tag">Compatible</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div>Solución Automatizada de Llamadas con IA</div>
+                <div class="page-number">4/10</div>
+            </div>
+        </section>
+        
+        <!-- Slide 5: Configuración Personalizable -->
+        <section class="slide" id="slide5">
+            <div class="header">
+                <div class="logo">ALOIA VOICEBOT</div>
+                <div class="client">Corporativo de Servicios Legaxxi</div>
+            </div>
+            
+            <div class="slide-content">
+                <h2 class="slide-title" style="font-size: 2.5rem; text-align: center; margin-bottom: 1rem;">Configuración Personalizable</h2>
+                <h3 class="slide-subtitle" style="text-align: center; margin-bottom: 2rem;">Adaptación a sus procesos de cobranza</h3>
+                
+                <div class="two-column">
+                    <div class="column">
+                        <div class="card" style="width: 100%; margin-bottom: 2rem;">
+                            <div class="card-header">
+                                <div class="card-icon"><i class="fas fa-cogs"></i></div>
+                                <div class="card-title">Elementos Configurables</div>
+                            </div>
+                            <div class="card-content">
+                                <div class="features-list" style="flex-direction: column; gap: 1rem;">
+                                    <div class="feature-item" style="width: 100%;">
+                                        <div class="feature-icon"><i class="fas fa-comments"></i></div>
+                                        <div class="feature-text"><strong>Scripts de conversación:</strong> Adaptados a su marca y tono</div>
+                                    </div>
+                                    <div class="feature-item" style="width: 100%;">
+                                        <div class="feature-icon"><i class="fas fa-database"></i></div>
+                                        <div class="feature-text"><strong>Campos de captura:</strong> Datos específicos por campaña</div>
+                                    </div>
+                                    <div class="feature-item" style="width: 100%;">
+                                        <div class="feature-icon"><i class="fas fa-tags"></i></div>
+                                        <div class="feature-text"><strong>Criterios de tipificación:</strong> Clasificación según sus estándares</div>
+                                    </div>
+                                    <div class="feature-item" style="width: 100%;">
+                                        <div class="feature-icon"><i class="fas fa-clock"></i></div>
+                                        <div class="feature-text"><strong>Horarios de operación:</strong> Franjas horarias personalizadas</div>
+                                    </div>
+                                    <div class="feature-item" style="width: 100%;">
+                                        <div class="feature-icon"><i class="fas fa-level-up-alt"></i></div>
+                                        <div class="feature-text"><strong>Reglas de escalamiento:</strong> Cuándo transferir a agente humano</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="column">
+                        <div class="card" style="width: 100%;">
+                            <div class="card-header">
+                                <div class="card-icon"><i class="fas fa-tools"></i></div>
+                                <div class="card-title">Configuración Inicial Incluye</div>
+                            </div>
+                            <div class="card-content">
+                                <div class="features-list" style="flex-direction: column; gap: 1rem;">
+                                    <div class="feature-item" style="width: 100%;">
+                                        <div class="feature-icon"><i class="fas fa-search"></i></div>
+                                        <div class="feature-text">Análisis de scripts actuales</div>
+                                    </div>
+                                    <div class="feature-item" style="width: 100%;">
+                                        <div class="feature-icon"><i class="fas fa-sitemap"></i></div>
+                                        <div class="feature-text">Mapeo de flujos de conversación</div>
+                                    </div>
+                                    <div class="feature-item" style="width: 100%;">
+                                        <div class="feature-icon"><i class="fas fa-link"></i></div>
+                                        <div class="feature-text">Configuración de integraciones</div>
+                                    </div>
+                                    <div class="feature-item" style="width: 100%;">
+                                        <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                                        <div class="feature-text">Pruebas de calidad y ajustes</div>
+                                    </div>
+                                    <div class="feature-item" style="width: 100%;">
+                                        <div class="feature-icon"><i class="fas fa-graduation-cap"></i></div>
+                                        <div class="feature-text">Capacitación del equipo</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div>Solución Automatizada de Llamadas con IA</div>
+                <div class="page-number">5/10</div>
+            </div>
+        </section>
+        
+        <!-- Slide 6: Estructura de Precios -->
+        <section class="slide" id="slide6">
+            <div class="header">
+                <div class="logo">ALOIA VOICEBOT</div>
+                <div class="client">Corporativo de Servicios Legaxxi</div>
+            </div>
+            
+            <div class="slide-content">
+                <h2 class="slide-title" style="font-size: 2.5rem; text-align: center; margin-bottom: 1rem;">Estructura de Precios</h2>
+                <h3 class="slide-subtitle" style="text-align: center; margin-bottom: 2rem;">Modelo transparente por consumo real</h3>
+                
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Paquete</th>
+                                <th>Minutos Incluidos</th>
+                                <th>Precio por Minuto</th>
+                                <th>Inversión Mensual</th>
+                                <th>Llamadas Aprox.*</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Básico</strong></td>
+                                <td>Hasta 8,000 min</td>
+                                <td>$4.8 MXN</td>
+                                <td><strong>$38,400 MXN</strong></td>
+                                <td>~2,000 llamadas</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Intermedio</strong></td>
+                                <td>Hasta 20,000 min</td>
+                                <td>$4.4 MXN</td>
+                                <td><strong>$88,000 MXN</strong></td>
+                                <td>~5,000 llamadas</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Avanzado</strong></td>
+                                <td>40,000+ min</td>
+                                <td>$3.9 MXN</td>
+                                <td><strong>$156,000+ MXN</strong></td>
+                                <td>~10,000+ llamadas</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div style="margin-top: 2rem; text-align: center;">
+                    <p style="font-size: 0.9rem; color: #666; margin-bottom: 1rem;">*Basado en promedio de 4 minutos por llamada</p>
+                    
+                    <div class="highlight-box">
+                        <div class="highlight-text">
+                            <strong>Setup fee:</strong> $35,000 MXN<br>
+                            <span style="font-size: 1rem; margin-top: 0.5rem; display: block;">50% al inicio del proyecto • 50% una vez aprobado en producción</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div>Solución Automatizada de Llamadas con IA</div>
+                <div class="page-number">6/10</div>
+            </div>
+        </section>
+        
+        <!-- Slide 7: ROI y Beneficios -->
+<section class="slide" id="slide7">
+    <div class="header">
+        <div class="logo">ALOIA VOICEBOT</div>
+        <div class="client">Corporativo de Servicios Legaxxi</div>
+    </div>
+    
+    <div class="slide-content">
+        <h2 class="slide-title" style="font-size: 2.5rem; text-align: center; margin-bottom: 1rem;">ROI y Beneficios Cuantificables</h2>
+        <h3 class="slide-subtitle" style="text-align: center; margin-bottom: 2rem;">Retorno de inversión en primeros 90 días</h3>
+        
+        <div style="display: flex; justify-content: center; width: 100%;">
+            <div class="card benefits-card">
+                <div class="card-header">
+                    <div class="card-icon"><i class="fas fa-trophy"></i></div>
+                    <div class="card-title">Beneficios Adicionales</div>
+                </div>
+                <div class="card-content">
+                    <div class="features-list" style="flex-direction: column; gap: 1rem;">
+                        <div class="feature-item" style="width: 100%;">
+                            <div class="feature-icon"><i class="fas fa-clock"></i></div>
+                            <div class="feature-text"><strong>Disponibilidad:</strong> 24/7 sin costos extras</div>
+                        </div>
+                        <div class="feature-item" style="width: 100%;">
+                            <div class="feature-icon"><i class="fas fa-expand-arrows-alt"></i></div>
+                            <div class="feature-text"><strong>Escalabilidad:</strong> Sin límites de capacidad</div>
+                        </div>
+                        <div class="feature-item" style="width: 100%;">
+                            <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                            <div class="feature-text"><strong>Consistencia:</strong> 100% adherencia a scripts</div>
+                        </div>
+                        <div class="feature-item" style="width: 100%;">
+                            <div class="feature-icon"><i class="fas fa-rocket"></i></div>
+                            <div class="feature-text"><strong>Productividad:</strong> 0% tiempo muerto entre llamadas</div>
+                        </div>
+                        <div class="feature-item" style="width: 100%;">
+                            <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                            <div class="feature-text"><strong>Métricas:</strong> Reportes automáticos en tiempo real</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="highlight-box" style="margin-top: 2rem;">
+            <div class="highlight-text">
+                <strong>ROI estimado:</strong> 35-50% en primeros 6 meses
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <div>Solucin Automatizada de Llamadas con IA</div>
+        <div class="page-number">7/10</div>
+    </div>
+</section>
+        
+        <!-- Slide 8: Casos de Uso -->
+        <section class="slide" id="slide8">
+            <div class="header">
+                <div class="logo">ALOIA VOICEBOT</div>
+                <div class="client">Corporativo de Servicios Legaxxi</div>
+            </div>
+            
+            <div class="slide-content">
+                <h2 class="slide-title" style="font-size: 2.5rem; text-align: center; margin-bottom: 1rem;">Casos de Uso Específicos</h2>
+                <h3 class="slide-subtitle" style="text-align: center; margin-bottom: 2rem;">Aplicaciones ideales para cobranza</h3>
+                
+                <div class="cards-container">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-phone-alt"></i></div>
+                            <div class="card-title">Llamadas Salientes Automatizadas</div>
+                        </div>
+                        <div class="card-content">
+                            <div class="features-list" style="flex-direction: column; gap: 0.8rem;">
+                                <div class="feature-item" style="width: 100%; margin-bottom: 0.5rem;">
+                                    <div class="feature-icon"><i class="fas fa-bell"></i></div>
+                                    <div class="feature-text">Recordatorios de pago</div>
+                                </div>
+                                <div class="feature-item" style="width: 100%; margin-bottom: 0.5rem;">
+                                    <div class="feature-icon"><i class="fas fa-handshake"></i></div>
+                                    <div class="feature-text">Confirmación de compromisos</div>
+                                </div>
+                                <div class="feature-item" style="width: 100%; margin-bottom: 0.5rem;">
+                                    <div class="feature-icon"><i class="fas fa-sync"></i></div>
+                                    <div class="feature-text">Actualización de datos de contacto</div>
+                                </div>
+                                <div class="feature-item" style="width: 100%; margin-bottom: 0.5rem;">
+                                    <div class="feature-icon"><i class="fas fa-clipboard-check"></i></div>
+                                    <div class="feature-text">Seguimiento post-gestión</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-tag">Automatizado</div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-phone"></i></div>
+                            <div class="card-title">Llamadas Entrantes Inteligentes</div>
+                        </div>
+                        <div class="card-content">
+                            <div class="features-list" style="flex-direction: column; gap: 0.8rem;">
+                                <div class="feature-item" style="width: 100%; margin-bottom: 0.5rem;">
+                                    <div class="feature-icon"><i class="fas fa-brain"></i></div>
+                                    <div class="feature-text">Clasificación de intención del cliente</div>
+                                </div>
+                                <div class="feature-item" style="width: 100%; margin-bottom: 0.5rem;">
+                                    <div class="feature-icon"><i class="fas fa-credit-card"></i></div>
+                                    <div class="feature-text">Captura de compromisos de pago</div>
+                                </div>
+                                <div class="feature-item" style="width: 100%; margin-bottom: 0.5rem;">
+                                    <div class="feature-icon"><i class="fas fa-calendar-alt"></i></div>
+                                    <div class="feature-text">Reagendación automática</div>
+                                </div>
+                                <div class="feature-item" style="width: 100%; margin-bottom: 0.5rem;">
+                                    <div class="feature-icon"><i class="fas fa-level-up-alt"></i></div>
+                                    <div class="feature-text">Escalamiento inteligente a agentes</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-tag">Inteligente</div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-tags"></i></div>
+                            <div class="card-title">Tipificación Automática</div>
+                        </div>
+                        <div class="card-content">
+                            <div class="features-list" style="flex-direction: column; gap: 0.8rem;">
+                                <div class="feature-item" style="width: 100%; margin-bottom: 0.5rem;">
+                                    <div class="feature-icon"><i class="fas fa-check"></i></div>
+                                    <div class="feature-text">Contacto efectivo/no efectivo</div>
+                                </div>
+                                <div class="feature-item" style="width: 100%; margin-bottom: 0.5rem;">
+                                    <div class="feature-icon"><i class="fas fa-handshake"></i></div>
+                                    <div class="feature-text">Compromiso de pago establecido</div>
+                                </div>
+                                <div class="feature-item" style="width: 100%; margin-bottom: 0.5rem;">
+                                    <div class="feature-icon"><i class="fas fa-database"></i></div>
+                                    <div class="feature-text">Datos actualizados/no actualizados</div>
+                                </div>
+                                <div class="feature-item" style="width: 100%; margin-bottom: 0.5rem;">
+                                    <div class="feature-icon"><i class="fas fa-user"></i></div>
+                                    <div class="feature-text">Requiere seguimiento humano</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-tag">Automático</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div>Solución Automatizada de Llamadas con IA</div>
+                <div class="page-number">8/10</div>
+            </div>
+        </section>
+        
+       
+        
+        <!-- Slide 9: Soporte y Garantías -->
+        <section class="slide" id="slide10">
+            <div class="header">
+                <div class="logo">ALOIA VOICEBOT</div>
+                <div class="client">Corporativo de Servicios Legaxxi</div>
+            </div>
+            
+            <div class="slide-content">
+                <h2 class="slide-title" style="font-size: 2.5rem; text-align: center; margin-bottom: 1rem;">Soporte y Garantías</h2>
+                <h3 class="slide-subtitle" style="text-align: center; margin-bottom: 2rem;">Tranquilidad total en la operación</h3>
+                
+                <div class="two-column">
+                    <div class="column">
+                        <div class="card" style="width: 100%; margin-bottom: 2rem;">
+                            <div class="card-header">
+                                <div class="card-icon"><i class="fas fa-gift"></i></div>
+                                <div class="card-title">Incluido sin costo adicional</div>
+                            </div>
+                            <div class="card-content">
+                                <div class="features-list" style="flex-direction: column; gap: 1rem;">
+                                    
+                                    <div class="feature-item" style="width: 100%;">
+                                        <div class="feature-icon"><i class="fas fa-headset"></i></div>
+                                        <div class="feature-text">Soporte técnico en horario hábil</div>
+                                    </div>
+                                    <div class="feature-item" style="width: 100%;">
+                                        <div class="feature-icon"><i class="fas fa-sync"></i></div>
+                                        <div class="feature-text">Actualizaciones automáticas del sistema</div>
+                                    </div>
+                                    <div class="feature-item" style="width: 100%;">
+                                        <div class="feature-icon"><i class="fas fa-save"></i></div>
+                                        <div class="feature-text">Backup diario de configuraciones</div>
+                                    </div>
+                                    <div class="feature-item" style="width: 100%;">
+                                        <div class="feature-icon"><i class="fas fa-chart-bar"></i></div>
+                                        <div class="feature-text">Reportes mensuales de performance</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="column">
+                        <div class="card" style="width: 100%;">
+                            <div class="card-header">
+                                <div class="card-icon"><i class="fas fa-shield-check"></i></div>
+                                <div class="card-title">Garantías</div>
+                            </div>
+                            <div class="card-content">
+                                <div style="margin-bottom: 1.5rem; padding: 1rem; background-color: var(--light-gray); border-radius: 15px; border-left: 4px solid var(--primary-color);">
+                                    <div style="font-weight: 600; color: var(--primary-color); margin-bottom: 0.5rem;">98% de disponibilidad</div>
+                                    <div style="font-size: 0.9rem;">del servicio garantizada</div>
+                                </div>
+                                
+                                <div style="margin-bottom: 1.5rem; padding: 1rem; background-color: var(--light-gray); border-radius: 15px; border-left: 4px solid var(--primary-color);">
+                                    <div style="font-weight: 600; color: var(--primary-color); margin-bottom: 0.5rem;">Respuesta en menos de 24 horas</div>
+                                    <div style="font-size: 0.9rem;">a incidencias críticas</div>
+                                </div>
+                                
+                                <div style="margin-bottom: 1.5rem; padding: 1rem; background-color: var(--light-gray); border-radius: 15px; border-left: 4px solid var(--primary-color);">
+                                    <div style="font-weight: 600; color: var(--primary-color); margin-bottom: 0.5rem;">Configuración sin pérdida</div>
+                                    <div style="font-size: 0.9rem;">de datos garantizada</div>
+                                </div>
+                                
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div>Solución Automatizada de Llamadas con IA</div>
+                <div class="page-number">10/10</div>
+            </div>
+        </section>
+        
+        <!-- Slide 11: Próximos Pasos -->
+        <section class="slide" id="slide11">
+            <div class="header">
+                <div class="logo">ALOIA VOICEBOT</div>
+                <div class="client">Corporativo de Servicios Legaxxi</div>
+            </div>
+            
+            <div class="slide-content">
+                <h2 class="slide-title" style="font-size: 3rem; text-align: center; margin-bottom: 1rem;">Próximos Pasos</h2>
+                <h3 class="slide-subtitle" style="text-align: center; margin-bottom: 2rem;">Inicie la transformación hoy</h3>
+                
+                <div style="max-width: 800px; margin: 0 auto;">
+                    <div class="card" style="width: 100%; margin-bottom: 2rem;">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-rocket"></i></div>
+                            <div class="card-title">Plan de acción inmediato</div>
+                        </div>
+                        <div class="card-content">
+                            <ol class="numbered-list">
+                                <li><strong>Aprobación de propuesta</strong>&nbsp y firma de contrato</li>
+                                <li><strong>Pago inicial</strong>&nbsp del 50% del setup fee ($17,500 MXN)</li>
+                                <li><strong>Kick-off del proyecto</strong> &nbsp con equipos técnicos</li>
+                                <li><strong>Análisis de procesos </strong> &nbspactuales de cobranza</li>
+                                <li><strong>Inicio de configuración</strong>&nbspdel voicebot</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                
+                </div></section></div></body></html>

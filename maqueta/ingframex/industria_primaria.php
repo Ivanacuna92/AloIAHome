@@ -1,0 +1,293 @@
+<?php include('header2.php') ?>
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <title>Industria Primaria - INGFRAMEX</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+  <link rel="stylesheet" href="fonts/ionicons/css/ionicons.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/animate.css">
+  <link rel="stylesheet" href="css/owl.carousel.min.css">
+  <link rel="stylesheet" href="css/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    .site-navbar {
+      background: #fff;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      padding: 1rem 0;
+    }
+    
+    .site-navbar .navbar-brand img {
+      height: 50px;
+      width: auto;
+    }
+    
+    .site-navbar .navbar-nav .nav-link {
+      color: #6B3AA0;
+      font-weight: 500;
+      padding: 0.5rem 1.5rem;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+    }
+    
+    .site-navbar .navbar-nav .nav-link:hover {
+      color: #4A2970;
+    }
+    
+    .site-navbar .dropdown-menu {
+      border: none;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      border-radius: 5px;
+      padding: 0.5rem 0;
+      margin-top: 0.5rem;
+    }
+    
+    .site-navbar .dropdown-item {
+      padding: 0.5rem 1.5rem;
+      font-size: 0.9rem;
+      color: #666;
+      transition: all 0.3s ease;
+    }
+    
+    .site-navbar .dropdown-item:hover {
+      background: #f8f9fa;
+      color: #6B3AA0;
+      padding-left: 2rem;
+    }
+    
+    .site-navbar .navbar-toggler {
+      border: none;
+      padding: 0.25rem 0.5rem;
+    }
+    
+    .site-navbar .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2833, 37, 41, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+    
+    @media (max-width: 768px) {
+      .site-navbar .navbar-nav {
+        text-align: center;
+        padding-top: 1rem;
+      }
+      
+      .site-navbar .dropdown-menu {
+        text-align: center;
+        box-shadow: none;
+        border-top: 1px solid #eee;
+      }
+    }
+    
+    .hero-section {
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/industria_primaria/xuusov3vf7jylgnjdy17cyoca0skyhl8imvlb0oj.webp');
+      background-size: cover;
+      background-position: center;
+      padding: 120px 0 80px;
+      color: white;
+      text-align: center;
+    }
+    
+    .hero-section h1 {
+      color: white;
+      font-size: 3rem;
+      font-weight: 300;
+      letter-spacing: 2px;
+      margin-bottom: 1rem;
+      animation: fadeInUp 1s ease-out;
+    }
+    
+    .hero-section p {
+      font-size: 1.2rem;
+      font-weight: 300;
+      max-width: 600px;
+      margin: 0 auto;
+      animation: fadeInUp 1s ease-out 0.3s;
+      animation-fill-mode: both;
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .products-section {
+      padding: 80px 0;
+      background: #f8f9fa;
+    }
+    
+    .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    
+    .section-header h2 {
+      font-size: 2.5rem;
+      font-weight: 300;
+      color: #333;
+      margin-bottom: 1rem;
+    }
+    
+    .product-card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+      margin-bottom: 40px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+    }
+    
+    .product-image {
+      width: 40%;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    
+    .product-content {
+      width: 60%;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    
+    .product-content h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #565b7a;
+      margin-bottom: 15px;
+      line-height: 1.3;
+    }
+    
+    .product-content p {
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      font-size: 0.95rem;
+    }
+    
+    .product-link {
+      color: #6B3AA0;
+      text-decoration: none;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      transition: color 0.3s ease;
+    }
+    
+    .product-link:hover {
+      color: #4A2970;
+      text-decoration: none;
+    }
+    
+    .product-link i {
+      margin-right: 8px;
+      font-size: 1.1rem;
+    }
+    
+    .product-row {
+      display: flex;
+      align-items: stretch;
+      min-height: 190px;
+    }
+    
+    @media (max-width: 768px) {
+      .hero-section h1 {
+        font-size: 2rem;
+      }
+      
+      .hero-section p {
+        font-size: 1rem;
+      }
+      
+      .product-row {
+        flex-direction: column;
+      }
+      
+      .product-image {
+        width: 100%;
+        height: 200px;
+      }
+      
+      .product-content {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+ 
+  <section class="hero-section">
+    <div class="container">
+      <h1>INDUSTRIA PRIMARIA</h1>
+      <p>Soluciones avanzadas de medición para optimizar procesos y garantizar la calidad en la industria primaria</p>
+    </div>
+  </section>
+  
+  <section class="products-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Productos para la Industria Primaria</h2>
+      </div>
+      
+      <div class="row">
+        <div class="col-12">
+          
+          <div class="product-card">
+            <div class="product-row">
+              <div class="product-image" style="background-image: url('images/industria_primaria/mq4dll0o2pvmkbntw42cqb4fqhemofwwger89cge.webp');"></div>
+              <div class="product-content">
+                <h2>Manómetros y transmisores para la industria primaria.</h2>
+                <p>Contamos con una amplia gama de instrumentación de presión, temperatura, nivel y caudal. Nuestros instrumentos son altamente fiables y resisten las condiciones de proceso más extremas (hasta 2.000 ºC). Son una gran herramienta para la industria primaria y sus condiciones desafiantes.</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="product-card">
+            <div class="product-row">
+              <div class="product-image" style="background-image: url('images/industria_primaria/1OwSZKlLN74TxdrecL3Lptv6IyrUW8UQ4tq3RbVv.jpg');"></div>
+              <div class="product-content">
+                <h2>Cámaras termográficas para procesos en industria primaria.</h2>
+                <p>Nuestras cámaras son dispositivos de medición de temperatura sin contacto para uso industrial. Usan tecnología infrarroja que permite medir en tiempo real, con alta exactitud y en condiciones desafiantes, la temperatura. Son ideales para uso en industria primaria.</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="product-card">
+            <div class="product-row">
+              <div class="product-image" style="background-image: url('images/industria_primaria/s2d1gmzzerd9ixupwulw3xwoebbschxtjhxnn3r6.webp');"></div>
+              <div class="product-content">
+                <h2>Cámaras portátiles de temperatura para la industria primaria.</h2>
+                <p>Nuestras cámaras portátiles son una gran solución para medición de temperatura en industria primaria, ya que cuentan con imagen de alta calidad, son portátiles y fáciles de usar, cuentan con una alta exactitud que mide desde el primer vistazo.</p>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  </body>
+</html>
+
+<?php include('footer.php') ?>

@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propuesta BRIA para Tropper - Aloia Tech</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --aloia-orange: #FD6144;
+            --aloia-red: #FD3244;
+            --aloia-purple: #AE3A8D;
+            --aloia-dark: #161212;
+            --aloia-light-gray: #CCB6B6;
+            --aloia-white: #F9F9F9;
+            --shadow-color: rgba(0, 0, 0, 0.15);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: var(--aloia-white);
+            color: var(--aloia-dark);
+            overflow: hidden;
+        }
+        
+        .slides-container {
+            height: 100vh;
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll;
+            scroll-behavior: smooth;
+        }
+        
+        .slide {
+            height: 100vh;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            background-color: var(--aloia-white);
+        }
+        
+        /* Header styling */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            width: 100%;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--aloia-dark);
+        }
+        
+        .client {
+            font-size: 1rem;
+            color: var(--aloia-orange);
+        }
+        
+        /* Slide content styling */
+        .slide-content {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            padding: 0 2rem;
+        }
+        
+        .slide-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: var(--aloia-dark);
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        .slide-subtitle {
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            color: var(--aloia-orange);
+            animation: fadeInUp 1.2s ease-out;
+        }
+        
+        .slide-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            animation: fadeInUp 1.4s ease-out;
+        }
+        
+        /* Card styles */
+        .cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 1rem;
+            animation: fadeInUp 1.6s ease-out;
+        }
+        
+        .card {
+            background-color: var(--aloia-white);
+            border-radius: 35px;
+            padding: 1.5rem;
+            width: calc(33% - 1.5rem);
+            min-width: 250px;
+            box-shadow: 10px 10px 0 var(--shadow-color);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 15px 15px 0 var(--shadow-color);
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .card-icon {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            color: var(--aloia-orange);
+        }
+        
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--aloia-dark);
+        }
+        
+        .card-content {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: var(--aloia-dark);
+            flex-grow: 1;
+        }
+        
+        .card-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--aloia-orange), var(--aloia-red));
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-top: 1rem;
+            color: var(--aloia-white);
+        }
+        
+        /* Table styles */
+        .table-container {
+            margin-top: 2rem;
+            width: 100%;
+            animation: fadeInUp 1.6s ease-out;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--aloia-white);
+            border-radius: 35px;
+            overflow: hidden;
+            box-shadow: 10px 10px 0 var(--shadow-color);
+        }
+        
+        thead {
+            background: linear-gradient(135deg, var(--aloia-orange), var(--aloia-red));
+        }
+        
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        th {
+            font-weight: 600;
+            color: var(--aloia-white);
+        }
+        
+        /* Feature list styles */
+        .features-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 1rem;
+            animation: fadeInUp 1.6s ease-out;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            width: calc(50% - 0.75rem);
+            margin-bottom: 1rem;
+        }
+        
+        .feature-icon {
+            font-size: 1.2rem;
+            color: var(--aloia-orange);
+            margin-right: 1rem;
+            margin-top: 0.2rem;
+        }
+        
+        .feature-text {
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        
+        /* Footer */
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.5rem;
+            width: 100%;
+            font-size: 0.8rem;
+            color: var(--aloia-dark);
+        }
+        
+        .page-number {
+            font-size: 0.9rem;
+            color: var(--aloia-dark);
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Cover slide specific */
+        .cover-slide {
+            background-color: var(--aloia-white);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .cover-logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            animation: fadeInUp 0.8s ease-out;
+            max-width: 300px;
+            color: var(--aloia-dark);
+        }
+        
+        .cover-title {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease-out;
+            color: var(--aloia-dark);
+        }
+        
+        .cover-subtitle {
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-bottom: 3rem;
+            color: var(--aloia-orange);
+            animation: fadeInUp 1.2s ease-out;
+        }
+        
+        .cover-client {
+            font-size: 1.2rem;
+            animation: fadeInUp 1.4s ease-out;
+            color: var(--aloia-dark);
+        }
+        
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--aloia-orange), var(--aloia-red), var(--aloia-purple));
+            width: 0%;
+            z-index: 100;
+            transition: width 0.3s ease;
+        }
+        
+        /* Two column layout */
+        .two-column {
+            display: flex;
+            gap: 2rem;
+            margin-top: 1rem;
+            animation: fadeInUp 1.6s ease-out;
+        }
+        
+        .column {
+            flex: 1;
+        }
+
+        /* Gradient blocks */
+        .gradient-block {
+            background: linear-gradient(135deg, var(--aloia-orange), var(--aloia-red), var(--aloia-purple));
+            border-radius: 35px;
+            padding: 2rem;
+            color: var(--aloia-white);
+            margin: 2rem 0;
+            box-shadow: 10px 10px 0 var(--shadow-color);
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, var(--aloia-orange), var(--aloia-red));
+            border-radius: 25px;
+            padding: 1.5rem;
+            color: var(--aloia-white);
+            margin: 1.5rem 0;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.2);
+        }
+
+</style>
+
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    <div class="slides-container" id="slidesContainer">
+        
+        <!-- Slide 1: Cover -->
+        <section class="slide cover-slide" id="slide1">
+            <img src="https://aloia.ai/assets/img/aloia-color.png" alt="Aloia Tech" style="max-width: 300px; height: auto;">
+            <h1 class="cover-title">PROPUESTA BRIA<br>PARA TROPPER</h1>
+            <div class="cover-subtitle">Automatización inteligente con integración total a Samsara</div>
+            <div class="cover-client">Presentado a: Tropper<br>Junio 2025</div>
+            
+            <div class="footer">
+                <div>Propuesta Técnica</div>
+                <div class="page-number">1/10</div>
+            </div>
+        </section>
+                
+        <!-- Slide 2: Resumen Ejecutivo -->
+        <section class="slide" id="slide2">
+            <div class="header">
+                <div class="logo">ALOIA TECH</div>
+                <div class="client">Tropper</div>
+            </div>
+            
+            <div class="slide-content">
+                <h2 class="slide-title">Propuesta BRIA para Tropper</h2>
+                <p class="slide-subtitle">Automatización inteligente con integración total a Samsara</p>
+                
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width: 25%;">Módulo</th>
+                                <th style="width: 37%;">Propósito Estratégico</th>
+                                <th style="width: 38%;">Impacto Directo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>MOI (Monitoreo Inteligente)</strong></td>
+                                <td>Reacción automática ante eventos críticos desde Samsara</td>
+                                <td>Reduce carga de monitoristas y mejora tiempos de respuesta</td>
+                            </tr>
+                            <tr>
+                                <td><strong>OptiRoute (Optimizador de Rutas)</strong></td>
+                                <td>Maximizar eficiencia en ocupación y trayectos más cortos</td>
+                                <td>Menos km vacíos, más pasajeros por unidad</td>
+                            </tr>
+                            <tr>
+                                <td><strong>CotIA (Cotizador Inteligente)</strong></td>
+                                <td>Cotizaciones rápidas, estandarizadas y trazables</td>
+                                <td>Ahorra tiempo comercial y elimina errores manuales</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="highlight-box">
+                    <h3 style="font-size: 1.4rem; margin-bottom: 1rem; font-weight: 600;">Valor diferencial:</h3>
+                    <ul style="font-size: 1rem; line-height: 1.6;">
+                        <li>Aprovechamos la infraestructura de Samsara, no la sustituimos</li>
+                        <li>Ejecutamos acciones automáticas en tiempo real con IA</li>
+                        <li>Unificamos monitoreo, planeación y cotización en una plataforma conectada</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div>Propuesta BRIA</div>
+                <div class="page-number">2/10</div>
+            </div>
+        </section>
+
+        <!-- Slide 3: Mdulo MOI - Objetivo -->
+        <section class="slide" id="slide3">
+            <div class="header">
+                <div class="logo">ALOIA TECH</div>
+                <div class="client">Tropper</div>
+            </div>
+            
+            <div class="slide-content">
+                <h2 class="slide-title">Módulo MOI</h2>
+                <p class="slide-subtitle">Monitoreo Inteligente de Unidades y Conductores</p>
+                
+                <div class="gradient-block">
+                    <h3 style="font-size: 2rem; font-weight: 700; margin-bottom: 1.5rem; text-align: center;">Objetivo</h3>
+                    <p style="font-size: 1.3rem; line-height: 1.6; text-align: center;">Crear un sistema que reaccione, registre y escale eventos críticos en tiempo real. Todas las señales provienen de la infraestructura instalada de Samsara; MOI únicamente las consume vía API y ejecuta acciones automatizadas (llamadas, alertas internas).</p>
+                </div>
+                
+                <div class="features-list">
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-eye"></i></div>
+                        <div class="feature-text">
+                            <strong>100% basado en Samsara:</strong> Aprovechamos toda la infraestructura existente
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-robot"></i></div>
+                        <div class="feature-text">
+                            <strong>Automatizacin total:</strong> Reacciones inmediatas sin intervención humana
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-phone"></i></div>
+                        <div class="feature-text">
+                            <strong>Escalamiento inteligente:</strong> Llamadas automáticas y alertas priorizadas
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-clock"></i></div>
+                        <div class="feature-text">
+                            <strong>Tiempo real:</strong> Respuesta inmediata ante cualquier evento crítico
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div>Módulo MOI</div>
+                <div class="page-number">3/10</div>
+            </div>
+        </section>
+
+        <!-- Slide 4: Funciones Principales MOI -->
+        <section class="slide" id="slide4">
+            <div class="header">
+                <div class="logo">ALOIA TECH</div>
+                <div class="client">Tropper</div>
+            </div>
+            
+            <div class="slide-content">
+                <h2 class="slide-title">Funciones Principales - MOI</h2>
+                <p class="slide-subtitle">Eventos automatizados desde infraestructura Samsara</p>
+                
+                <div class="table-container">
+                    <table style="font-size: 0.9rem;">
+                        <thead>
+                            <tr>
+                                <th style="width: 30%;">Evento detectado por Samsara</th>
+                                <th style="width: 40%;">Acción gestionada por MOI</th>
+                                <th style="width: 30%;">Observaciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Alerta de somnolencia</strong> (cámara IA Samsara)</td>
+                                <td>Llamada inmediata del asistente de voz IA al operador y notificación al supervisor</td>
+                                <td>MOI no procesa la imagen; solo recibe el flag de alerta</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Exceso de velocidad</strong></td>
+                                <td>Registro en dashboard MOI + notificación priorizada al monitorista IA</td>
+                                <td>Regla de velocidad configurable</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Desvío de ruta / cruce de geocerca crítica</strong></td>
+                                <td>Llamada preventiva al operador o alerta al monitorista</td>
+                                <td>Geocercas se definen/actualizan en Samsara; MOI solo las consulta</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Diagnstico crítico de la unidad</strong> (voltaje, fallas)</td>
+                                <td>Escalamiento directo a mantenimiento</td>
+                                <td>Datos de diagnóstico va API Samsara</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Uso de dispositivo móvil durante conducción</strong></td>
+                                <td>Notificación al supervisor y registro para auditoría</td>
+                                <td>Evento generado por cmara Samsara</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Inicio y fin de jornada</strong></td>
+                                <td>Check-in y check-out automticos por voz</td>
+                                <td>Timestamps tomados de Samsara</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div>Funciones MOI</div>
+                <div class="page-number">4/10</div>
+            </div>
+        </section>
+
+        <!-- Slide 5: Tareas que se eficientan MOI -->
+        <section class="slide" id="slide5">
+            <div class="header">
+                <div class="logo">ALOIA TECH</div>
+                <div class="client">Tropper</div>
+            </div>
+            
+            <div class="slide-content">
+                <h2 class="slide-title">Tareas que se eficientan con MOI</h2>
+                <p class="slide-subtitle">Optimización operativa inmediata</p>
+                
+                <div class="cards-container">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-phone-alt"></i></div>
+                            <div class="card-title">Validación de rutas</div>
+                        </div>
+                        <div class="card-content">
+                            Llamadas de validación antes, durante y despus de la ruta automatizadas completamente.
+                        </div>
+                        <div class="card-tag">Automatizado</div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-clipboard-list"></i></div>
+                            <div class="card-title">Registro de incidencias</div>
+                        </div>
+                        <div class="card-content">
+                            Registro centralizado y ordenado de todas las incidencias con trazabilidad completa.
+                        </div>
+                        <div class="card-tag">Centralizado</div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                            <div class="card-title">Escalamiento automático</div>
+                        </div>
+                        <div class="card-content">
+                            Escalamiento automático con reglas de severidad configurables según criticidad.
+                        </div>
+                        <div class="card-tag">Inteligente</div>
+                    </div>
+                </div>
+
+                <div class="gradient-block">
+                    <div style="display: flex; align-items: center; justify-content: center; gap: 2rem;">
+                        <div style="text-align: center;">
+                            <div style="font-size: 3rem; font-weight: 700; margin-bottom: 0.5rem;">70%</div>
+                            <div style="font-size: 1.2rem;">Reducción del tiempo de reaccin ante eventos críticos</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 3rem; font-weight: 700; margin-bottom: 0.5rem;">85%</div>
+                            <div style="font-size: 1.2rem;">Menor carga operativa para monitoristas humanos</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div>Eficiencias MOI</div>
+                <div class="page-number">5/10</div>
+            </div>
+        </section>
+
+        <!-- Slide 6: Módulo OptiRoute -->
+        <section class="slide" id="slide6">
+            <div class="header">
+                <div class="logo">ALOIA TECH</div>
+                <div class="client">Tropper</div>
+            </div>
+            
+            <div class="slide-content">
+                <h2 class="slide-title">Mdulo OptiRoute</h2>
+                <p class="slide-subtitle">Optimizador Dinmico de Rutas</p>
+                
+                <div class="two-column">
+                    <div class="column">
+                        <h3 style="font-size: 1.6rem; font-weight: 600; margin-bottom: 1.5rem; color: var(--aloia-orange);">Objetivo Principal</h3>
+                        <p style="font-size: 1.2rem; line-height: 1.6; margin-bottom: 2rem;">Maximizar la eficiencia de los recorridos al reducir kilmetros vacíos y aumentar la ocupación promedio por unidad.</p>
+                        
+                        <div class="features-list">
+                            <div class="feature-item" style="width: 100%;">
+                                <div class="feature-icon"><i class="fas fa-route"></i></div>
+                                <div class="feature-text">Motor de optimización con variables: origen, destino, paradas, horarios, capacidad y demanda</div>
+                            </div>
+                            <div class="feature-item" style="width: 100%;">
+                                <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                                <div class="feature-text">Simulación y sugerencia de rutas con indicadores de ocupación y tiempo estimado</div>
+                            </div>
+                            <div class="feature-item" style="width: 100%;">
+                                <div class="feature-icon"><i class="fas fa-edit"></i></div>
+                                <div class="feature-text">Edición visual drag-and-drop para ajustes de última hora</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="column">
+                        <div class="highlight-box">
+                            <h3 style="font-size: 1.4rem; margin-bottom: 1rem;">Retroalimentación Continua</h3>
+                            <p style="margin-bottom: 1rem;">Coteja la ruta propuesta con la ruta real capturada por Samsara para optimización continua.</p>
+                            <div style="display: flex; align-items: center;">
+                                <i class="fas fa-sync-alt" style="font-size: 2rem; margin-right: 1rem;"></i>
+                                <div>
+                                    <strong>Exportación flexible:</strong><br>
+                                    Excel/PDF o envío directo a operaciones
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div style="background-color: var(--aloia-white); border-radius: 25px; padding: 1.5rem; box-shadow: 5px 5px 15px rgba(0,0,0,0.1); margin-top: 1.5rem;">
+                            <h4 style="color: var(--aloia-orange); margin-bottom: 1rem; font-size: 1.2rem;">Tareas optimizadas:</h4>
+                            <ul style="list-style: none; padding: 0;">
+                                <li style="margin-bottom: 0.5rem;"> Tiempo de planeación manual</li>
+                                <li style="margin-bottom: 0.5rem;">✓ Kilómetros con baja ocupación</li>
+                                <li style="margin-bottom: 0.5rem;"> Reasignacin urgente de unidades</li>
+                                <li style="margin-bottom: 0.5rem;"> Consumo de combustible</li>
+                                <li>✓ Documentación para auditorías</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div>Módulo OptiRoute</div>
+                <div class="page-number">6/10</div>
+            </div>
+        </section>
+
+        <!-- Slide 7: Mdulo CotIA -->
+        <section class="slide" id="slide7">
+            <div class="header">
+                <div class="logo">ALOIA TECH</div>
+                <div class="client">Tropper</div>
+            </div>
+            
+            <div class="slide-content">
+                <h2 class="slide-title">Módulo CotIA</h2>
+                <p class="slide-subtitle">Cotizador Inteligente</p>
+                
+                <div class="gradient-block">
+                    <h3 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 1rem; text-align: center;">Objetivo</h3>
+                    <p style="font-size: 1.2rem; line-height: 1.6; text-align: center;">Generar cotizaciones consistentes y trazables con parámetros editables; en fase 2, sincronizar automáticamente los costos base con el ERP de Tropper.</p>
+                </div>
+                
+                <div class="two-column">
+                    <div class="column">
+                        <h3 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem; color: var(--aloia-orange);">Funciones Principales</h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="margin-bottom: 1rem; display: flex; align-items: flex-start;">
+                                <i class="fas fa-edit" style="color: var(--aloia-orange); margin-right: 1rem; margin-top: 0.2rem;"></i>
+                                <div>
+                                    <strong>Fase 1:</strong> Formulario de parámetros de costo introducidos por usuario
+                                </div>
+                            </li>
+                            <li style="margin-bottom: 1rem; display: flex; align-items: flex-start;">
+                                <i class="fas fa-calculator" style="color: var(--aloia-orange); margin-right: 1rem; margin-top: 0.2rem;"></i>
+                                <div>
+                                    <strong>Lógica de clculo:</strong> tipo de unidad, distancia, rendimiento, costo de operador, viáticos y margen
+                                </div>
+                            </li>
+                            <li style="margin-bottom: 1rem; display: flex; align-items: flex-start;">
+                                <i class="fas fa-file-alt" style="color: var(--aloia-orange); margin-right: 1rem; margin-top: 0.2rem;"></i>
+                                <div>
+                                    <strong>Plantillas:</strong> Personalizables y versionadas para diferentes tipos de servicio
+                                </div>
+                            </li>
+                            <li style="display: flex; align-items: flex-start;">
+                                <i class="fas fa-link" style="color: var(--aloia-orange); margin-right: 1rem; margin-top: 0.2rem;"></i>
+                                <div>
+                                    <strong>Fase 2:</strong> Conector ERP para refrescar automáticamente costos estndar
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="column">
+                        <h3 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem; color: var(--aloia-orange);">Tareas Optimizadas</h3>
+                        <div class="cards-container" style="flex-direction: column;">
+                            <div class="card" style="width: 100%; margin-bottom: 1rem;">
+                                <div class="card-header">
+                                    <div class="card-icon"><i class="fas fa-stopwatch"></i></div>
+                                    <div class="card-title">Tiempo de cotizacin</div>
+                                </div>
+                                <div class="card-content">
+                                    Eliminación de elaboración y revisión manual de cotizaciones
+                                </div>
+                            </div>
+                            
+                            <div class="card" style="width: 100%; margin-bottom: 1rem;">
+                                <div class="card-header">
+                                    <div class="card-icon"><i class="fas fa-balance-scale"></i></div>
+                                    <div class="card-title">Uniformidad de criterios</div>
+                                </div>
+                                <div class="card-content">
+                                    Criterios de precio consistentes entre todos los ejecutivos
+                                </div>
+                            </div>
+                            
+                            <div class="card" style="width: 100%;">
+                                <div class="card-header">
+                                    <div class="card-icon"><i class="fas fa-shield-alt"></i></div>
+                                    <div class="card-title">Control de errores</div>
+                                </div>
+                                <div class="card-content">
+                                    Eliminación de errores por cálculo manual o versiones duplicadas
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div>Módulo CotIA</div>
+                <div class="page-number">7/10</div>
+            </div>
+        </section>
+
+          
+<!-- Slide 8: Cronograma -->
+<section class="slide" id="slide8">
+    <div class="header">
+        <div class="logo">ALOIA TECH</div>
+        <div class="client">Tropper</div>
+    </div>
+    
+    <div class="slide-content">
+        <h2 class="slide-title">Cronograma del Proyecto</h2>
+        <p class="slide-subtitle">Fases de implementación</p>
+        
+        <div class="gantt-container" style="margin-top: 1rem; position: relative; height: 180px; overflow: visible;">
+            <!-- Timeline -->
+            <div style="position: absolute; top: 30px; left: 0; right: 0; height: 4px; background: var(--aloia-light-gray);"></div>
+            
+            <!-- Fase 1: Levantamiento -->
+            <div style="position: absolute; top: 0; left: 0; width: 15%;">
+                <div style="height: 25px; background: linear-gradient(135deg, var(--aloia-orange), var(--aloia-red)); border-radius: 15px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 500; font-size: 0.85rem;">Levantamiento</div>
+                <div style="text-align: center; font-size: 0.8rem; margin-top: 0.3rem;">27 Jun - 4 Jul</div>
+            </div>
+            
+            <!-- Fase 2: Set up y Desarrollo -->
+            <div style="position: absolute; top: 60px; left: 15%; width: 45%;">
+                <div style="height: 25px; background: linear-gradient(135deg, var(--aloia-purple), #6a3093); border-radius: 15px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 500; font-size: 0.85rem;">Set up y Desarrollo</div>
+                <div style="text-align: center; font-size: 0.8rem; margin-top: 0.3rem;">5 Jul - 25 Jul</div>
+            </div>
+            
+            <!-- Fase 3: Pruebas -->
+            <div style="position: absolute; top: 120px; left: 60%; width: 45%;">
+                <div style="height: 25px; background: linear-gradient(135deg, #00b09b, #96c93d); border-radius: 15px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 500; font-size: 0.85rem;">Pruebas</div>
+                <div style="text-align: center; font-size: 0.8rem; margin-top: 0.3rem;">26 Jul - 15 Ago</div>
+            </div>
+            
+            <!-- Marcadores de tiempo -->
+            <div style="position: absolute; top: 35px; left: 0%; transform: translateX(-50%); text-align: center; width: 40px;">
+                <div style="width: 10px; height: 10px; background: var(--aloia-orange); border-radius: 50%; margin: 0 auto;"></div>
+                <div style="font-size: 0.7rem; margin-top: 0.3rem;">Sem 1</div>
+            </div>
+            <div style="position: absolute; top: 35px; left: 25%; transform: translateX(-50%); text-align: center; width: 40px;">
+                <div style="width: 10px; height: 10px; background: var(--aloia-purple); border-radius: 50%; margin: 0 auto;"></div>
+                <div style="font-size: 0.7rem; margin-top: 0.3rem;">Sem 3</div>
+            </div>
+            <div style="position: absolute; top: 35px; left: 50%; transform: translateX(-50%); text-align: center; width: 40px;">
+                <div style="width: 10px; height: 10px; background: var(--aloia-purple); border-radius: 50%; margin: 0 auto;"></div>
+                <div style="font-size: 0.7rem; margin-top: 0.3rem;">Sem 5</div>
+            </div>
+            <div style="position: absolute; top: 35px; left: 75%; transform: translateX(-50%); text-align: center; width: 40px;">
+                <div style="width: 10px; height: 10px; background: #00b09b; border-radius: 50%; margin: 0 auto;"></div>
+                <div style="font-size: 0.7rem; margin-top: 0.3rem;">Sem 7</div>
+            </div>
+            <div style="position: absolute; top: 35px; left: 100%; transform: translateX(-50%); text-align: center; width: 40px;">
+                <div style="width: 10px; height: 10px; background: #96c93d; border-radius: 50%; margin: 0 auto;"></div>
+                <div style="font-size: 0.7rem; margin-top: 0.3rem;">Fin</div>
+            </div>
+        </div>
+        
+        <div style="display: flex; justify-content: center; gap: 1.5rem; margin-top: 2.5rem; flex-wrap: wrap;">
+            <div style="display: flex; align-items: center; font-size: 0.9rem;">
+                <div style="width: 18px; height: 18px; background: linear-gradient(135deg, var(--aloia-orange), var(--aloia-red)); border-radius: 4px; margin-right: 0.5rem;"></div>
+                <span>Reuniones clave</span>
+            </div>
+            <div style="display: flex; align-items: center; font-size: 0.9rem;">
+                <div style="width: 18px; height: 18px; background: linear-gradient(135deg, var(--aloia-purple), #6a3093); border-radius: 4px; margin-right: 0.5rem;"></div>
+                <span>Desarrollo técnico</span>
+            </div>
+            <div style="display: flex; align-items: center; font-size: 0.9rem;">
+                <div style="width: 18px; height: 18px; background: linear-gradient(135deg, #00b09b, #96c93d); border-radius: 4px; margin-right: 0.5rem;"></div>
+                <span>Pruebas y ajustes</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <div>Cronograma</div>
+        <div class="page-number">8/10</div>
+    </div>
+</section>
+
+<!-- Slide 9: Calendario Levantamiento -->
+<section class="slide" id="slide9">
+    <div class="header">
+        <div class="logo">ALOIA TECH</div>
+        <div class="client">Tropper</div>
+    </div>
+    
+    <div class="slide-content">
+        <h2 class="slide-title">Agenda de Levantamiento</h2>
+        <p class="slide-subtitle">Sesiones de recopilación de requerimientos</p>
+        
+        <div class="calendar-container" style="margin-top: 2rem;">
+            <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                <!-- Evento 1 -->
+                <div class="event-card" style="background: var(--aloia-white); border-radius: 20px; padding: 1.5rem; box-shadow: 5px 5px 15px rgba(0,0,0,0.1);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <strong style="font-size: 1.3rem; color: var(--aloia-orange);">Viernes, 27 de Junio</strong>
+                        <span style="background: #e6f7ff; color: #1890ff; padding: 0.3rem 0.8rem; border-radius: 20px; font-weight: 600;">10:00 AM - 12:00 PM</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <i class="fas fa-video" style="font-size: 1.5rem; color: var(--aloia-orange);"></i>
+                        <div>
+                            <strong style="display: block; margin-bottom: 0.3rem;">Sesión remota</strong>
+                            <p>Reunión inicial para definir alcance y requerimientos clave</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Evento 2 -->
+                <div class="event-card" style="background: var(--aloia-white); border-radius: 20px; padding: 1.5rem; box-shadow: 5px 5px 15px rgba(0,0,0,0.1);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <strong style="font-size: 1.3rem; color: var(--aloia-orange);">Lunes, 30 de Junio</strong>
+                        <span style="background: #e6f7ff; color: #1890ff; padding: 0.3rem 0.8rem; border-radius: 20px; font-weight: 600;">2:00 PM - 4:00 PM</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <i class="fas fa-video" style="font-size: 1.5rem; color: var(--aloia-orange);"></i>
+                        <div>
+                            <strong style="display: block; margin-bottom: 0.3rem;">Sesión remota</strong>
+                            <p>Revisión técnica de integraciones con Samsara y flujos operativos</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Evento 3 -->
+                <div class="event-card" style="background: var(--aloia-white); border-radius: 20px; padding: 1.5rem; box-shadow: 5px 5px 15px rgba(0,0,0,0.1);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <strong style="font-size: 1.3rem; color: var(--aloia-orange);">Viernes, 4 de Julio</strong>
+                        <span style="background: #f6ffed; color: #52c41a; padding: 0.3rem 0.8rem; border-radius: 20px; font-weight: 600;">9:00 AM - 1:00 PM</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <i class="fas fa-building" style="font-size: 1.5rem; color: var(--aloia-purple);"></i>
+                        <div>
+                            <strong style="display: block; margin-bottom: 0.3rem;">Sesión presencial</strong>
+                            <p>Workshop con equipos operativos y validación de procesos</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 2rem; text-align: center; font-size: 0.9rem; color: var(--aloia-light-gray);">
+                <i class="fas fa-info-circle"></i> Todas las sesiones incluirán representantes técnicos y operativos de ambos equipos
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <div>Agenda Levantamiento</div>
+        <div class="page-number">9/10</div>
+    </div>
+</section>
+
+                     
+        <!-- Slide 10: Recomendaciones y Próximos Pasos -->
+        <section class="slide" id="slide10">
+            <div class="header">
+                <div class="logo">ALOIA TECH</div>
+                <div class="client">Tropper</div>
+            </div>
+            
+            <div class="slide-content">
+                <h2 class="slide-title">Recomendaciones y Próximos Pasos</h2>
+                <p class="slide-subtitle">Implementación exitosa y medición de resultados</p>
+                
+                <div class="two-column">
+                    <div class="column">
+                        <h3 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem; color: var(--aloia-orange);">Recomendaciones Clave</h3>
+                        <div class="features-list">
+                            <div class="feature-item" style="width: 100%;">
+                                <div class="feature-icon"><i class="fas fa-chart-bar"></i></div>
+                                <div class="feature-text">
+                                    <strong>Definir KPIs por módulo:</strong> tiempo medio de reacción, ocupación promedio por ruta, tiempo medio de cotización
+                                </div>
+                            </div>
+                            <div class="feature-item" style="width: 100%;">
+                                <div class="feature-icon"><i class="fas fa-clock"></i></div>
+                                <div class="feature-text">
+                                    <strong>Establecer SLA internos:</strong> tiempos de respuesta de MOI y con el cliente
+                                </div>
+                            </div>
+                            <div class="feature-item" style="width: 100%;">
+                                <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+                                <div class="feature-text">
+                                    <strong>Medidas de seguridad:</strong> autenticación, cifrado y control de acceso a la API de Samsara
+                                </div>
+                            </div>
+                            <div class="feature-item" style="width: 100%;">
+                                <div class="feature-icon"><i class="fas fa-graduation-cap"></i></div>
+                                <div class="feature-text">
+                                    <strong>Capacitacin integral:</strong> técnica y operativa para usuarios de cada módulo
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="column">
+                        <div class="highlight-box">
+                            <h3 style="font-size: 1.4rem; margin-bottom: 1rem; text-align: center;">Prueba Piloto Recomendada</h3>
+                            <p style="text-align: center; margin-bottom: 1.5rem;">Implementar en subconjunto controlado antes del despliegue completo</p>
+                            <div style="display: flex; justify-content: space-around; text-align: center;">
+                                <div>
+                                    <div style="font-size: 2rem; font-weight: 700;">3-5</div>
+                                    <div style="font-size: 0.9rem;">Unidades</div>
+                                </div>
+                                <div>
+                                    <div style="font-size: 2rem; font-weight: 700;">2</div>
+                                    <div style="font-size: 0.9rem;">Semanas</div>
+                                </div>
+                                <div>
+                                    <div style="font-size: 2rem; font-weight: 700;">100%</div>
+                                    <div style="font-size: 0.9rem;">Validación</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div style="background-color: var(--aloia-white); border-radius: 25px; padding: 1.5rem; box-shadow: 5px 5px 15px rgba(0,0,0,0.1); margin-top: 1.5rem;">
+                            <h4 style="color: var(--aloia-orange); margin-bottom: 1rem; font-size: 1.2rem;">Cronograma sugerido:</h4>
+                            <div style="display: flex; flex-direction: column; gap: 0.8rem;">
+                                <div style="display: flex; align-items: center;">
+                                    <div style="width: 30px; height: 30px; background: var(--aloia-orange); border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; margin-right: 1rem; font-weight: 600;">1</div>
+                                    <div>Kick-off y definición de requerimientos (1 semana)</div>
+                                </div>
+                                <div style="display: flex; align-items: center;">
+                                    <div style="width: 30px; height: 30px; background: var(--aloia-red); border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; margin-right: 1rem; font-weight: 600;">2</div>
+                                    <div>Desarrollo y pruebas MOI (4-5 semanas)</div>
+                                </div>
+                                <div style="display: flex; align-items: center;">
+                                    <div style="width: 30px; height: 30px; background: var(--aloia-purple); border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; margin-right: 1rem; font-weight: 600;">3</div>
+                                    <div>Piloto y ajustes (2 semanas)</div>
+                                </div>
+                                <div style="display: flex; align-items: center;">
+                                    <div style="width: 30px; height: 30px; background: var(--aloia-dark); border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; margin-right: 1rem; font-weight: 600;">4</div>
+                                    <div>Desarrollo módulos adicionales (paralelo)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+            </div>
+            
+            <div class="footer">
+                <div>Prximos Pasos</div>
+                <div class="page-number">10/10</div>
+            </div>
+        </section>
+
+
+
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slidesContainer = document.getElementById('slidesContainer');
+            const progressBar = document.getElementById('progressBar');
+            const totalSlides = document.querySelectorAll('.slide').length;
+            
+            slidesContainer.addEventListener('scroll', function() {
+                const scrollPosition = slidesContainer.scrollTop;
+                const slideHeight = window.innerHeight;
+                const currentSlideIndex = Math.round(scrollPosition / slideHeight) + 1;
+                
+                // Update progress bar
+                const progress = ((currentSlideIndex - 1) / (totalSlides - 1)) * 100;
+                progressBar.style.width = `${progress}%`;
+            });
+        });
+    </script>
+
+    <!-- Reemplazar el bloque de voicebot-container completo con este código -->
+<div class="voicebot-container">
+    <div class="voicebot-bubble">
+        <div class="voicebot-icon">
+            <i class="fas fa-microphone-alt"></i>
+        </div>
+        <div class="voicebot-widget">
+            <div class="voicebot-card">
+                <div class="voicebot-header">
+                    <div class="voicebot-avatar">
+                        <img src="https://aloia.ai/assets/img/alex.png" alt="Alex Voicebot" class="voicebot-avatar-img">
+                    </div>
+                    <div class="voicebot-info">
+                        <h3 class="voicebot-title">Habla con Moi</h3>
+                        <p class="voicebot-subtitle">El sabe todo del los mdulos</p>
+                    </div>
+                </div>
+                <div class="elevenlabs-container">
+                    <elevenlabs-convai agent-id="agent_01jymbtk1kew3s3t6ba1zp4e98" class="custom-voicebot"></elevenlabs-convai>
+                </div>
+                <div class="voicebot-footer">
+                    <i class="fas fa-info-circle"></i> Pregunta lo que quieras
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Script del widget -->
+<script src="https://elevenlabs.io/convai-widget/index.js" async type="text/javascript"></script>
+
+<!-- Agregar estos estilos dentro de la etiqueta <style> -->
+<style>
+/* Voicebot Container - FIXED POSITION */
+.voicebot-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 10000;
+}
+
+/* Voicebot Bubble */
+.voicebot-bubble {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+/* Voicebot Icon */
+.voicebot-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--aloia-orange), var(--aloia-purple));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    z-index: 10001;
+}
+
+.voicebot-icon:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Voicebot Widget - FIXED POSITION */
+.voicebot-widget {
+    position: fixed;
+    bottom: 100px; /* Aumentado para más espacio */
+    right: 20px;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 10000;
+    pointer-events: none;
+}
+
+.voicebot-bubble:hover .voicebot-widget {
+    width: 380px; /* Ancho aumentado */
+    height: 520px; /* Altura aumentada en 70px */
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+}
+
+/* Voicebot Card */
+.voicebot-card {
+    background: linear-gradient(135deg, var(--aloia-orange), var(--aloia-purple));
+    color: var(--aloia-white);
+    border-radius: 20px;
+    padding: 1.5rem;
+    width: 100%;
+    height: 100%;
+    box-shadow: 10px 10px 0 var(--shadow-color);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.voicebot-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.2rem; /* Reducido */
+}
+
+.voicebot-avatar {
+    width: 70px; /* Reducido */
+    height: 70px; /* Reducido */
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+    border: 2px solid white;
+    flex-shrink: 0;
+}
+
+.voicebot-avatar-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.voicebot-info {
+    flex: 1;
+}
+
+.voicebot-title {
+    font-size: 1.3rem; /* Reducido */
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+}
+
+.voicebot-subtitle {
+    font-size: 0.85rem; /* Reducido */
+    opacity: 0.9;
+}
+
+/* ElevenLabs Container */
+.elevenlabs-container {
+    flex: 1;
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 15px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    min-height: 280px; /* Altura aumentada */
+}
+
+/* Estilos para el widget de ElevenLabs */
+elevenlabs-convai {
+    position: relative !important;
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    bottom: auto !important;
+    right: auto !important;
+}
+
+/* Ocultar el botón flotante original de ElevenLabs */
+elevenlabs-convai.elevenlabs-widget-fab {
+    display: none !important;
+}
+
+/* Asegurarse de que el widget no tenga posición fija */
+elevenlabs-convai::part(fab) {
+    position: relative !important;
+}
+
+.voicebot-footer {
+    text-align: center;
+    font-size: 0.75rem; /* Reducido */
+    opacity: 0.8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+    padding: 0.5rem 0;
+}
+</style>
+
+
+</body>
+</html>

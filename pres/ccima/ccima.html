@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propuesta Sistema Integral de Atención a Leads con IA - Grupo CCIMA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #F04E59;
+            --primary-dark: #1E1E1E;
+            --primary-light: #F47983;
+            --white: #ffffff;
+            --light-gray: #f5f5f5;
+            --text-light: #e0e0e0;
+            --shadow-color: rgba(0, 0, 0, 0.15);
+            --gradient-start: #F04E59;
+            --gradient-mid: #E94057;
+            --gradient-end: #F04E59;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: var(--white);
+            color: var(--primary-dark);
+            overflow: hidden;
+        }
+        
+        .slides-container {
+            height: 100vh;
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll;
+            scroll-behavior: smooth;
+        }
+        
+        .slide {
+            height: 100vh;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            background-color: var(--white);
+        }
+        
+        /* Header styling */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            width: 100%;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+        
+        .client {
+            font-size: 1rem;
+            color: var(--primary-color);
+        }
+        
+        /* Slide content styling */
+        .slide-content {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            padding: 0 2rem;
+        }
+        
+        .slide-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: var(--primary-dark);
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        .slide-subtitle {
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            animation: fadeInUp 1.2s ease-out;
+        }
+        
+        .slide-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            animation: fadeInUp 1.4s ease-out;
+        }
+        
+        /* Card styles */
+        .cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 1rem;
+            animation: fadeInUp 1.6s ease-out;
+        }
+        
+        .card {
+            background-color: var(--white);
+            border-radius: 45px;
+            padding: 1.5rem;
+            width: calc(33% - 1.5rem);
+            min-width: 250px;
+            box-shadow: 10px 10px 0 var(--shadow-color);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 15px 15px 0 var(--shadow-color);
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .card-icon {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+        
+        .card-content {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: var(--primary-dark);
+            flex-grow: 1;
+        }
+        
+        .card-tag {
+            display: inline-block;
+            background-color: var(--primary-color);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-top: 1rem;
+            color: var(--white);
+        }
+        
+        .promo-tag {
+            display: inline-block;
+            background-color: var(--primary-light);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 1rem;
+            color: var(--white);
+            animation: pulse 2s infinite;
+        }
+        
+        /* Table styles */
+        .table-container {
+            margin-top: 2rem;
+            width: 100%;
+            animation: fadeInUp 1.6s ease-out;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--white);
+            border-radius: 45px;
+            overflow: hidden;
+            box-shadow: 10px 10px 0 var(--shadow-color);
+        }
+        
+        thead {
+            background-color: var(--primary-light);
+        }
+        
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        th {
+            font-weight: 600;
+        }
+        
+        /* Feature list styles */
+        .features-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 1rem;
+            animation: fadeInUp 1.6s ease-out;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            width: calc(50% - 0.75rem);
+            margin-bottom: 1rem;
+        }
+        
+        .feature-icon {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin-right: 1rem;
+            margin-top: 0.2rem;
+        }
+        
+        .feature-text {
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        
+        /* Footer */
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.5rem;
+            width: 100%;
+            font-size: 0.8rem;
+            color: var(--primary-dark);
+        }
+        
+        .page-number {
+            font-size: 0.9rem;
+            color: var(--primary-dark);
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Cover slide specific */
+        .cover-slide {
+            background-color: var(--white);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .cover-logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            animation: fadeInUp 0.8s ease-out;
+            color: var(--primary-dark);
+        }
+        
+        .cover-title {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease-out;
+            color: var(--primary-dark);
+        }
+        
+        .cover-subtitle {
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+            animation: fadeInUp 1.2s ease-out;
+        }
+        
+        .cover-client {
+            font-size: 1.2rem;
+            animation: fadeInUp 1.4s ease-out;
+            color: var(--primary-dark);
+        }
+        
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 5px;
+            background: var(--primary-color);
+            width: 0%;
+            z-index: 100;
+            transition: width 0.3s ease;
+        }
+        
+        /* Two column layout */
+        .two-column {
+            display: flex;
+            gap: 2rem;
+            margin-top: 1rem;
+            animation: fadeInUp 1.6s ease-out;
+        }
+        
+        .column {
+            flex: 1;
+        }
+        
+        .highlight-box {
+            background-color: var(--primary-color);
+            border-radius: 45px;
+            padding: 1.5rem;
+            margin: 0 auto;
+            max-width: 800px;
+            box-shadow: 10px 10px 0 var(--shadow-color);
+        }
+        
+        .highlight-text {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: white;
+            margin: 0;
+            text-align: center;
+        }
+
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .value-card {
+            background-color: var(--light-gray);
+            border-radius: 25px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 5px 5px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .value-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .value-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .value-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+        }
+        
+        .value-description {
+            font-size: 1rem;
+            color: var(--primary-dark);
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 2rem auto 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 4px;
+            background-color: var(--primary-light);
+            transform: translateX(-50%);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            width: calc(50% - 40px);
+        }
+        
+        .timeline-item:nth-child(odd) {
+            float: left;
+            clear: both;
+        }
+        
+        .timeline-item:nth-child(even) {
+            float: right;
+            clear: both;
+        }
+        
+        .timeline-content {
+            background-color: var(--white);
+            border-radius: 25px;
+            padding: 1.5rem;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .timeline-date {
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .numbered-list {
+            counter-reset: item;
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .numbered-list li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            counter-increment: item;
+        }
+
+        .numbered-list li::before {
+            content: counter(item);
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+            border-radius: 50%;
+            width: 2rem;
+            height: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            flex-shrink: 0;
+            margin-top: 0.2rem;
+        }
+
+        .pricing-highlight {
+            background: linear-gradient(135deg, var(--primary-light), var(--primary-color));
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: 600;
+            display: inline-block;
+            margin-left: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .strikethrough {
+            text-decoration: line-through;
+            color: #666;
+            margin-right: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    <div class="slides-container" id="slidesContainer">
+        
+        <!-- Slide 1: Portada -->
+        <section class="slide cover-slide" id="slide1">
+            <div style="margin-bottom: 2rem;">
+                <img src="https://aloia.ai/assets/img/aloia-color.png" alt="Aloia Logo" style="height: 120px; width: auto;">
+            </div>
+            <h1 class="cover-title">SISTEMA INTEGRAL DE<br>ATENCIÓN A LEADS CON IA</h1>
+            <div class="cover-subtitle">Propuesta de implementacin para desarrolladoras inmobiliarias</div>
+            <div class="cover-client">Presentado a: Grupo CCIMA<br>Atención: Carlos Romo</div>
+            
+            <div class="footer">
+                <div>Julio 22, 2025</div>
+                <div class="page-number">1/13</div>
+            </div>
+        </section>
+        
+        <!-- Slide 2: Resumen Ejecutivo -->
+        <section class="slide" id="slide2">
+            <div class="header">
+                <div class="logo">ALOIA FRAMEWORK</div>
+                <div class="client">Grupo CCIMA</div>
+            </div>
+            
+            <div class="slide-content">
+                <h2 class="slide-title" style="font-size: 3rem; text-align: center; margin-bottom: 1.5rem;">Resumen Ejecutivo</h2>
+                
+                <div class="slide-text" style="font-size: 1.2rem; text-align: center; margin-bottom: 2rem;">
+                    Solución integral diseñada específicamente para desarrolladoras inmobiliarias que buscan optimizar su proceso de captación y atención de leads mediante inteligencia artificial y automatización avanzada.
+                </div>
+                
+                <div class="value-grid">
+                    <div class="value-card">
+                        <div class="value-icon"><i class="fas fa-share-alt"></i></div>
+                        <div class="value-title">Conexión Total</div>
+                        <div class="value-description">Ecosistema que conecta anuncios de redes sociales con sistema automatizado de atención al cliente</div>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon"><i class="fas fa-robot"></i></div>
+                        <div class="value-title">IA Especializada</div>
+                        <div class="value-description">Gestión de inventario y CRM especializado con inteligencia artificial inmobiliaria</div>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon"><i class="fas fa-chart-line"></i></div>
+                        <div class="value-title">Experiencia Fluida</div>
+                        <div class="value-description">Desde el primer contacto hasta el cierre de ventas con automatización completa</div>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon"><i class="fas fa-clock"></i></div>
+                        <div class="value-title">Respuesta Inmediata</div>
+                        <div class="value-description">Atención 24/7 que aumenta significativamente las tasas de conversión</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div>Propuesta de Implementación</div>
+                <div class="page-number">2/13</div>
+            </div>
+        </section>
+        
+        <!-- Slide 3: Análisis de Necesidades -->
+        <section class="slide" id="slide3">
+            <div class="header">
+                <div class="logo">ALOIA FRAMEWORK</div>
+                <div class="client">Grupo CCIMA</div>
+            </div>
+            
+            <div class="slide-content">
+                <h2 class="slide-title" style="font-size: 3rem; text-align: center; margin-bottom: 2rem;">Análisis de Necesidades</h2>
+                
+                <div class="two-column">
+                    <div class="column">
+                        <h3 style="font-size: 2rem; color: var(--primary-color); margin-bottom: 1.5rem; text-align: center;">
+                            <i class="fas fa-exclamation-triangle" style="margin-right: 0.5rem;"></i>
+                            Desafío Actual
+                        </h3>
+                        <div class="features-list" style="flex-direction: column;">
+                            <div class="feature-item" style="width: 100%;">
+                                <div class="feature-icon"><i class="fas fa-link"></i></div>
+                                <div class="feature-text">Necesidad de conectar eficientemente anuncios de redes sociales con captación de leads</div>
+                            </div>
+                            <div class="feature-item" style="width: 100%;">
+                                <div class="feature-icon"><i class="fas fa-clock"></i></div>
+                                <div class="feature-text">Requerimiento de atención automatizada 24/7 para prospects interesados</div>
+                            </div>
+                            <div class="feature-item" style="width: 100%;">
+                                <div class="feature-icon"><i class="fas fa-warehouse"></i></div>
+                                <div class="feature-text">Gestión manual de inventario de propiedades</div>
+                            </div>
+                            <div class="feature-item" style="width: 100%;">
+                                <div class="feature-icon"><i class="fas fa-disconnect"></i></div>
+                                <div class="feature-text">Falta de integración entre herramientas de marketing y ventas</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="column">
+                        <h3 style="font-size: 2rem; color: var(--primary-color); margin-bottom: 1.5rem; text-align: center;">
+                            <i class="fas fa-bullseye" style="margin-right: 0.5rem;"></i>
+                            Oportunidad
+                        </h3>
+                        <div style="background-color: var(--light-gray); border-radius: 25px; padding: 2rem;">
+                            <p style="font-size: 1.2rem; line-height: 1.6; text-align: center; color: var(--primary-dark);">
+                                El sector inmobiliario requiere <strong>respuestas inmediatas</strong> e <strong>información precisa</strong>.
+                            </p>
+                            <p style="font-size: 1.1rem; line-height: 1.6; margin-top: 1rem; text-align: center;">
+                                Nuestra solución permitirá a Grupo CCIMA ofrecer <span style="color: var(--primary-color); font-weight: 600;">atención personalizada en tiempo real</span>, aumentando significativamente las tasas de conversión.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div>Propuesta de Implementacin</div>
+                <div class="page-number">3/13</div>
+            </div>
+        </section>
+        
+        <!-- Slide 4: Aloia Framework Módulo 1 -->
+        <section class="slide" id="slide4">
+            <div class="header">
+                <div class="logo">ALOIA FRAMEWORK</div>
+                <div class="client">Grupo CCIMA</div>
+            </div>
+            
+            <div class="slide-content">
+                <h2 class="slide-title" style="font-size: 2.5rem; text-align: center; margin-bottom: 1rem;">Módulo 1: Integración con Redes Sociales</h2>
+                <h3 class="slide-subtitle" style="text-align: center; margin-bottom: 2rem;">Desarrollo a la Medida - Conexión IA + CRM</h3>
+                
+                <div class="cards-container">
+                    <div class="card" style="width: 100%; margin-bottom: 2rem;">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-share-alt"></i></div>
+                            <div class="card-title">Características Principales</div>
+                        </div>
+                        <div class="card-content">
+                            <div class="features-list" style="flex-direction: column; gap: 1rem;">
+                                <div class="feature-item" style="width: 100%;">
+                                    <div class="feature-icon"><i class="fas fa-facebook"></i></div>
+                                    <div class="feature-text">Conexión directa de anuncios de Facebook, Instagram y Google con el sistema</div>
+                                </div>
+                                <div class="feature-item" style="width: 100%;">
+                                    <div class="feature-icon"><i class="fas fa-download"></i></div>
+                                    <div class="feature-text">Captura automtica de datos de leads desde formularios publicitarios</div>
+                                </div>
+                                <div class="feature-item" style="width: 100%;">
+                                    <div class="feature-icon"><i class="fas fa-sync"></i></div>
+                                    <div class="feature-text">Integración inmediata con CRM para seguimiento</div>
+                                </div>
+                                <div class="feature-item" style="width: 100%;">
+                                    <div class="feature-icon"><i class="fas fa-chart-bar"></i></div>
+                                    <div class="feature-text">Dashboard de métricas de rendimiento por campaña</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="highlight-box">
+                    <div class="highlight-text" style="display: flex; align-items: center; justify-content: center; gap: 2rem;">
+                        <div>
+                            <i class="fas fa-clock" style="margin-right: 0.5rem;"></i>
+                            Implementación: 5 horas
+                        </div>
+                        <div>
+                            <i class="fas fa-dollar-sign" style="margin-right: 0.5rem;"></i>
+                            $8,400 MXN + IVA (pago único)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div>Propuesta de Implementación</div>
+                <div class="page-number">4/13</div>
+            </div>
+        </section>
+        
+        <!-- Slide 5: Aloia Framework Módulo 2 -->
+<!-- Slide 5: Aloia Framework Módulo 2 -->
+<section class="slide" id="slide5">
+    <div class="header">
+        <div class="logo">ALOIA FRAMEWORK</div>
+        <div class="client">Grupo CCIMA</div>
+    </div>
+    
+    <div class="slide-content">
+        <h2 class="slide-title" style="font-size: 2.5rem; text-align: center; margin-bottom: 1rem;">Módulo 2: Asistente de Ventas IA</h2>
+        <h3 class="slide-subtitle" style="text-align: center; margin-bottom: 2rem;">Chatbot Inteligente Web + WhatsApp</h3>
+        
+        <div style="display: flex; gap: 2rem; justify-content: center; max-width: 1000px; margin: 0 auto;">
+            <div class="card" style="width: 45%;">
+                <div class="card-header">
+                    <div class="card-icon"><i class="fas fa-robot"></i></div>
+                    <div class="card-title">Características</div>
+                </div>
+                <div class="card-content">
+                    <div class="features-list" style="flex-direction: column; gap: 0.8rem;">
+                        <div class="feature-item" style="width: 100%; margin-bottom: 0.5rem;">
+                            <div class="feature-icon"><i class="fas fa-clock"></i></div>
+                            <div class="feature-text">Atención automatizada 24/7</div>
+                        </div>
+                        <div class="feature-item" style="width: 100%; margin-bottom: 0.5rem;">
+                            <div class="feature-icon"><i class="fas fa-brain"></i></div>
+                            <div class="feature-text">Conocimiento inmobiliario especializado</div>
+                        </div>
+                        <div class="feature-item" style="width: 100%; margin-bottom: 0.5rem;">
+                            <div class="feature-icon"><i class="fas fa-filter"></i></div>
+                            <div class="feature-text">Calificación automática de leads</div>
+                        </div>
+                        <div class="feature-item" style="width: 100%; margin-bottom: 0.5rem;">
+                            <div class="feature-icon"><i class="fas fa-calendar"></i></div>
+                            <div class="feature-text">Agendamiento automático de citas</div>
+                        </div>
+                        <div class="feature-item" style="width: 100%; margin-bottom: 0.5rem;">
+                            <div class="feature-icon"><i class="fas fa-level-up-alt"></i></div>
+                            <div class="feature-text">Escalamiento inteligente</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" style="width: 45%;">
+                <div class="card-header">
+                    <div class="card-icon"><i class="fas fa-chart-pie"></i></div>
+                    <div class="card-title">Planes Disponibles</div>
+                </div>
+                <div class="card-content">
+                    <div style="margin-bottom: 1rem; padding: 1rem; background-color: var(--light-gray); border-radius: 15px; border-left: 4px solid var(--primary-color);">
+                        <strong>Básico - 250 clientes/mes</strong><br>
+                        <span style="font-size: 1.2rem; color: var(--primary-color); font-weight: 600;">$9,998 MXN + IVA</span>
+                    </div>
+                    <div style="margin-bottom: 1rem; padding: 1rem; background-color: var(--light-gray); border-radius: 15px;">
+                        <strong>Intermedio - 500 clientes/mes</strong><br>
+                        <span style="color: var(--primary-color);">$11,477.43 MXN + IVA</span>
+                    </div>
+                    <div style="margin-bottom: 1rem; padding: 1rem; background-color: var(--light-gray); border-radius: 15px;">
+                        <strong>Avanzado - 1,000 clientes/mes</strong><br>
+                        <span style="color: var(--primary-color);">$20,998.20 MXN + IVA</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="margin-top: 1rem; background-color: var(--light-gray); border-left: 4px solid var(--primary-color); padding: 1rem; border-radius: 0 10px 10px 0;">
+            <p style="font-size: 1rem;">
+                <i class="fas fa-info-circle" style="color: var(--primary-color); margin-right: 0.5rem;"></i>
+                <strong>Implementación:</strong> 1.5 semanas | <strong>Incluye:</strong> 3,000 interacciones mensuales, respuestas en tiempo real, análisis de intención de compra y reportes detallados.
+            </p>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <div>Propuesta de Implementacin</div>
+        <div class="page-number">5/13</div>
+    </div>
+</section>
+        
+        <!-- Slide 6: Aloia Framework Módulo 3 -->
+        <section class="slide" id="slide6">
+            <div class="header">
+                <div class="logo">ALOIA FRAMEWORK</div>
+                <div class="client">Grupo CCIMA</div>
+            </div>
+            
+            <div class="slide-content">
+                <h2 class="slide-title" style="font-size: 2.5rem; text-align: center; margin-bottom: 1rem;">Módulo 3: Catálogo de Inventario Inteligente</h2>
+                <h3 class="slide-subtitle" style="text-align: center; margin-bottom: 2rem;">Pantalla de Carga de Inventarios + IA</h3>
+                
+                <div class="cards-container">
+                    <div class="card" style="width: 100%; margin-bottom: 2rem;">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-warehouse"></i></div>
+                            <div class="card-title">Características del Sistema</div>
+                        </div>
+                        <div class="card-content">
+                            <div class="features-list">
+                                <div class="feature-item">
+                                    <div class="feature-icon"><i class="fas fa-upload"></i></div>
+                                    <div class="feature-text">Interfaz intuitiva para carga y actualización de propiedades</div>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon"><i class="fas fa-sync-alt"></i></div>
+                                    <div class="feature-text">Sincronización automática con el asistente IA</div>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon"><i class="fas fa-clock"></i></div>
+                                    <div class="feature-text">Gestión de disponibilidad en tiempo real</div>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon"><i class="fas fa-tags"></i></div>
+                                    <div class="feature-text">Categorización automática por tipo, ubicación y precio</div>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon"><i class="fas fa-camera"></i></div>
+                                    <div class="feature-text">Integración con sistemas de imágenes y tours virtuales</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="highlight-box" style="background: linear-gradient(135deg, var(--primary-light), var(--primary-color));">
+                    <div class="highlight-text" style="display: flex; align-items: center; justify-content: center; gap: 2rem;">
+                        <div>
+                            <i class="fas fa-clock" style="margin-right: 0.5rem;"></i>
+                            Implementación: 2 días
+                        </div>
+                        <div>
+                            <span class="strikethrough" style="color: rgba(255,255,255,0.7);">$4,780 MXN</span>
+                            <strong style="font-size: 1.6rem;">$0 MXN</strong>
+                        </div>
+                        <div class="promo-tag" style="background: rgba(255,255,255,0.2); color: white;">
+                            <i class="fas fa-gift" style="margin-right: 0.5rem;"></i>
+                            PROMOCIÓN JULIO 2025
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div>Propuesta de Implementación</div>
+                <div class="page-number">6/13</div>
+            </div>
+        </section>
+        
+        <!-- Slide 7: Aloia Framework Módulo 4 -->
+<!-- Slide 7: Aloia Framework Módulo 4 -->
+<section class="slide" id="slide7">
+    <div class="header">
+        <div class="logo">ALOIA FRAMEWORK</div>
+        <div class="client">Grupo CCIMA</div>
+    </div>
+    
+    <div class="slide-content">
+        <h2 class="slide-title" style="font-size: 2.5rem; text-align: center; margin-bottom: 1rem;">Mdulo 4: CRM con Integración WhatsApp</h2>
+        <h3 class="slide-subtitle" style="text-align: center; margin-bottom: 2rem;">Sistema de Gestión de Relaciones con Clientes</h3>
+        
+        <div style="display: flex; gap: 2rem; justify-content: center; max-width: 1000px; margin: 0 auto;">
+            <div class="card" style="width: 45%;">
+                <div class="card-header">
+                    <div class="card-icon"><i class="fas fa-users"></i></div>
+                    <div class="card-title">Características</div>
+                </div>
+                <div class="card-content">
+                    <div class="features-list" style="flex-direction: column; gap: 1rem;">
+                        <div class="feature-item" style="width: 100%;">
+                            <div class="feature-icon"><i class="fas fa-home"></i></div>
+                            <div class="feature-text">CRM especializado para equipos de ventas inmobiliarias</div>
+                        </div>
+                        <div class="feature-item" style="width: 100%;">
+                            <div class="feature-icon"><i class="fab fa-whatsapp"></i></div>
+                            <div class="feature-text">Integración nativa con WhatsApp Business</div>
+                        </div>
+                        <div class="feature-item" style="width: 100%;">
+                            <div class="feature-icon"><i class="fas fa-route"></i></div>
+                            <div class="feature-text">Seguimiento completo del customer journey</div>
+                        </div>
+                        <div class="feature-item" style="width: 100%;">
+                            <div class="feature-icon"><i class="fas fa-magic"></i></div>
+                            <div class="feature-text">Automatización de follow-ups</div>
+                        </div>
+                        <div class="feature-item" style="width: 100%;">
+                            <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                            <div class="feature-text">Reportes de ventas y conversión</div>
+                        </div>
+                        <div class="feature-item" style="width: 100%;">
+                            <div class="feature-icon"><i class="fas fa-funnel-dollar"></i></div>
+                            <div class="feature-text">Gestión de pipeline de prospectos</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" style="width: 45%;">
+                <div class="card-header">
+                    <div class="card-icon"><i class="fas fa-gift"></i></div>
+                    <div class="card-title">Incluye</div>
+                </div>
+                <div class="card-content">
+                    <div style="margin-bottom: 1.5rem; padding: 1rem; background-color: var(--light-gray); border-radius: 15px;">
+                        <div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+                            <i class="fas fa-play-circle" style="color: var(--primary-color); margin-right: 0.5rem;"></i>
+                            <strong>Acceso inmediato al sistema</strong>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-bottom: 1.5rem; padding: 1rem; background-color: var(--light-gray); border-radius: 15px;">
+                        <div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+                            <i class="fas fa-graduation-cap" style="color: var(--primary-color); margin-right: 0.5rem;"></i>
+                            <strong>Sesión de capacitación (1.5 horas)</strong>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-bottom: 1.5rem; padding: 1rem; background-color: var(--light-gray); border-radius: 15px;">
+                        <div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+                            <i class="fas fa-headset" style="color: var(--primary-color); margin-right: 0.5rem;"></i>
+                            <strong>Soporte técnico 5 días/semana</strong>
+                        </div>
+                        <div style="font-size: 0.9rem; color: #666;">9:00 AM - 7:00 PM</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="highlight-box">
+            <div class="highlight-text">
+                <i class="fas fa-dollar-sign" style="margin-right: 0.5rem;"></i>
+                Inversión: $750 MXN + IVA mensual
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <div>Propuesta de Implementación</div>
+        <div class="page-number">7/13</div>
+    </div>
+</section>
+        
+        <!-- Slide 8: Aloia Framework Módulo 5 -->
+        <section class="slide" id="slide8">
+            <div class="header">
+                <div class="logo">ALOIA FRAMEWORK</div>
+                <div class="client">Grupo CCIMA</div>
+            </div>
+            
+            <div class="slide-content" style="justify-content: center; align-items: center;">
+                <h2 class="slide-title" style="font-size: 3rem; text-align: center; margin-bottom: 2rem;">Módulo 5: Task Manager</h2>
+                <h3 class="slide-subtitle" style="text-align: center; margin-bottom: 3rem;">Administrador de Tareas y Proyectos</h3>
+                
+                <div class="card" style="width: 60%; max-width: 600px; margin: 0 auto;">
+                    <div class="card-header" style="justify-content: center;">
+                        <div class="card-icon"><i class="fas fa-tasks"></i></div>
+                        <div class="card-title">Características del Sistema</div>
+                    </div>
+                    <div class="card-content">
+                        <div class="features-list" style="flex-direction: column; gap: 1.5rem;">
+                            <div class="feature-item" style="width: 100%;">
+                                <div class="feature-icon"><i class="fas fa-clipboard-list"></i></div>
+                                <div class="feature-text"><strong>Gestión de tareas del equipo de ventas</strong></div>
+                            </div>
+                            <div class="feature-item" style="width: 100%;">
+                                <div class="feature-icon"><i class="fas fa-user-check"></i></div>
+                                <div class="feature-text"><strong>Seguimiento de actividades por cliente</strong></div>
+                            </div>
+                            <div class="feature-item" style="width: 100%;">
+                                <div class="feature-icon"><i class="fas fa-bell"></i></div>
+                                <div class="feature-text"><strong>Recordatorios automáticos</strong></div>
+                            </div>
+                            <div class="feature-item" style="width: 100%;">
+                                <div class="feature-icon"><i class="fas fa-link"></i></div>
+                                <div class="feature-text"><strong>Integracin con CRM y asistente IA</strong></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="highlight-box" style="margin-top: 3rem;">
+                    <div class="highlight-text">
+                        <i class="fas fa-dollar-sign" style="margin-right: 0.5rem;"></i>
+                        Inversión: $500 MXN + IVA mensual
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div>Propuesta de Implementación</div>
+                <div class="page-number">8/13</div>
+            </div>
+        </section>
+        
+        <!-- Slide 9: Prospectator -->
+<!-- Slide 9: Prospectator -->
+<section class="slide" id="slide9">
+    <div class="header">
+        <div class="logo">ALOIA FRAMEWORK</div>
+        <div class="client">Grupo CCIMA</div>
+    </div>
+    
+    <div class="slide-content">
+        <h2 class="slide-title" style="font-size: 2.5rem; text-align: center; margin-bottom: 1rem;">Módulo Adicional: Prospectator</h2>
+        <h3 class="slide-subtitle" style="text-align: center; margin-bottom: 2rem;">Herramienta Avanzada de Prospección Empresarial</h3>
+        
+        <div style="display: flex; gap: 2rem; justify-content: center; max-width: 1000px; margin: 0 auto;">
+            <div class="card" style="width: 45%;">
+                <div class="card-header">
+                    <div class="card-icon"><i class="fas fa-search"></i></div>
+                    <div class="card-title">Características</div>
+                </div>
+                <div class="card-content">
+                    <div class="features-list" style="flex-direction: column; gap: 1rem;">
+                        <div class="feature-item" style="width: 100%;">
+                            <div class="feature-icon"><i class="fas fa-spider"></i></div>
+                            <div class="feature-text">Crawling automático de datos de contactos empresariales</div>
+                        </div>
+                        <div class="feature-item" style="width: 100%;">
+                            <div class="feature-icon"><i class="fas fa-address-card"></i></div>
+                            <div class="feature-text">Obtención de: nombre, cargo, email, teléfono, puesto</div>
+                        </div>
+                        <div class="feature-item" style="width: 100%;">
+                            <div class="feature-icon"><i class="fas fa-link"></i></div>
+                            <div class="feature-text">Solo requiere URL de la empresa objetivo</div>
+                        </div>
+                        <div class="feature-item" style="width: 100%;">
+                            <div class="feature-icon"><i class="fas fa-sync"></i></div>
+                            <div class="feature-text">Base de datos actualizada constantemente</div>
+                        </div>
+                    </div>
+                    <div class="card-tag">Ideal para B2B</div>
+                </div>
+            </div>
+            
+            <div class="card" style="width: 45%;">
+                <div class="card-header">
+                    <div class="card-icon"><i class="fas fa-dollar-sign"></i></div>
+                    <div class="card-title">Estructura de Precios</div>
+                </div>
+                <div class="card-content">
+                    <div style="margin-bottom: 1rem; padding: 1rem; background-color: var(--light-gray); border-radius: 15px;">
+                        <strong>Paquete Básico</strong><br>
+                        <span style="color: var(--primary-color);">1,000 búsquedas - $3.00 MXN c/u</span><br>
+                        <span style="font-size: 0.9rem; color: #666;">Total: $3,000 MXN</span>
+                    </div>
+                    <div style="margin-bottom: 1rem; padding: 1rem; background-color: var(--light-gray); border-radius: 15px;">
+                        <strong>Paquete Intermedio</strong><br>
+                        <span style="color: var(--primary-color);">2,000 búsquedas - $2.50 MXN c/u</span><br>
+                        <span style="font-size: 0.9rem; color: #666;">Total: $5,000 MXN</span>
+                    </div>
+                    <div style="margin-bottom: 1rem; padding: 1rem; background-color: var(--light-gray); border-radius: 15px;">
+                        <strong>Paquete Avanzado</strong><br>
+                        <span style="color: var(--primary-color);">5,000 búsquedas - $2.00 MXN c/u</span><br>
+                        <span style="font-size: 0.9rem; color: #666;">Total: $10,000 MXN</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="margin-top: 1rem; background-color: var(--light-gray); border-left: 4px solid var(--primary-color); padding: 1rem; border-radius: 0 10px 10px 0;">
+            <p style="font-size: 1rem;">
+                <i class="fas fa-bullseye" style="color: var(--primary-color); margin-right: 0.5rem;"></i>
+                <strong>Perfecto para identificar:</strong> Potenciales compradores institucionales, inversionistas y socios comerciales.
+            </p>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <div>Propuesta de Implementación</div>
+        <div class="page-number">9/13</div>
+    </div>
+</section>
+        
+       
+        
+        <!-- Slide 11: Inversión -->
+<!-- Slide 11: Inversin -->
+<section class="slide" id="slide11">
+    <div class="header">
+        <div class="logo">ALOIA FRAMEWORK</div>
+        <div class="client">Grupo CCIMA</div>
+    </div>
+    
+    <div class="slide-content">
+        <h2 class="slide-title" style="font-size: 3rem; text-align: center; margin-bottom: 2rem;">Inversión y Estructura de Pagos</h2>
+        
+        <div style="display: flex; gap: 2rem; justify-content: center; max-width: 1000px; margin: 0 auto;">
+            <div class="card" style="width: 45%;">
+                <div class="card-header">
+                    <div class="card-icon"><i class="fas fa-calendar-alt"></i></div>
+                    <div class="card-title">Costos Mensuales</div>
+                </div>
+                <div class="card-content">
+                    <div style="margin-bottom: 0.8rem; display: flex; justify-content: space-between; align-items: center;">
+                        <span>Integración Redes Sociales:</span>
+                        <span style="color: var(--primary-color); font-weight: 600;">$8,400</span>
+                    </div>
+                    <div style="margin-bottom: 0.8rem; display: flex; justify-content: space-between; align-items: center;">
+                        <span>Asistente IA (250 clientes):</span>
+                        <span style="color: var(--primary-color); font-weight: 600;">$9,998</span>
+                    </div>
+                    <div style="margin-bottom: 0.8rem; display: flex; justify-content: space-between; align-items: center;">
+                        <span>Task Manager/usuario:</span>
+                        <span style="color: var(--primary-color); font-weight: 600;">$500</span>
+                    </div>
+                    <div style="margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center;">
+                        <span>Pantalla de Inventarios:</span>
+                        <span style="text-decoration: line-through; color: #666; margin-right: 0.5rem;">$398</span>
+                        <span style="color: var(--primary-light); font-weight: 600;">$0</span>
+                    </div>
+                    <hr style="margin: 1rem 0;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; font-size: 1.2rem; font-weight: 700;">
+                        <span>Total mensual sin IVA:</span>
+                        <span style="color: var(--primary-color);">$10,998</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" style="width: 45%; border: 3px solid var(--primary-color);">
+                <div class="card-header">
+                    <div class="card-icon"><i class="fas fa-percent"></i></div>
+                    <div class="card-title">Descuento por Pago Anual</div>
+                </div>
+                <div class="card-content">
+                    
+                    
+                    <div style="margin-bottom: 1rem; padding: 1rem; background-color: var(--light-gray); border-radius: 15px;">
+                        <div>Plan mensual normal:</div>
+                        <div style="text-decoration: line-through; color: #666;">$10,998 MXN + IVA</div>
+                        <div style="font-size: 1.2rem; color: var(--primary-color); font-weight: 600;">$10,119 MXN + IVA</div>
+                    </div>
+                    
+                    <div style="background-color: var(--primary-light); color: white; padding: 1rem; border-radius: 15px; text-align: center;">
+                        <div style="font-weight: 600;">AHORRO ANUAL</div>
+                        <div style="font-size: 1.5rem; font-weight: 700;">$10,548 MXN</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="margin-top: 2rem; background-color: var(--light-gray); border-left: 4px solid var(--primary-color); padding: 1rem; border-radius: 0 10px 10px 0;">
+            <p style="font-size: 1rem;">
+                <i class="fas fa-gift" style="color: var(--primary-color); margin-right: 0.5rem;"></i>
+                <strong>Oferta especial julio:</strong> Primera mensualidad con 20% de descuento si se firma antes del 31 de julio + Módulo de inventarios SIN COSTO.
+            </p>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <div>Propuesta de Implementación</div>
+        <div class="page-number">10/13</div>
+    </div>
+</section>
+        
+        <!-- Slide 12: Beneficios -->
+        <section class="slide" id="slide12">
+            <div class="header">
+                <div class="logo">ALOIA FRAMEWORK</div>
+                <div class="client">Grupo CCIMA</div>
+            </div>
+            
+            <div class="slide-content">
+                <h2 class="slide-title" style="font-size: 3rem; text-align: center; margin-bottom: 2rem;">Beneficios Esperados</h2>
+                
+                <div class="cards-container">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-rocket"></i></div>
+                            <div class="card-title">Inmediatos (Primeras 4 semanas)</div>
+                        </div>
+                        <div class="card-content">
+                            <div class="features-list" style="flex-direction: column; gap: 0.8rem;">
+                                <div class="feature-item" style="width: 100%; margin-bottom: 0.5rem;">
+                                    <div class="feature-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                    <div class="feature-text">Reducción del 80% en tiempo de respuesta inicial a leads</div>
+                                </div>
+                                <div class="feature-item" style="width: 100%; margin-bottom: 0.5rem;">
+                                    <div class="feature-icon"><i class="fas fa-clock"></i></div>
+                                    <div class="feature-text">Atención 24/7 sin costo adicional de personal</div>
+                                </div>
+                                <div class="feature-item" style="width: 100%; margin-bottom: 0.5rem;">
+                                    <div class="feature-icon"><i class="fas fa-database"></i></div>
+                                    <div class="feature-text">Organización completa de base de datos de clientes</div>
+                                </div>
+                                <div class="feature-item" style="width: 100%; margin-bottom: 0.5rem;">
+                                    <div class="feature-icon"><i class="fas fa-eye"></i></div>
+                                    <div class="feature-text">Seguimiento automatizado de oportunidades</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+                            <div class="card-title">Mediano Plazo (3-6 meses)</div>
+                        </div>
+                        <div class="card-content">
+                            <div class="features-list" style="flex-direction: column; gap: 0.8rem;">
+                                <div class="feature-item" style="width: 100%; margin-bottom: 0.5rem;">
+                                    <div class="feature-icon"><i class="fas fa-arrow-up"></i></div>
+                                    <div class="feature-text">Incremento del 40-60% en tasa de conversión de leads</div>
+                                </div>
+                                <div class="feature-item" style="width: 100%; margin-bottom: 0.5rem;">
+                                    <div class="feature-icon"><i class="fas fa-arrow-down"></i></div>
+                                    <div class="feature-text">Reducción del 50% en costo de adquisición de clientes</div>
+                                </div>
+                                <div class="feature-item" style="width: 100%; margin-bottom: 0.5rem;">
+                                    <div class="feature-icon"><i class="fas fa-smile"></i></div>
+                                    <div class="feature-text">Mejora del 70% en satisfacción del cliente</div>
+                                </div>
+                                <div class="feature-item" style="width: 100%; margin-bottom: 0.5rem;">
+                                    <div class="feature-icon"><i class="fas fa-dollar-sign"></i></div>
+                                    <div class="feature-text">ROI positivo en primeros 90 días</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-trophy"></i></div>
+                            <div class="card-title">Largo Plazo (6-12 meses)</div>
+                        </div>
+                        <div class="card-content">
+                            <div class="features-list" style="flex-direction: column; gap: 0.8rem;">
+                                <div class="feature-item" style="width: 100%; margin-bottom: 0.5rem;">
+                                    <div class="feature-icon"><i class="fas fa-expand"></i></div>
+                                    <div class="feature-text">Escalabilidad sin incremento proporcional de costos</div>
+                                </div>
+                                <div class="feature-item" style="width: 100%; margin-bottom: 0.5rem;">
+                                    <div class="feature-icon"><i class="fas fa-archive"></i></div>
+                                    <div class="feature-text">Base de datos calificada para futuras campañas</div>
+                                </div>
+                                <div class="feature-item" style="width: 100%; margin-bottom: 0.5rem;">
+                                    <div class="feature-icon"><i class="fas fa-brain"></i></div>
+                                    <div class="feature-text">Análisis predictivo para optimización de ventas</div>
+                                </div>
+                                <div class="feature-item" style="width: 100%; margin-bottom: 0.5rem;">
+                                    <div class="feature-icon"><i class="fas fa-medal"></i></div>
+                                    <div class="feature-text">Ventaja competitiva significativa en el mercado</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div>Propuesta de Implementación</div>
+                <div class="page-number">11/13</div>
+            </div>
+        </section>
+        
+        <!-- Slide 13: Soporte y Garantas -->
+<!-- Slide 13: Soporte y Garantías -->
+<section class="slide" id="slide13">
+    <div class="header">
+        <div class="logo">ALOIA FRAMEWORK</div>
+        <div class="client">Grupo CCIMA</div>
+    </div>
+    
+    <div class="slide-content">
+        <h2 class="slide-title" style="font-size: 3rem; text-align: center; margin-bottom: 2rem;">Soporte y Garantías</h2>
+        
+        <div style="display: flex; gap: 2rem; justify-content: center; max-width: 1000px; margin: 0 auto;">
+            <div class="card" style="width: 45%;">
+                <div class="card-header">
+                    <div class="card-icon"><i class="fas fa-handshake"></i></div>
+                    <div class="card-title">Incluido en la Solución</div>
+                </div>
+                <div class="card-content">
+                    <div class="features-list" style="flex-direction: column; gap: 1rem;">
+                        <div class="feature-item" style="width: 100%;">
+                            <div class="feature-icon"><i class="fas fa-headset"></i></div>
+                            <div class="feature-text">Soporte técnico 5 días/semana (9:00 AM - 7:00 PM)</div>
+                        </div>
+                        <div class="feature-item" style="width: 100%;">
+                            <div class="feature-icon"><i class="fas fa-sync"></i></div>
+                            <div class="feature-text">Actualizaciones automáticas del sistema</div>
+                        </div>
+                        <div class="feature-item" style="width: 100%;">
+                            <div class="feature-icon"><i class="fas fa-save"></i></div>
+                            <div class="feature-text">Backup diario de información</div>
+                        </div>
+                        <div class="feature-item" style="width: 100%;">
+                            <div class="feature-icon"><i class="fas fa-monitor-heart-rate"></i></div>
+                            <div class="feature-text">Monitoreo 24/7 de disponibilidad</div>
+                        </div>
+                        <div class="feature-item" style="width: 100%;">
+                            <div class="feature-icon"><i class="fas fa-graduation-cap"></i></div>
+                            <div class="feature-text">Capacitación inicial incluida</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" style="width: 45%;">
+                <div class="card-header">
+                    <div class="card-icon"><i class="fas fa-shield-check"></i></div>
+                    <div class="card-title">Garantías</div>
+                </div>
+                <div class="card-content">
+                    <div style="margin-bottom: 1.5rem; padding: 1rem; background-color: var(--light-gray); border-radius: 15px; border-left: 4px solid var(--primary-color);">
+                        <div style="font-weight: 600; color: var(--primary-color); margin-bottom: 0.5rem;">99.9% Tiempo de Actividad</div>
+                        <div style="font-size: 0.9rem;">Sistema disponible prácticamente todo el tiempo</div>
+                    </div>
+                    
+                    <div style="margin-bottom: 1.5rem; padding: 1rem; background-color: var(--light-gray); border-radius: 15px; border-left: 4px solid var(--primary-color);">
+                        <div style="font-weight: 600; color: var(--primary-color); margin-bottom: 0.5rem;">Respuesta < 2 horas</div>
+                        <div style="font-size: 0.9rem;">A incidencias críticas</div>
+                    </div>
+                    
+                    <div style="margin-bottom: 1.5rem; padding: 1rem; background-color: var(--light-gray); border-radius: 15px; border-left: 4px solid var(--primary-color);">
+                        <div style="font-weight: 600; color: var(--primary-color); margin-bottom: 0.5rem;">Migración Segura</div>
+                        <div style="font-size: 0.9rem;">Sin pérdida de información</div>
+                    </div>
+                    
+                    <div style="margin-bottom: 1.5rem; padding: 1rem; background-color: var(--light-gray); border-radius: 15px; border-left: 4px solid var(--primary-color);">
+                        <div style="font-weight: 600; color: var(--primary-color); margin-bottom: 0.5rem;">Cronograma</div>
+                        <div style="font-size: 0.9rem;">Cumplimiento garantizado</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <div>Propuesta de Implementación</div>
+        <div class="page-number">12/13</div>
+    </div>
+</section>
+        
+
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slidesContainer = document.getElementById('slidesContainer');
+            const progressBar = document.getElementById('progressBar');
+            const totalSlides = document.querySelectorAll('.slide').length;
+            
+            slidesContainer.addEventListener('scroll', function() {
+                const scrollPosition = slidesContainer.scrollTop;
+                const slideHeight = window.innerHeight;
+                const currentSlideIndex = Math.round(scrollPosition / slideHeight) + 1;
+                
+                // Update progress bar
+                const progress = ((currentSlideIndex - 1) / (totalSlides - 1)) * 100;
+                progressBar.style.width = `${progress}%`;
+            });
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                const currentScroll = slidesContainer.scrollTop;
+                const slideHeight = window.innerHeight;
+                
+                if (e.key === 'ArrowDown' || e.key === 'PageDown') {
+                    slidesContainer.scrollTop = currentScroll + slideHeight;
+                    e.preventDefault();
+                } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+                    slidesContainer.scrollTop = currentScroll - slideHeight;
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
+</body>
+</html></html>                                </div

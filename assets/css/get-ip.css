@@ -1,0 +1,131 @@
+
+/* Estilos para botones */
+.btn-aloia-primary {
+    background: linear-gradient(90deg, #FD6144, #FD3244);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    border: none;
+    width: 100%;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.btn-aloia-primary:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(253, 50, 68, 0.2);
+}
+
+.btn-check-ip {
+    background: linear-gradient(90deg, #FD6144, #FD3244);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    border: none;
+    font-size: 1.2rem;
+    margin: 2rem auto;
+    display: block;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.btn-check-ip:hover {
+    opacity: 0.9;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(253, 50, 68, 0.2);
+}
+
+/* Estilos para las cards */
+.feature-card {
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid #E5E7EB;
+    height: 100%;
+    background: white;
+    padding: 2rem;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    border-color: #FD6144;
+}
+
+.feature-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(253, 97, 68, 0.1), rgba(174, 58, 141, 0.1));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #FD3244;
+}
+
+/* Animaciones */
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+
+.shadow-aloia {
+    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para el header de la página */
+.ip-header {
+    background: #161212; /* Color de fondo oscuro como en el hero */
+    color: white;
+    padding: 6rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Loader */
+.loader {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #FD3244;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+    display: none;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.info-container {
+    display: none;
+    animation: fadeInUp 0.5s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .ip-header {
+        padding: 4rem 0;
+    }
+}

@@ -1,0 +1,3598 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muuk Fase 2 - Aloia</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #F04E59;
+            --primary-dark: #1E1E1E;
+            --primary-light: #F47983;
+            --white: #ffffff;
+            --light-gray: #f5f5f5;
+            --text-light: #e0e0e0;
+            --shadow-color: rgba(0, 0, 0, 0.15);
+            --gradient-start: #F04E59;
+            --gradient-mid: #E94057;
+            --gradient-end: #F04E59;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: var(--white);
+            color: var(--primary-dark);
+            overflow: hidden;
+        }
+        
+        .slides-container {
+            height: 100vh;
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll;
+            scroll-behavior: smooth;
+        }
+        
+        .slide {
+            height: 100vh;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            background-color: var(--white);
+        }
+        
+        /* Header styling */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            width: 100%;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+        
+        .client {
+            font-size: 1rem;
+            color: var(--primary-color);
+        }
+        
+        /* Slide content styling */
+        .slide-content {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            padding: 0 2rem;
+        }
+        
+        .slide-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: var(--primary-dark);
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        .slide-subtitle {
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            animation: fadeInUp 1.2s ease-out;
+        }
+        
+        .slide-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            animation: fadeInUp 1.4s ease-out;
+        }
+        
+        /* Card styles */
+        .cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 1rem;
+            animation: fadeInUp 1.6s ease-out;
+        }
+        
+        .card {
+            background-color: var(--white);
+            border-radius: 45px;
+            padding: 1.5rem;
+            width: calc(33% - 1.5rem);
+            min-width: 250px;
+            box-shadow: 10px 10px 0 var(--shadow-color);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 15px 15px 0 var(--shadow-color);
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .card-icon {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+        
+        .card-content {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: var(--primary-dark);
+            flex-grow: 1;
+        }
+        
+        .card-tag {
+            display: inline-block;
+            background-color: var(--primary-color);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-top: 1rem;
+            color: var(--white);
+        }
+        
+        /* Feature list styles */
+        .features-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 1rem;
+            animation: fadeInUp 1.6s ease-out;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            width: calc(50% - 0.75rem);
+            margin-bottom: 1rem;
+        }
+        
+        .feature-icon {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin-right: 1rem;
+            margin-top: 0.2rem;
+        }
+        
+        .feature-text {
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        
+        /* Footer */
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.5rem;
+            width: 100%;
+            font-size: 0.8rem;
+            color: var(--primary-dark);
+        }
+        
+        .page-number {
+            font-size: 0.9rem;
+            color: var(--primary-dark);
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Cover slide specific */
+        .cover-slide {
+            background-color: var(--white);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .cover-logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            animation: fadeInUp 0.8s ease-out;
+            color: var(--primary-dark);
+        }
+        
+        .cover-title {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease-out;
+            color: var(--primary-dark);
+        }
+        
+        .cover-subtitle {
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+            animation: fadeInUp 1.2s ease-out;
+        }
+        
+        .cover-client {
+            font-size: 1.2rem;
+            animation: fadeInUp 1.4s ease-out;
+            color: var(--primary-dark);
+        }
+        
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 5px;
+            background: var(--primary-color);
+            width: 0%;
+            z-index: 100;
+            transition: width 0.3s ease;
+        }
+        
+        /* Two column layout */
+        .two-column {
+            display: flex;
+            gap: 2rem;
+            margin-top: 1rem;
+            animation: fadeInUp 1.6s ease-out;
+        }
+        
+        .column {
+            flex: 1;
+        }
+        
+        .highlight-box {
+            background-color: var(--primary-color);
+            border-radius: 45px;
+            padding: 1.5rem;
+            margin: 0 auto;
+            max-width: 800px;
+            box-shadow: 10px 10px 0 var(--shadow-color);
+        }
+        
+        .highlight-text {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: white;
+            margin: 0;
+            text-align: center;
+        }
+        
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .value-card {
+            background-color: var(--light-gray);
+            border-radius: 25px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 5px 5px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .value-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .value-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .value-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+        }
+        
+        .value-description {
+            font-size: 1rem;
+            color: var(--primary-dark);
+        }
+
+
+        /* Module card styles */
+.module-card {
+    background-color: var(--white);
+    border-radius: 25px;
+    padding: 1.5rem;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.module-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--light-gray);
+}
+
+.module-icon {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-right: 1rem;
+}
+
+.module-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+}
+
+.module-content {
+    flex-grow: 1;
+}
+
+/* Activity types */
+.activity-types {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.activity-tag {
+    background-color: var(--primary-light);
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+/* Workflow steps */
+.workflow-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.step-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.step-number {
+    background-color: var(--primary-color);
+    color: white;
+    width: 1.8rem;
+    height: 1.8rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+}
+
+.step-text {
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+/* Filter options */
+.filter-options {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.filter-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.8rem;
+    background-color: var(--light-gray);
+    border-radius: 10px;
+}
+
+.filter-item i {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+}
+
+.filter-item span {
+    font-weight: 500;
+}
+
+/* Deliverable box */
+.deliverable-box {
+    background-color: var(--light-gray);
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+.deliverable-box h4 {
+    color: var(--primary-color);
+    margin-bottom: 0.8rem;
+    font-size: 1rem;
+}
+
+.deliverable-box ul {
+    list-style: none;
+    padding: 0;
+}
+
+.deliverable-box li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.deliverable-box li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+
+/* Store features */
+.store-features {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.store-feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: var(--light-gray);
+    border-radius: 12px;
+}
+
+.store-feature-item i {
+    color: var(--primary-color);
+    font-size: 1.3rem;
+    margin-top: 0.2rem;
+    flex-shrink: 0;
+}
+
+.feature-info h4 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+}
+
+.feature-info p {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: #666;
+}
+
+/* Analysis workflow */
+.analysis-workflow {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.analysis-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: var(--light-gray);
+    border-radius: 12px;
+    border-left: 4px solid var(--primary-color);
+}
+
+.step-icon {
+    background-color: var(--primary-color);
+    color: white;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 0.2rem;
+}
+
+.step-icon i {
+    font-size: 1.1rem;
+}
+
+.step-content h4 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+}
+
+.step-content p {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: #666;
+}
+
+/* Deliverables section */
+.deliverables-section {
+    margin-top: 2rem;
+    width: 100%;
+}
+
+.deliverables-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    background-color: rgba(240, 78, 89, 0.05);
+    padding: 1.5rem;
+    border-radius: 20px;
+    border: 2px dashed var(--primary-light);
+}
+
+.deliverable-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1rem;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease;
+}
+
+.deliverable-item:hover {
+    transform: translateY(-2px);
+}
+
+.deliverable-item i {
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.deliverable-item span {
+    font-size: 0.95rem;
+    font-weight: 500;
+    line-height: 1.3;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .deliverables-grid {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+    }
+    
+    .deliverable-item {
+        justify-content: center;
+        text-align: center;
+    }
+}
+
+/* Calendar container */
+.calendar-container {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.calendar-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.calendar-preview {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+/* Calendar cards */
+.calendar-card {
+    background-color: var(--white);
+    border-radius: 20px;
+    padding: 1.5rem;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+}
+
+.calendar-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--light-gray);
+}
+
+.calendar-icon {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+}
+
+.calendar-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+}
+
+/* Calendar features */
+.calendar-features {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.calendar-feature {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.8rem;
+    background-color: var(--light-gray);
+    border-radius: 10px;
+}
+
+.calendar-feature i {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    width: 1.3rem;
+}
+
+.calendar-feature span {
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+/* Event types */
+.event-types {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
+}
+
+.event-type {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.6rem;
+    background-color: var(--light-gray);
+    border-radius: 8px;
+}
+
+.event-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.event-dot.courses { background-color: #3498db; }
+.event-dot.workshops { background-color: #e74c3c; }
+.event-dot.trainings { background-color: #f39c12; }
+.event-dot.audits { background-color: #9b59b6; }
+
+.event-type span {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.event-features {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.event-feature {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.6rem;
+    background-color: rgba(240, 78, 89, 0.1);
+    border-radius: 8px;
+    border-left: 3px solid var(--primary-color);
+}
+
+.event-feature i {
+    color: var(--primary-color);
+    font-size: 1rem;
+}
+
+.event-feature span {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* Calendar mockup */
+.calendar-mockup {
+    background-color: white;
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 5px 5px 20px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 350px;
+}
+
+.calendar-header-mock {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--light-gray);
+}
+
+.month-nav {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+}
+
+.month-nav i {
+    color: var(--primary-color);
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.view-toggles {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.view-toggle {
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.view-toggle.active {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.view-toggle:not(.active) {
+    background-color: var(--light-gray);
+    color: var(--primary-dark);
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.3rem;
+}
+
+.calendar-day {
+    text-align: center;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #888;
+    padding: 0.5rem;
+}
+
+.calendar-date {
+    text-align: center;
+    font-size: 0.9rem;
+    padding: 0.8rem 0.3rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    position: relative;
+}
+
+.calendar-date:hover {
+    background-color: var(--light-gray);
+}
+
+.calendar-date.with-event {
+    font-weight: 600;
+}
+
+.event-indicator {
+    position: absolute;
+    bottom: 0.2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
+
+.event-indicator.courses { background-color: #3498db; }
+.event-indicator.workshops { background-color: #e74c3c; }
+.event-indicator.trainings { background-color: #f39c12; }
+.event-indicator.audits { background-color: #9b59b6; }
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .calendar-container {
+        flex-direction: column;
+    }
+    
+    .calendar-section {
+        flex-direction: row;
+    }
+    
+    .calendar-preview {
+        justify-content: center;
+    }
+}
+
+/* Workflow main container */
+.workflow-main-container {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.workflow-card {
+    flex: 1;
+    background-color: var(--white);
+    border-radius: 20px;
+    padding: 1.5rem;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+}
+
+.workflow-preview {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+/* Workflow header */
+.workflow-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--light-gray);
+}
+
+.workflow-icon {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+}
+
+.workflow-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+}
+
+/* Workflow grid */
+.workflow-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.workflow-item {
+    display: flex;
+    gap: 1rem;
+    padding: 1.2rem;
+    background-color: var(--light-gray);
+    border-radius: 12px;
+    transition: transform 0.2s ease;
+}
+
+.workflow-item:hover {
+    transform: translateY(-2px);
+}
+
+.workflow-item-icon {
+    background-color: var(--primary-color);
+    color: white;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.workflow-item-icon i {
+    font-size: 1.1rem;
+}
+
+.workflow-item-content h4 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+}
+
+.workflow-item-content p {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: #666;
+}
+
+/* Workflow mockup */
+.workflow-mockup {
+    background-color: white;
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 5px 5px 20px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 400px;
+    border: 1px solid #e0e0e0;
+}
+
+.mockup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--light-gray);
+}
+
+.mockup-title {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+    font-size: 1rem;
+}
+
+.mockup-title i {
+    color: var(--primary-color);
+}
+
+.mockup-search {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: var(--light-gray);
+    padding: 0.5rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    color: #888;
+}
+
+/* Process categories */
+.process-category {
+    margin-bottom: 1rem;
+}
+
+.category-header {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.8rem;
+    background-color: var(--light-gray);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.category-header i:first-child {
+    color: var(--primary-color);
+}
+
+.category-header i:last-child {
+    margin-left: auto;
+    color: #888;
+    font-size: 0.8rem;
+}
+
+.process-list {
+    margin-top: 0.5rem;
+    padding-left: 1rem;
+}
+
+.process-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.6rem;
+    margin-bottom: 0.3rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    transition: background-color 0.2s ease;
+}
+
+.process-item:hover {
+    background-color: rgba(240, 78, 89, 0.05);
+}
+
+.process-item i {
+    color: var(--primary-color);
+    font-size: 0.8rem;
+    width: 1rem;
+}
+
+.process-status {
+    margin-left: auto;
+    width: 1.2rem;
+    height: 1.2rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: bold;
+}
+
+.process-status.completed {
+    background-color: #27ae60;
+    color: white;
+}
+
+.process-status.in-progress {
+    background-color: #f39c12;
+    color: white;
+}
+
+.process-status.pending {
+    background-color: #bdc3c7;
+    color: #7f8c8d;
+}
+
+/* Workflow benefits */
+.workflow-benefits {
+    margin: 2rem 0;
+}
+
+.benefit-card {
+    display: flex;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background-color: rgba(240, 78, 89, 0.05);
+    border-radius: 15px;
+    border-left: 4px solid var(--primary-color);
+}
+
+.benefit-card i {
+    font-size: 2rem;
+    color: var(--primary-color);
+    flex-shrink: 0;
+    margin-top: 0.2rem;
+}
+
+.benefit-content h4 {
+    margin: 0 0 0.8rem 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+}
+
+.benefit-content p {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--primary-dark);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .workflow-main-container {
+        flex-direction: column;
+    }
+    
+    .workflow-mockup {
+        max-width: 100%;
+    }
+}
+
+
+/* Financial container */
+.financial-container {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.financial-section {
+    flex: 1;
+}
+
+.financial-preview {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+/* Financial card */
+.financial-card {
+    background-color: var(--white);
+    border-radius: 20px;
+    padding: 1.5rem;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+    height: 100%;
+}
+
+.financial-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--light-gray);
+}
+
+.financial-icon {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+}
+
+.financial-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+}
+
+/* Financial features */
+.financial-features {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.financial-feature {
+    background-color: var(--light-gray);
+    border-radius: 12px;
+    padding: 1.2rem;
+}
+
+.feature-step {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+.step-icon-financial {
+    background-color: var(--primary-color);
+    color: white;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.step-icon-financial i {
+    font-size: 1.1rem;
+}
+
+.step-content-financial h4 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+}
+
+.step-content-financial p {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: #666;
+}
+
+/* Financial mockup */
+.financial-mockup {
+    background-color: white;
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 5px 5px 20px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 380px;
+    border: 1px solid #e0e0e0;
+}
+
+.mockup-header-financial {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--light-gray);
+}
+
+.mockup-title-financial {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+    font-size: 1rem;
+}
+
+.mockup-title-financial i {
+    color: var(--primary-color);
+}
+
+.mockup-period {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: var(--light-gray);
+    padding: 0.4rem 0.8rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    color: var(--primary-dark);
+}
+
+.mockup-period i {
+    color: var(--primary-color);
+}
+
+/* Financial stats */
+.financial-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
+}
+
+.stat-card {
+    background-color: var(--light-gray);
+    border-radius: 10px;
+    padding: 1rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.stat-icon {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.stat-icon.pending {
+    background-color: #f39c12;
+}
+
+.stat-icon.paid {
+    background-color: #27ae60;
+}
+
+.stat-icon i {
+    font-size: 0.9rem;
+}
+
+.stat-number {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary-dark);
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: #666;
+    font-weight: 500;
+}
+
+/* Recent invoices */
+.recent-invoices {
+    background-color: var(--light-gray);
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+    margin-bottom: 1rem;
+}
+
+.section-title i {
+    color: var(--primary-color);
+}
+
+.invoice-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.invoice-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    padding: 0.8rem;
+    border-radius: 8px;
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.05);
+}
+
+.invoice-info {
+    flex: 1;
+}
+
+.invoice-number {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+}
+
+.invoice-client {
+    font-size: 0.75rem;
+    color: #666;
+}
+
+.invoice-amount {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+    margin-right: 0.8rem;
+}
+
+.invoice-status {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.invoice-status.paid {
+    background-color: #27ae60;
+    color: white;
+}
+
+.invoice-status.pending {
+    background-color: #f39c12;
+    color: white;
+}
+
+.invoice-status i {
+    font-size: 0.7rem;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .financial-container {
+        flex-direction: column;
+    }
+    
+    .financial-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .financial-mockup {
+        max-width: 100%;
+    }
+}
+
+/* Performance container */
+.performance-container {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.performance-section {
+    flex: 1;
+}
+
+.performance-preview {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+/* Performance card */
+.performance-card {
+    background-color: var(--white);
+    border-radius: 20px;
+    padding: 1.5rem;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+    height: 100%;
+}
+
+.performance-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--light-gray);
+}
+
+.performance-icon {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+}
+
+.performance-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+}
+
+/* Evaluation criteria */
+.evaluation-criteria {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.criteria-item {
+    display: flex;
+    gap: 1rem;
+    padding: 1.2rem;
+    background-color: var(--light-gray);
+    border-radius: 12px;
+    border-left: 4px solid var(--primary-color);
+}
+
+.criteria-icon {
+    background-color: var(--primary-color);
+    color: white;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.criteria-icon i {
+    font-size: 1.1rem;
+}
+
+.criteria-content h4 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+}
+
+.criteria-content p {
+    margin: 0 0 0.8rem 0;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: #666;
+}
+
+.weight-indicator {
+    background-color: rgba(240, 78, 89, 0.1);
+    color: var(--primary-color);
+    padding: 0.3rem 0.8rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: inline-block;
+}
+
+/* Performance mockup */
+.performance-mockup {
+    background-color: white;
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 5px 5px 20px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 400px;
+    border: 1px solid #e0e0e0;
+}
+
+.mockup-header-performance {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--light-gray);
+}
+
+.mockup-title-performance {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+    font-size: 1rem;
+}
+
+.mockup-title-performance i {
+    color: #ffd700;
+}
+
+.period-selector {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: var(--light-gray);
+    padding: 0.4rem 0.8rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    color: var(--primary-dark);
+    cursor: pointer;
+}
+
+.period-selector i {
+    color: var(--primary-color);
+}
+
+/* Ranking list */
+.ranking-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
+}
+
+.ranking-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: var(--light-gray);
+    border-radius: 10px;
+    transition: transform 0.2s ease;
+}
+
+.ranking-item:hover {
+    transform: translateY(-1px);
+}
+
+.ranking-item.top-performer {
+    background: linear-gradient(135deg, #ffd700, #ffed4e);
+    color: var(--primary-dark);
+    border: 2px solid #ffd700;
+}
+
+.rank-position {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: 1rem;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.ranking-item.top-performer .rank-position {
+    background-color: #ff6b35;
+}
+
+.rank-position i {
+    position: absolute;
+    top: -0.3rem;
+    right: -0.3rem;
+    font-size: 0.8rem;
+    color: #ffd700;
+}
+
+.user-info {
+    flex: 1;
+}
+
+.user-name {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+    margin-bottom: 0.2rem;
+}
+
+.user-team {
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.score-info {
+    text-align: right;
+}
+
+.score {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary-dark);
+    margin-bottom: 0.2rem;
+}
+
+.score-trend {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.score-trend.up {
+    color: #27ae60;
+}
+
+.score-trend.down {
+    color: #e74c3c;
+}
+
+.score-trend.neutral {
+    color: #7f8c8d;
+}
+
+.score-trend i {
+    font-size: 0.7rem;
+}
+
+/* Performance summary */
+.performance-summary {
+    display: flex;
+    justify-content: space-around;
+    background-color: var(--light-gray);
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+.summary-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--primary-dark);
+}
+
+.summary-item i {
+    color: var(--primary-color);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .performance-container {
+        flex-direction: column;
+    }
+    
+    .performance-mockup {
+        max-width: 100%;
+    }
+    
+    .performance-summary {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+}
+
+/* Next steps container */
+.next-steps-container {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.steps-section {
+    flex: 1.2;
+}
+
+.contact-section {
+    flex: 0.8;
+}
+
+/* Steps card */
+.steps-card {
+    background-color: var(--white);
+    border-radius: 20px;
+    padding: 1.5rem;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+    height: 100%;
+}
+
+.steps-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--light-gray);
+}
+
+.steps-icon {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+}
+
+.steps-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+}
+
+/* Action steps */
+.action-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.action-step {
+    display: flex;
+    gap: 1rem;
+    padding: 1.2rem;
+    background-color: var(--light-gray);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.action-step:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.step-number-next {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+    color: white;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    box-shadow: 0 3px 10px rgba(240, 78, 89, 0.3);
+}
+
+.step-content-next h4 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+}
+
+.step-content-next p {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: #666;
+}
+
+/* Contact card */
+.contact-card {
+    background-color: var(--white);
+    border-radius: 20px;
+    padding: 1.5rem;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+    height: 100%;
+    border: 2px solid var(--primary-light);
+}
+
+.contact-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--light-gray);
+}
+
+.contact-icon {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+}
+
+.contact-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+}
+
+/* Contact info */
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    margin-bottom: 1.5rem;
+}
+
+.contact-item {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: var(--light-gray);
+    border-radius: 10px;
+}
+
+.contact-item-icon {
+    background-color: var(--primary-color);
+    color: white;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.contact-item-icon i {
+    font-size: 0.9rem;
+}
+
+.contact-details {
+    flex: 1;
+}
+
+.contact-label {
+    font-size: 0.8rem;
+    color: #666;
+    font-weight: 500;
+    margin-bottom: 0.2rem;
+}
+
+.contact-value {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+}
+
+.availability-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    background: linear-gradient(135deg, #27ae60, #2ecc71);
+    color: white;
+    padding: 0.8rem;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-align: center;
+    justify-content: center;
+}
+
+.availability-badge i {
+    font-size: 1rem;
+}
+
+/* Project summary */
+.project-summary {
+    margin-bottom: 2rem;
+}
+
+.summary-highlight {
+    display: flex;
+    gap: 1.5rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, rgba(240, 78, 89, 0.1), rgba(244, 121, 131, 0.05));
+    border-radius: 20px;
+    border-left: 5px solid var(--primary-color);
+}
+
+.summary-icon {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+    color: white;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 5px 15px rgba(240, 78, 89, 0.3);
+}
+
+.summary-icon i {
+    font-size: 1.3rem;
+}
+
+.summary-content h3 {
+    margin: 0 0 0.8rem 0;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+}
+
+.summary-content p {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--primary-dark);
+}
+
+/* CTA section */
+.cta-section {
+    text-align: center;
+}
+
+.cta-button {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+    color: white;
+    border: none;
+    padding: 1.2rem 3rem;
+    border-radius: 50px;
+    font-size: 1.3rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(240, 78, 89, 0.4);
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(240, 78, 89, 0.5);
+}
+
+.cta-button i {
+    font-size: 1.2rem;
+}
+
+.cta-subtitle {
+    font-size: 1.1rem;
+    color: #666;
+    font-style: italic;
+    margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .next-steps-container {
+        flex-direction: column;
+    }
+    
+    .summary-highlight {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .cta-button {
+        padding: 1rem 2rem;
+        font-size: 1.1rem;
+    }
+}
+
+/* Timeline container - ajustado */
+.timeline-container {
+    max-width: 100%;
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Timeline header - compactado */
+.timeline-header {
+    margin-bottom: 1.5rem;
+}
+
+.timeline-summary {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    background-color: var(--light-gray);
+    padding: 1rem;
+    border-radius: 15px;
+}
+
+.summary-stat {
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: #666;
+    font-weight: 500;
+    margin-top: 0.3rem;
+}
+
+/* Timeline phases - compactado */
+.timeline-phases {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.phase-container {
+    background-color: var(--white);
+    border-radius: 15px;
+    padding: 1rem;
+    box-shadow: 3px 3px 10px rgba(0,0,0,0.08);
+    position: relative;
+}
+
+.phase-container.phase-1 {
+    border-left: 4px solid #3498db;
+}
+
+.phase-container.phase-2 {
+    border-left: 4px solid #e74c3c;
+}
+
+.phase-container.phase-3 {
+    border-left: 4px solid #27ae60;
+}
+
+/* Phase header - compactado */
+.phase-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid var(--light-gray);
+}
+
+.phase-number {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+    color: white;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    box-shadow: 0 2px 8px rgba(240, 78, 89, 0.3);
+    flex-shrink: 0;
+}
+
+.phase-info {
+    flex: 1;
+}
+
+.phase-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+    margin-bottom: 0.2rem;
+}
+
+.phase-duration {
+    font-size: 0.9rem;
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+/* Phase modules - más compacto */
+.phase-modules {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.module-timeline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.8rem;
+    background-color: var(--light-gray);
+    border-radius: 10px;
+    transition: all 0.2s ease;
+}
+
+.module-timeline:hover {
+    transform: translateX(3px);
+    background-color: rgba(240, 78, 89, 0.05);
+}
+
+.module-info {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    flex: 1;
+}
+
+.module-icon {
+    background-color: var(--primary-color);
+    color: white;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.module-icon i {
+    font-size: 0.9rem;
+}
+
+.module-details {
+    flex: 1;
+}
+
+.module-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+    margin-bottom: 0.2rem;
+}
+
+.module-description {
+    font-size: 0.8rem;
+    color: #666;
+    line-height: 1.2;
+}
+
+.module-duration {
+    flex-shrink: 0;
+}
+
+.duration-badge {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    box-shadow: 0 2px 6px rgba(240, 78, 89, 0.3);
+}
+
+/* Timeline benefits - más pequeño */
+.timeline-benefits {
+    margin-top: 1rem;
+}
+
+.benefit-highlight {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: linear-gradient(135deg, rgba(240, 78, 89, 0.1), rgba(244, 121, 131, 0.05));
+    padding: 1rem;
+    border-radius: 12px;
+    border-left: 3px solid var(--primary-color);
+}
+
+.benefit-highlight i {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    flex-shrink: 0;
+}
+
+.benefit-text h4 {
+    margin: 0 0 0.3rem 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+}
+
+.benefit-text p {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: var(--primary-dark);
+}
+
+/* Responsive - ajustado */
+@media (max-width: 1200px) {
+    .timeline-summary {
+        gap: 1rem;
+    }
+    
+    .module-timeline {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.8rem;
+    }
+    
+    .module-info {
+        width: 100%;
+    }
+    
+    .module-duration {
+        align-self: flex-end;
+    }
+    
+    .benefit-highlight {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.8rem;
+    }
+}
+
+/* Asegurar que el slide-content ocupe toda la altura disponible */
+.slide#slide11 .slide-content {
+    height: calc(100vh - 8rem);
+    display: flex;
+    flex-direction: column;
+}
+
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    <div class="slides-container" id="slidesContainer">
+        
+        <!-- Slide 1: Cover -->
+        <section class="slide cover-slide" id="slide1">
+            <div style="margin-bottom: 2rem;">
+                <img src="https://aloia.ai/assets/img/aloia-color.png" alt="Aloia Logo" style="height: 120px; width: auto;">
+            </div>
+            <h1 class="cover-title">MUUK FASE 2</h1>
+            <div class="cover-subtitle">Transformación Digital Completa con Módulos Avanzados</div>
+            <div class="cover-client">Presentado a: Muuk<br>Atención: Perla Contreras</div>
+            
+            <div class="footer">
+                <div>Julio 25, 2025</div>
+                <div class="page-number">1/11</div>
+            </div>
+        </section>
+        
+        <!-- Slide 2: Resumen Ejecutivo -->
+        <section class="slide" id="slide2">
+            <div class="header">
+                <div class="logo">ALOIA</div>
+                <div class="client">Muuk</div>
+            </div>
+            
+            <div class="slide-content">
+                <h2 class="slide-title" style="font-size: 3rem; text-align: center; margin-bottom: 1.5rem;">Resumen Ejecutivo</h2>
+                
+                <p class="slide-text" style="font-size: 1.3rem; text-align: center; margin-bottom: 2rem; max-width: 900px; margin-left: auto; margin-right: auto;">
+                    La Fase 2 contempla el desarrollo de <strong>7 módulos principales</strong> que transformarán la gestión operativa actual, automatizando procesos, mejorando la trazabilidad y proporcionando herramientas de análisis avanzadas para la toma de decisiones estratégicas.
+                </p>
+                
+                <div class="value-grid">
+                    <div class="value-card">
+                        <div class="value-icon"><i class="fas fa-chart-line"></i></div>
+                        <div class="value-title">Eficiencia Operativa</div>
+                        <div class="value-description">Reducción del 40% en tiempo de reportes y centralización de información operativa.</div>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon"><i class="fas fa-eye"></i></div>
+                        <div class="value-title">Visibilidad Total</div>
+                        <div class="value-description">Información en tiempo real de todas las operaciones con automatización de reportes.</div>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon"><i class="fas fa-cogs"></i></div>
+                        <div class="value-title">Control de Calidad</div>
+                        <div class="value-description">Estandarización de procesos y seguimiento integral del desempeño del equipo.</div>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon"><i class="fas fa-rocket"></i></div>
+                        <div class="value-title">Escalabilidad</div>
+                        <div class="value-description">Sistema preparado para crecimiento con inteligencia de negocio para análisis predictivo.</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div>Fase 2 - Módulos y Funcionalidades</div>
+                <div class="page-number">2/11</div>
+            </div>
+        </section>
+
+
+        <!-- Slide 3: Gestión de Actividades y Reportes -->
+<section class="slide" id="slide3">
+    <div class="header">
+        <div class="logo">ALOIA</div>
+        <div class="client">Muuk</div>
+    </div>
+    
+    <div class="slide-content">
+        <h2 class="slide-title" style="font-size: 2.8rem; text-align: center; margin-bottom: 1.5rem;">
+            📋 Gestión de Actividades y Reportes
+        </h2>
+        
+        <p class="slide-text" style="font-size: 1.2rem; text-align: center; margin-bottom: 2rem; max-width: 900px; margin-left: auto; margin-right: auto;">
+            Digitalizar y centralizar el registro de actividades comerciales, reemplazando el sistema actual de AppSheet con una solución integrada y automatizada.
+        </p>
+        
+        <div class="two-column">
+            <div class="column">
+                <div class="module-card">
+                    <div class="module-header">
+                        <div class="module-icon"><i class="fas fa-clipboard-list"></i></div>
+                        <div class="module-title">Registro de Actividades</div>
+                    </div>
+                    <div class="module-content">
+                        <div class="activity-types">
+                            <span class="activity-tag">Ventas</span>
+                            <span class="activity-tag">Clínicas de venta</span>
+                            <span class="activity-tag">Demostraciones</span>
+                        </div>
+                        <div class="workflow-steps">
+                            <div class="step-item">
+                                <span class="step-number">1</span>
+                                <span class="step-text">Selección del tipo de actividad</span>
+                            </div>
+                            <div class="step-item">
+                                <span class="step-number">2</span>
+                                <span class="step-text">Vinculación de datos (Usuario, Tienda, Turno)</span>
+                            </div>
+                            <div class="step-item">
+                                <span class="step-number">3</span>
+                                <span class="step-text">Carga de multimedia (fotos/videos)</span>
+                            </div>
+                            <div class="step-item">
+                                <span class="step-number">4</span>
+                                <span class="step-text">Descripción obligatoria</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="column">
+                <div class="module-card">
+                    <div class="module-header">
+                        <div class="module-icon"><i class="fas fa-chart-bar"></i></div>
+                        <div class="module-title">Sistema de Reportes</div>
+                    </div>
+                    <div class="module-content">
+                        <div class="filter-options">
+                            <div class="filter-item">
+                                <i class="fas fa-user"></i>
+                                <span>Por Usuario</span>
+                            </div>
+                            <div class="filter-item">
+                                <i class="fas fa-store"></i>
+                                <span>Por Tienda</span>
+                            </div>
+                            <div class="filter-item">
+                                <i class="fas fa-bullhorn"></i>
+                                <span>Por Campaña</span>
+                            </div>
+                        </div>
+                        <div class="deliverable-box">
+                            <h4>Entregables:</h4>
+                            <ul>
+                                <li>Interface de registro de actividades</li>
+                                <li>Panel de reportes con filtros avanzados</li>
+                                <li>Generador automático de reportes fotográficos</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <div>Fase 2 - Módulos y Funcionalidades</div>
+        <div class="page-number">3/11</div>
+    </div>
+</section>
+
+<!-- Slide 5: Control de Tiendas e Inventarios -->
+<section class="slide" id="slide5">
+    <div class="header">
+        <div class="logo">ALOIA</div>
+        <div class="client">Muuk</div>
+    </div>
+    
+    <div class="slide-content">
+        <h2 class="slide-title" style="font-size: 2.8rem; text-align: center; margin-bottom: 1.5rem;">
+            🏬 Control de Tiendas e Inventarios
+        </h2>
+        
+        <p class="slide-text" style="font-size: 1.2rem; text-align: center; margin-bottom: 2rem; max-width: 900px; margin-left: auto; margin-right: auto;">
+            Implementar un sistema de control integral que permita verificar la efectividad de las ventas contra el inventario real.
+        </p>
+        
+        <div class="two-column">
+            <div class="column">
+                <div class="module-card">
+                    <div class="module-header">
+                        <div class="module-icon"><i class="fas fa-store"></i></div>
+                        <div class="module-title">Gestión de Tiendas</div>
+                    </div>
+                    <div class="module-content">
+                        <div class="store-features">
+                            <div class="store-feature-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div class="feature-info">
+                                    <h4>Catálogo de Puntos de Venta</h4>
+                                    <p>Registro completo de todas las tiendas con información detallada</p>
+                                </div>
+                            </div>
+                            <div class="store-feature-item">
+                                <i class="fas fa-user-tag"></i>
+                                <div class="feature-info">
+                                    <h4>Asignación de Roles</h4>
+                                    <p>Control de roles e inventarios específicos por tienda</p>
+                                </div>
+                            </div>
+                            <div class="store-feature-item">
+                                <i class="fas fa-search"></i>
+                                <div class="feature-info">
+                                    <h4>Consulta Intuitiva</h4>
+                                    <p>Interface clara para acceso rápido a información</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="column">
+                <div class="module-card">
+                    <div class="module-header">
+                        <div class="module-icon"><i class="fas fa-chart-pie"></i></div>
+                        <div class="module-title">Análisis de Ventas Efectivas</div>
+                    </div>
+                    <div class="module-content">
+                        <div class="analysis-workflow">
+                            <div class="analysis-step">
+                                <div class="step-icon">
+                                    <i class="fas fa-balance-scale"></i>
+                                </div>
+                                <div class="step-content">
+                                    <h4>Comparativo Automático</h4>
+                                    <p>Ventas registradas vs. Inventario entregado</p>
+                                </div>
+                            </div>
+                            <div class="analysis-step">
+                                <div class="step-icon">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </div>
+                                <div class="step-content">
+                                    <h4>Alertas de Discrepancias</h4>
+                                    <p>Notificaciones automáticas de inconsistencias</p>
+                                </div>
+                            </div>
+                            <div class="analysis-step">
+                                <div class="step-icon">
+                                    <i class="fas fa-chart-bar"></i>
+                                </div>
+                                <div class="step-content">
+                                    <h4>Reportes de Efectividad</h4>
+                                    <p>Análisis por punto de venta y período</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="deliverables-section">
+            <div class="deliverables-grid">
+                <div class="deliverable-item">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard de tiendas con inventarios</span>
+                </div>
+                <div class="deliverable-item">
+                    <i class="fas fa-analytics"></i>
+                    <span>Sistema de análisis comparativo</span>
+                </div>
+                <div class="deliverable-item">
+                    <i class="fas fa-file-chart"></i>
+                    <span>Reportes de efectividad de ventas</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <div>Fase 2 - Módulos y Funcionalidades</div>
+        <div class="page-number">5/11</div>
+    </div>
+</section>
+
+<!-- Slide 6: Calendario y Planificación -->
+<section class="slide" id="slide6">
+    <div class="header">
+        <div class="logo">ALOIA</div>
+        <div class="client">Muuk</div>
+    </div>
+    
+    <div class="slide-content">
+        <h2 class="slide-title" style="font-size: 2.8rem; text-align: center; margin-bottom: 1.5rem;">
+            📆 Calendario y Planificación
+        </h2>
+        
+        <p class="slide-text" style="font-size: 1.2rem; text-align: center; margin-bottom: 2rem; max-width: 900px; margin-left: auto; margin-right: auto;">
+            Centralizar la planificación y seguimiento de todas las actividades programadas del equipo.
+        </p>
+        
+        <div class="calendar-container">
+            <div class="calendar-section">
+                <div class="calendar-card">
+                    <div class="calendar-header">
+                        <div class="calendar-icon"><i class="fas fa-user-clock"></i></div>
+                        <div class="calendar-title">Agenda del Personal</div>
+                    </div>
+                    <div class="calendar-content">
+                        <div class="calendar-features">
+                            <div class="calendar-feature">
+                                <i class="fas fa-eye"></i>
+                                <span>Vista administrativa consolidada</span>
+                            </div>
+                            <div class="calendar-feature">
+                                <i class="fas fa-clock"></i>
+                                <span>Gestión de disponibilidad</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="calendar-card">
+                    <div class="calendar-header">
+                        <div class="calendar-icon"><i class="fas fa-calendar-alt"></i></div>
+                        <div class="calendar-title">Gestión de Eventos</div>
+                    </div>
+                    <div class="calendar-content">
+                        <div class="event-types">
+                            <div class="event-type">
+                                <div class="event-dot courses"></div>
+                                <span>Cursos</span>
+                            </div>
+                            <div class="event-type">
+                                <div class="event-dot workshops"></div>
+                                <span>Talleres</span>
+                            </div>
+                            <div class="event-type">
+                                <div class="event-dot trainings"></div>
+                                <span>Capacitaciones</span>
+                            </div>
+                            <div class="event-type">
+                                <div class="event-dot audits"></div>
+                                <span>Auditorías</span>
+                            </div>
+                        </div>
+                        <div class="event-features">
+                            <div class="event-feature">
+                                <i class="fas fa-bell"></i>
+                                <span>Notificaciones automáticas</span>
+                            </div>
+                            <div class="event-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Control de asistencia</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="calendar-preview">
+                <div class="calendar-mockup">
+                    <div class="calendar-header-mock">
+                        <div class="month-nav">
+                            <i class="fas fa-chevron-left"></i>
+                            <span>Agosto 2025</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </div>
+                        <div class="view-toggles">
+                            <span class="view-toggle active">Mes</span>
+                            <span class="view-toggle">Semana</span>
+                            <span class="view-toggle">Día</span>
+                        </div>
+                    </div>
+                    <div class="calendar-grid">
+                        <div class="calendar-day">L</div>
+                        <div class="calendar-day">M</div>
+                        <div class="calendar-day">M</div>
+                        <div class="calendar-day">J</div>
+                        <div class="calendar-day">V</div>
+                        <div class="calendar-day">S</div>
+                        <div class="calendar-day">D</div>
+                        <div class="calendar-date">1</div>
+                        <div class="calendar-date">2</div>
+                        <div class="calendar-date">3</div>
+                        <div class="calendar-date">4</div>
+                        <div class="calendar-date">5</div>
+                        <div class="calendar-date">6</div>
+                        <div class="calendar-date">7</div>
+                        <div class="calendar-date">8</div>
+                        <div class="calendar-date with-event">9
+                            <div class="event-indicator courses"></div>
+                        </div>
+                        <div class="calendar-date">10</div>
+                        <div class="calendar-date">11</div>
+                        <div class="calendar-date">12</div>
+                        <div class="calendar-date with-event">13
+                            <div class="event-indicator workshops"></div>
+                        </div>
+                        <div class="calendar-date">14</div>
+                        <div class="calendar-date">15</div>
+                        <div class="calendar-date with-event">16
+                            <div class="event-indicator audits"></div>
+                        </div>
+                        <div class="calendar-date">17</div>
+                        <div class="calendar-date">18</div>
+                        <div class="calendar-date">19</div>
+                        <div class="calendar-date with-event">20
+                            <div class="event-indicator trainings"></div>
+                        </div>
+                        <div class="calendar-date">21</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="deliverables-section">
+            <div class="deliverables-grid">
+                <div class="deliverable-item">
+                    <i class="fas fa-calendar-week"></i>
+                    <span>Calendario interactivo multivista</span>
+                </div>
+                <div class="deliverable-item">
+                    <i class="fas fa-cogs"></i>
+                    <span>Sistema de gestión de eventos</span>
+                </div>
+                <div class="deliverable-item">
+                    <i class="fas fa-user-check"></i>
+                    <span>Módulo de control de asistencia</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <div>Fase 2 - Módulos y Funcionalidades</div>
+        <div class="page-number">6/11</div>
+    </div>
+</section>
+
+<!-- Slide 7: Mecánica de Trabajo -->
+<section class="slide" id="slide7">
+    <div class="header">
+        <div class="logo">ALOIA</div>
+        <div class="client">Muuk</div>
+    </div>
+    
+    <div class="slide-content">
+        <h2 class="slide-title" style="font-size: 2.8rem; text-align: center; margin-bottom: 1.5rem;">
+            💼 Mecánica de Trabajo
+        </h2>
+        
+        <p class="slide-text" style="font-size: 1.2rem; text-align: center; margin-bottom: 2rem; max-width: 900px; margin-left: auto; margin-right: auto;">
+            Documentar y estandarizar los procesos operativos para garantizar consistencia en la ejecución.
+        </p>
+        
+        <div class="workflow-main-container">
+            <div class="workflow-card">
+                <div class="workflow-header">
+                    <div class="workflow-icon"><i class="fas fa-sitemap"></i></div>
+                    <div class="workflow-title">Flujos de Trabajo Documentados</div>
+                </div>
+                <div class="workflow-content">
+                    <div class="workflow-grid">
+                        <div class="workflow-item">
+                            <div class="workflow-item-icon">
+                                <i class="fas fa-route"></i>
+                            </div>
+                            <div class="workflow-item-content">
+                                <h4>Procesos por Cliente</h4>
+                                <p>Descripción detallada de flujos específicos para cada tipo de cliente</p>
+                            </div>
+                        </div>
+                        
+                        <div class="workflow-item">
+                            <div class="workflow-item-icon">
+                                <i class="fas fa-list-ol"></i>
+                            </div>
+                            <div class="workflow-item-content">
+                                <h4>Guías Paso a Paso</h4>
+                                <p>Instrucciones detalladas para cada actividad operativa</p>
+                            </div>
+                        </div>
+                        
+                        <div class="workflow-item">
+                            <div class="workflow-item-icon">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <div class="workflow-item-content">
+                                <h4>Plantillas Estandarizadas</h4>
+                                <p>Formatos predefinidos para mantener consistencia</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="workflow-preview">
+                <div class="workflow-mockup">
+                    <div class="mockup-header">
+                        <div class="mockup-title">
+                            <i class="fas fa-book"></i>
+                            Manual Digital de Procesos
+                        </div>
+                        <div class="mockup-search">
+                            <i class="fas fa-search"></i>
+                            <span>Buscar proceso...</span>
+                        </div>
+                    </div>
+                    <div class="mockup-content">
+                        <div class="process-category">
+                            <div class="category-header">
+                                <i class="fas fa-folder-open"></i>
+                                <span>Cliente Tipo A - Retail</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="process-list">
+                                <div class="process-item">
+                                    <i class="fas fa-play"></i>
+                                    <span>Inicio de campaña</span>
+                                    <div class="process-status completed">✓</div>
+                                </div>
+                                <div class="process-item">
+                                    <i class="fas fa-chart-line"></i>
+                                    <span>Registro de ventas</span>
+                                    <div class="process-status in-progress">⟳</div>
+                                </div>
+                                <div class="process-item">
+                                    <i class="fas fa-camera"></i>
+                                    <span>Captura de evidencias</span>
+                                    <div class="process-status pending">○</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="process-category">
+                            <div class="category-header">
+                                <i class="fas fa-folder"></i>
+                                <span>Cliente Tipo B - Corporativo</span>
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="process-category">
+                            <div class="category-header">
+                                <i class="fas fa-folder"></i>
+                                <span>Plantillas Generales</span>
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="workflow-benefits">
+            <div class="benefit-card">
+                <i class="fas fa-lightbulb"></i>
+                <div class="benefit-content">
+                    <h4>Enfoque Estandarizado</h4>
+                    <p>Cada proceso se documenta según prioridades definidas conjuntamente, asegurando máximo valor y ROI en cada implementación.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="deliverables-section">
+            <div class="deliverables-grid">
+                <div class="deliverable-item">
+                    <i class="fas fa-book-open"></i>
+                    <span>Manual digital de procesos</span>
+                </div>
+                <div class="deliverable-item">
+                    <i class="fas fa-layer-group"></i>
+                    <span>Sistema de plantillas operativas</span>
+                </div>
+                <div class="deliverable-item">
+                    <i class="fas fa-play-circle"></i>
+                    <span>Guías interactivas de procedimientos</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <div>Fase 2 - Módulos y Funcionalidades</div>
+        <div class="page-number">7/11</div>
+    </div>
+</section>
+
+<!-- Slide 8: Gestión Financiera -->
+<section class="slide" id="slide8">
+    <div class="header">
+        <div class="logo">ALOIA</div>
+        <div class="client">Muuk</div>
+    </div>
+    
+    <div class="slide-content">
+        <h2 class="slide-title" style="font-size: 2.8rem; text-align: center; margin-bottom: 1.5rem;">
+            🧾 Gestión Financiera
+        </h2>
+        
+        <p class="slide-text" style="font-size: 1.2rem; text-align: center; margin-bottom: 2rem; max-width: 900px; margin-left: auto; margin-right: auto;">
+            Digitalizar y automatizar el proceso de facturación, mejorando el control financiero.
+        </p>
+        
+        <div class="financial-container">
+            <div class="financial-section">
+                <div class="financial-card">
+                    <div class="financial-header">
+                        <div class="financial-icon"><i class="fas fa-file-invoice"></i></div>
+                        <div class="financial-title">Gestión de Facturas</div>
+                    </div>
+                    <div class="financial-content">
+                        <div class="financial-features">
+                            <div class="financial-feature">
+                                <div class="feature-step">
+                                    <div class="step-icon-financial">
+                                        <i class="fas fa-cloud-upload-alt"></i>
+                                    </div>
+                                    <div class="step-content-financial">
+                                        <h4>Carga y Almacenamiento</h4>
+                                        <p>Subida de facturas en formato PDF y XML con clasificación automática</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="financial-feature">
+                                <div class="feature-step">
+                                    <div class="step-icon-financial">
+                                        <i class="fas fa-plus-circle"></i>
+                                    </div>
+                                    <div class="step-content-financial">
+                                        <h4>Generador Interno</h4>
+                                        <p>Creación de facturas directamente desde la aplicación con plantillas</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="financial-feature">
+                                <div class="feature-step">
+                                    <div class="step-icon-financial">
+                                        <i class="fas fa-credit-card"></i>
+                                    </div>
+                                    <div class="step-content-financial">
+                                        <h4>Control de Pagos</h4>
+                                        <p>Registro de pagos y seguimiento del estado financiero</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="financial-preview">
+                <div class="financial-mockup">
+                    <div class="mockup-header-financial">
+                        <div class="mockup-title-financial">
+                            <i class="fas fa-chart-pie"></i>
+                            Panel Financiero
+                        </div>
+                        <div class="mockup-period">
+                            <span>Julio 2025</span>
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="financial-stats">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-file-invoice-dollar"></i>
+                            </div>
+                            <div class="stat-info">
+                                <div class="stat-number">47</div>
+                                <div class="stat-label">Facturas</div>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon pending">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="stat-info">
+                                <div class="stat-number">12</div>
+                                <div class="stat-label">Pendientes</div>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon paid">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="stat-info">
+                                <div class="stat-number">35</div>
+                                <div class="stat-label">Pagadas</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="recent-invoices">
+                        <div class="section-title">
+                            <i class="fas fa-history"></i>
+                            Facturas Recientes
+                        </div>
+                        <div class="invoice-list">
+                            <div class="invoice-item">
+                                <div class="invoice-info">
+                                    <div class="invoice-number">FAC-2025-001</div>
+                                    <div class="invoice-client">Cliente ABC</div>
+                                </div>
+                                <div class="invoice-amount">$25,400</div>
+                                <div class="invoice-status paid">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="invoice-item">
+                                <div class="invoice-info">
+                                    <div class="invoice-number">FAC-2025-002</div>
+                                    <div class="invoice-client">Cliente XYZ</div>
+                                </div>
+                                <div class="invoice-amount">$18,750</div>
+                                <div class="invoice-status pending">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="invoice-item">
+                                <div class="invoice-info">
+                                    <div class="invoice-number">FAC-2025-003</div>
+                                    <div class="invoice-client">Cliente DEF</div>
+                                </div>
+                                <div class="invoice-amount">$31,200</div>
+                                <div class="invoice-status paid">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="deliverables-section">
+            <div class="deliverables-grid">
+                <div class="deliverable-item">
+                    <i class="fas fa-archive"></i>
+                    <span>Repositorio digital de facturas</span>
+                </div>
+                <div class="deliverable-item">
+                    <i class="fas fa-magic"></i>
+                    <span>Generador de facturas integrado</span>
+                </div>
+                <div class="deliverable-item">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Panel de control financiero</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <div>Fase 2 - Módulos y Funcionalidades</div>
+        <div class="page-number">8/11</div>
+    </div>
+</section>
+
+<!-- Slide 9: Evaluación y Desempeño -->
+<section class="slide" id="slide9">
+    <div class="header">
+        <div class="logo">ALOIA</div>
+        <div class="client">Muuk</div>
+    </div>
+    
+    <div class="slide-content">
+        <h2 class="slide-title" style="font-size: 2.8rem; text-align: center; margin-bottom: 1.5rem;">
+            📊 Evaluación y Desempeño
+        </h2>
+        
+        <p class="slide-text" style="font-size: 1.2rem; text-align: center; margin-bottom: 2rem; max-width: 900px; margin-left: auto; margin-right: auto;">
+            Implementar un sistema de medición y ranking que incentive el alto rendimiento del equipo.
+        </p>
+        
+        <div class="performance-container">
+            <div class="performance-section">
+                <div class="performance-card">
+                    <div class="performance-header">
+                        <div class="performance-icon"><i class="fas fa-trophy"></i></div>
+                        <div class="performance-title">Sistema de Ranking</div>
+                    </div>
+                    <div class="performance-content">
+                        <div class="evaluation-criteria">
+                            <div class="criteria-item">
+                                <div class="criteria-icon">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <div class="criteria-content">
+                                    <h4>Actividades Realizadas</h4>
+                                    <p>Número y calidad de ventas, clínicas y demostraciones</p>
+                                    <div class="weight-indicator">Peso: 40%</div>
+                                </div>
+                            </div>
+                            
+                            <div class="criteria-item">
+                                <div class="criteria-icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div class="criteria-content">
+                                    <h4>Puntualidad y Asistencia</h4>
+                                    <p>Cumplimiento de horarios y presencia en actividades</p>
+                                    <div class="weight-indicator">Peso: 35%</div>
+                                </div>
+                            </div>
+                            
+                            <div class="criteria-item">
+                                <div class="criteria-icon">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                </div>
+                                <div class="criteria-content">
+                                    <h4>Proactividad</h4>
+                                    <p>Reporte oportuno de incidencias y mejoras</p>
+                                    <div class="weight-indicator">Peso: 25%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="performance-preview">
+                <div class="performance-mockup">
+                    <div class="mockup-header-performance">
+                        <div class="mockup-title-performance">
+                            <i class="fas fa-medal"></i>
+                            Leaderboard - Julio 2025
+                        </div>
+                        <div class="period-selector">
+                            <span>Mensual</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="ranking-list">
+                        <div class="ranking-item top-performer">
+                            <div class="rank-position">
+                                <i class="fas fa-crown"></i>
+                                <span>1</span>
+                            </div>
+                            <div class="user-info">
+                                <div class="user-name">Ana García</div>
+                                <div class="user-team">Equipo Norte</div>
+                            </div>
+                            <div class="score-info">
+                                <div class="score">98.5</div>
+                                <div class="score-trend up">
+                                    <i class="fas fa-arrow-up"></i>
+                                    +5.2
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="ranking-item">
+                            <div class="rank-position">
+                                <span>2</span>
+                            </div>
+                            <div class="user-info">
+                                <div class="user-name">Carlos Mendez</div>
+                                <div class="user-team">Equipo Sur</div>
+                            </div>
+                            <div class="score-info">
+                                <div class="score">94.2</div>
+                                <div class="score-trend up">
+                                    <i class="fas fa-arrow-up"></i>
+                                    +2.1
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="ranking-item">
+                            <div class="rank-position">
+                                <span>3</span>
+                            </div>
+                            <div class="user-info">
+                                <div class="user-name">Laura Torres</div>
+                                <div class="user-team">Equipo Centro</div>
+                            </div>
+                            <div class="score-info">
+                                <div class="score">91.8</div>
+                                <div class="score-trend down">
+                                    <i class="fas fa-arrow-down"></i>
+                                    -1.3
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="ranking-item">
+                            <div class="rank-position">
+                                <span>4</span>
+                            </div>
+                            <div class="user-info">
+                                <div class="user-name">Miguel Ruiz</div>
+                                <div class="user-team">Equipo Norte</div>
+                            </div>
+                            <div class="score-info">
+                                <div class="score">89.6</div>
+                                <div class="score-trend neutral">
+                                    <i class="fas fa-minus"></i>
+                                    0.0
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="ranking-item">
+                            <div class="rank-position">
+                                <span>5</span>
+                            </div>
+                            <div class="user-info">
+                                <div class="user-name">Sofia López</div>
+                                <div class="user-team">Equipo Sur</div>
+                            </div>
+                            <div class="score-info">
+                                <div class="score">87.3</div>
+                                <div class="score-trend up">
+                                    <i class="fas fa-arrow-up"></i>
+                                    +3.7
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="performance-summary">
+                        <div class="summary-item">
+                            <i class="fas fa-users"></i>
+                            <span>25 Evaluados</span>
+                        </div>
+                        <div class="summary-item">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>Promedio: 85.2</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="deliverables-section">
+            <div class="deliverables-grid">
+                <div class="deliverable-item">
+                    <i class="fas fa-calculator"></i>
+                    <span>Sistema de scoring automático</span>
+                </div>
+                <div class="deliverable-item">
+                    <i class="fas fa-list-ol"></i>
+                    <span>Leaderboard interactivo</span>
+                </div>
+                <div class="deliverable-item">
+                    <i class="fas fa-user-chart"></i>
+                    <span>Reportes de desempeño personalizados</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <div>Fase 2 - Módulos y Funcionalidades</div>
+        <div class="page-number">9/11</div>
+    </div>
+</section>
+
+
+<!-- Slide 11: Cronograma de Implementación -->
+<section class="slide" id="slide11">
+    <div class="header">
+        <div class="logo">ALOIA</div>
+        <div class="client">Muuk</div>
+    </div>
+    
+    <div class="slide-content">
+        <h2 class="slide-title" style="font-size: 3rem; text-align: center; margin-bottom: 2rem;">
+            🚀 Cronograma de Implementación
+        </h2>
+        
+       
+        
+        <div class="timeline-container">
+            <div class="timeline-header">
+                <div class="timeline-summary">
+                    <div class="summary-stat">
+                        <div class="stat-number">15</div>
+                        <div class="stat-label">Semanas Total</div>
+                    </div>
+                    <div class="summary-stat">
+                        <div class="stat-number">7</div>
+                        <div class="stat-label">Módulos</div>
+                    </div>
+                    <div class="summary-stat">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">Fases</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-phases">
+                <div class="phase-container phase-1">
+                    <div class="phase-header">
+                        <div class="phase-number">1</div>
+                        <div class="phase-info">
+                            <div class="phase-title">Fundamentos Operativos</div>
+                            <div class="phase-duration">4 semanas</div>
+                        </div>
+                    </div>
+                    <div class="phase-modules">
+                        <div class="module-timeline">
+                            <div class="module-info">
+                                <div class="module-icon"><i class="fas fa-clipboard-list"></i></div>
+                                <div class="module-details">
+                                    <div class="module-name">Gestión de Actividades</div>
+                                    <div class="module-description">Registro y reportes de actividades comerciales</div>
+                                </div>
+                            </div>
+                            <div class="module-duration">
+                                <span class="duration-badge">2 semanas</span>
+                            </div>
+                        </div>
+                        
+                        <div class="module-timeline">
+                            <div class="module-info">
+                                <div class="module-icon"><i class="fas fa-ticket-alt"></i></div>
+                                <div class="module-details">
+                                    <div class="module-name">Incidencias y Comunicación</div>
+                                    <div class="module-description">Sistema de tickets y notificaciones</div>
+                                </div>
+                            </div>
+                            <div class="module-duration">
+                                <span class="duration-badge">2 semanas</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="phase-container phase-2">
+                    <div class="phase-header">
+                        <div class="phase-number">2</div>
+                        <div class="phase-info">
+                            <div class="phase-title">Control y Planificación</div>
+                            <div class="phase-duration">5 semanas</div>
+                        </div>
+                    </div>
+                    <div class="phase-modules">
+                        <div class="module-timeline">
+                            <div class="module-info">
+                                <div class="module-icon"><i class="fas fa-store"></i></div>
+                                <div class="module-details">
+                                    <div class="module-name">Tiendas e Inventarios</div>
+                                    <div class="module-description">Control integral de puntos de venta</div>
+                                </div>
+                            </div>
+                            <div class="module-duration">
+                                <span class="duration-badge">3 semanas</span>
+                            </div>
+                        </div>
+                        
+                        <div class="module-timeline">
+                            <div class="module-info">
+                                <div class="module-icon"><i class="fas fa-calendar-alt"></i></div>
+                                <div class="module-details">
+                                    <div class="module-name">Calendario</div>
+                                    <div class="module-description">Planificación y gestión de eventos</div>
+                                </div>
+                            </div>
+                            <div class="module-duration">
+                                <span class="duration-badge">2 semanas</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="phase-container phase-3">
+                    <div class="phase-header">
+                        <div class="phase-number">3</div>
+                        <div class="phase-info">
+                            <div class="phase-title">Optimización y Análisis</div>
+                            <div class="phase-duration">6 semanas</div>
+                        </div>
+                    </div>
+                    <div class="phase-modules">
+                        <div class="module-timeline">
+                            <div class="module-info">
+                                <div class="module-icon"><i class="fas fa-sitemap"></i></div>
+                                <div class="module-details">
+                                    <div class="module-name">Mecánica de Trabajo</div>
+                                    <div class="module-description">Documentación de procesos</div>
+                                </div>
+                            </div>
+                            <div class="module-duration">
+                                <span class="duration-badge">1 semana</span>
+                            </div>
+                        </div>
+                        
+                        <div class="module-timeline">
+                            <div class="module-info">
+                                <div class="module-icon"><i class="fas fa-file-invoice"></i></div>
+                                <div class="module-details">
+                                    <div class="module-name">Gestión Financiera</div>
+                                    <div class="module-description">Control de facturas y pagos</div>
+                                </div>
+                            </div>
+                            <div class="module-duration">
+                                <span class="duration-badge">2 semanas</span>
+                            </div>
+                        </div>
+                        
+                        <div class="module-timeline">
+                            <div class="module-info">
+                                <div class="module-icon"><i class="fas fa-trophy"></i></div>
+                                <div class="module-details">
+                                    <div class="module-name">Evaluación y Desempeño</div>
+                                    <div class="module-description">Sistema de ranking y métricas</div>
+                                </div>
+                            </div>
+                            <div class="module-duration">
+                                <span class="duration-badge">3 semanas</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-benefits">
+                <div class="benefit-highlight">
+                    <i class="fas fa-rocket"></i>
+                    <div class="benefit-text">
+                        
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <div>Fase 2 - Módulos y Funcionalidades</div>
+        <div class="page-number">11/12</div>
+    </div>
+</section>
+
+<!-- Slide 10: Próximos Pasos -->
+<section class="slide" id="slide10">
+    <div class="header">
+        <div class="logo">ALOIA</div>
+        <div class="client">Muuk</div>
+    </div>
+    
+    <div class="slide-content">
+        <h2 class="slide-title" style="font-size: 3.5rem; text-align: center; margin-bottom: 2rem;">
+         Próximos Pasos
+        </h2>
+        
+        <p class="slide-text" style="font-size: 1.4rem; text-align: center; margin-bottom: 3rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+            Estamos listos para transformar digitalmente las operaciones de Muuk con estos 7 módulos avanzados.
+        </p>
+        
+        <div class="next-steps-container">
+            <div class="steps-section">
+                <div class="steps-card">
+                    <div class="steps-header">
+                        <div class="steps-icon"><i class="fas fa-list-ol"></i></div>
+                        <div class="steps-title">Plan de Acción</div>
+                    </div>
+                    <div class="steps-content">
+                        <div class="action-steps">
+                            <div class="action-step">
+                                <div class="step-number-next">1</div>
+                                <div class="step-content-next">
+                                    <h4>Revisar y Validar</h4>
+                                    <p>Alcance detallado de cada módulo y definición de prioridades</p>
+                                </div>
+                            </div>
+                            
+                            <div class="action-step">
+                                <div class="step-number-next">2</div>
+                                <div class="step-content-next">
+                                    <h4>Aprobación Formal</h4>
+                                    <p>Firma de contrato y confirmación de cronograma de implementación</p>
+                                </div>
+                            </div>
+                            
+                            <div class="action-step">
+                                <div class="step-number-next">3</div>
+                                <div class="step-content-next">
+                                    <h4>Plan de Trabajo</h4>
+                                    <p>Elaboración detallada con fechas, hitos y responsables asignados</p>
+                                </div>
+                            </div>
+                            
+                            <div class="action-step">
+                                <div class="step-number-next">4</div>
+                                <div class="step-content-next">
+                                    <h4>Kick-off del Proyecto</h4>
+                                    <p>Inicio del desarrollo y configuración del primer módulo</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-section">
+                <div class="contact-card">
+                    <div class="contact-header">
+                        <div class="contact-icon"><i class="fas fa-user-tie"></i></div>
+                        <div class="contact-title">Contacto del Proyecto</div>
+                    </div>
+                    <div class="contact-content">
+                        <div class="contact-info">
+                            <div class="contact-item">
+                                <div class="contact-item-icon">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <div class="contact-label">Responsable</div>
+                                    <div class="contact-value">Luis Martínez</div>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-item">
+                                <div class="contact-item-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <div class="contact-label">Email</div>
+                                    <div class="contact-value">luis.martinez@aloia.tech</div>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-item">
+                                <div class="contact-item-icon">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <div class="contact-label">Teléfono</div>
+                                    <div class="contact-value">+52 55 1234 5678</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="availability-badge">
+                            <i class="fas fa-clock"></i>
+                            <span>Disponible para reunión inmediata</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="project-summary">
+            <div class="summary-highlight">
+                <div class="summary-icon">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <div class="summary-content">
+                    <h3>Transformación Digital Completa</h3>
+                    <p>7 módulos integrados que revolucionarán la gestión operativa, desde actividades y reportes hasta evaluación de desempeño, todo con tecnología de vanguardia.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="cta-section">
+            <button class="cta-button">
+                <i class="fas fa-handshake"></i>
+                ¡Comencemos la Transformación!
+            </button>
+            <p class="cta-subtitle">El futuro digital de Muuk está a un clic de distancia</p>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <div>Fase 2 - Módulos y Funcionalidades</div>
+        <div class="page-number">10/11</div>
+    </div>
+</section>
+
+
+
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slidesContainer = document.getElementById('slidesContainer');
+            const progressBar = document.getElementById('progressBar');
+            const totalSlides = document.querySelectorAll('.slide').length;
+            
+            slidesContainer.addEventListener('scroll', function() {
+                const scrollPosition = slidesContainer.scrollTop;
+                const slideHeight = window.innerHeight;
+                const currentSlideIndex = Math.round(scrollPosition / slideHeight) + 1;
+                
+                // Update progress bar
+                const progress = ((currentSlideIndex - 1) / (totalSlides - 1)) * 100;
+                progressBar.style.width = `${progress}%`;
+            });
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                const currentScroll = slidesContainer.scrollTop;
+                const slideHeight = window.innerHeight;
+                
+                if (e.key === 'ArrowDown' || e.key === 'PageDown') {
+                    slidesContainer.scrollTop = currentScroll + slideHeight;
+                    e.preventDefault();
+                } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+                    slidesContainer.scrollTop = currentScroll - slideHeight;
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

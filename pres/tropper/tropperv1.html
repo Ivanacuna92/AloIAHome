@@ -1,0 +1,1333 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propuesta Económica Plataforma BRIA - Tropper</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #FD6144;
+            --primary-dark: #161212;
+            --primary-red: #FD3244;
+            --primary-purple: #AE3A8D;
+            --light-gray: #CCB6B6;
+            --white: #F9F9F9;
+            --shadow-color: rgba(0, 0, 0, 0.15);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: var(--white);
+            color: var(--primary-dark);
+            overflow: hidden;
+        }
+        
+        .slides-container {
+            height: 100vh;
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll;
+            scroll-behavior: smooth;
+        }
+        
+        .slide {
+            height: 100vh;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            background-color: var(--white);
+        }
+        
+        /* Header styling */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            width: 100%;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+        
+        .client {
+            font-size: 1rem;
+            color: var(--primary-color);
+        }
+        
+        /* Slide content styling */
+        .slide-content {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            padding: 0 2rem;
+        }
+        
+        .slide-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: var(--primary-dark);
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        .slide-subtitle {
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            animation: fadeInUp 1.2s ease-out;
+        }
+        
+        .slide-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            animation: fadeInUp 1.4s ease-out;
+        }
+        
+        /* Card styles */
+        .cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 1rem;
+            animation: fadeInUp 1.6s ease-out;
+        }
+        
+        .card {
+            background-color: var(--white);
+            border-radius: 45px;
+            padding: 1.5rem;
+            width: calc(33% - 1.5rem);
+            min-width: 250px;
+            box-shadow: 10px 10px 0 var(--shadow-color);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 15px 15px 0 var(--shadow-color);
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .card-icon {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+        
+        .card-content {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: var(--primary-dark);
+            flex-grow: 1;
+        }
+        
+        .card-tag {
+            display: inline-block;
+            background-color: var(--primary-color);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-top: 1rem;
+            color: var(--white);
+        }
+        
+        /* Table styles */
+        .table-container {
+            margin-top: 2rem;
+            width: 100%;
+            animation: fadeInUp 1.6s ease-out;
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--white);
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 10px 10px 0 var(--shadow-color);
+        }
+        
+        thead {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+        
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        th {
+            font-weight: 600;
+        }
+        
+        /* Feature list styles */
+        .features-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 1rem;
+            animation: fadeInUp 1.6s ease-out;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            width: calc(50% - 0.75rem);
+            margin-bottom: 1rem;
+        }
+        
+        .feature-icon {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin-right: 1rem;
+            margin-top: 0.2rem;
+        }
+        
+        .feature-text {
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        
+        /* Footer */
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.5rem;
+            width: 100%;
+            font-size: 0.8rem;
+            color: var(--primary-dark);
+        }
+        
+        .page-number {
+            font-size: 0.9rem;
+            color: var(--primary-dark);
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Cover slide specific */
+        .cover-slide {
+            background-color: var(--white);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .cover-logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            animation: fadeInUp 0.8s ease-out;
+            color: var(--primary-dark);
+        }
+        
+        .cover-title {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease-out;
+            color: var(--primary-dark);
+        }
+        
+        .cover-subtitle {
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+            animation: fadeInUp 1.2s ease-out;
+        }
+        
+        .cover-client {
+            font-size: 1.2rem;
+            animation: fadeInUp 1.4s ease-out;
+            color: var(--primary-dark);
+        }
+        
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 5px;
+            background: var(--primary-color);
+            width: 0%;
+            z-index: 100;
+            transition: width 0.3s ease;
+        }
+        
+        /* Two column layout */
+        .two-column {
+            display: flex;
+            gap: 2rem;
+            margin-top: 1rem;
+            animation: fadeInUp 1.6s ease-out;
+        }
+        
+        .column {
+            flex: 1;
+        }
+        
+        .highlight-box {
+            background-color: var(--primary-color);
+            border-radius: 45px;
+            padding: 1.5rem;
+            margin: 0 auto;
+            max-width: 800px;
+            box-shadow: 10px 10px 0 var(--shadow-color);
+        }
+        
+        .highlight-text {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: white;
+            margin: 0;
+            text-align: center;
+        }
+
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .value-card {
+            background-color: #f5f5f5;
+            border-radius: 25px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 5px 5px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .value-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .value-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .value-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+        }
+        
+        .value-description {
+            font-size: 1rem;
+            color: var(--primary-dark);
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 2rem auto 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 4px;
+            background-color: var(--primary-color);
+            transform: translateX(-50%);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            width: calc(50% - 40px);
+        }
+        
+        .timeline-item:nth-child(odd) {
+            float: left;
+            clear: both;
+        }
+        
+        .timeline-item:nth-child(even) {
+            float: right;
+            clear: both;
+        }
+        
+        .timeline-content {
+            background-color: var(--white);
+            border-radius: 25px;
+            padding: 1.5rem;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .timeline-date {
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .numbered-list {
+            counter-reset: item;
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .numbered-list li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            counter-increment: item;
+        }
+
+        .numbered-list li::before {
+            content: counter(item);
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+            border-radius: 50%;
+            width: 2rem;
+            height: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            flex-shrink: 0;
+            margin-top: 0.2rem;
+        }
+
+        .pricing-highlight {
+            background: linear-gradient(135deg, var(--primary-purple), var(--primary-color));
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: 600;
+            display: inline-block;
+            margin-left: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .strikethrough {
+            text-decoration: line-through;
+            color: #666;
+            margin-right: 1rem;
+        }
+
+        .l-function-tag {
+            display: inline-block;
+            background-color: var(--primary-purple);
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-left: 0.5rem;
+        }
+
+        .module-tag {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-left: 0.5rem;
+        }
+
+        .module-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .module-grid-centered {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            align-items: center;
+            flex-grow: 1;
+        }
+
+        .module-card {
+            background-color: var(--white);
+            border-radius: 45px;
+            padding: 2rem;
+            width: 280px;
+            box-shadow: 10px 10px 0 var(--shadow-color);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .module-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 15px 15px 0 var(--shadow-color);
+        }
+
+        .module-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .module-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+
+        .functions-list {
+            background-color: #f5f5f5;
+            border-radius: 25px;
+            padding: 2rem;
+            font-size: 1.1rem;
+            line-height: 2;
+        }
+
+        .functions-list ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .functions-list li {
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .functions-list li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: var(--primary-purple);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .module-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cards-container {
+                flex-direction: column;
+            }
+            
+            .card {
+                width: 100%;
+            }
+            
+            .feature-item {
+                width: 100%;
+            }
+        }
+
+                .qr-container {
+            position: absolute;
+            bottom: 80px;
+            right: 40px;
+            text-align: center;
+            animation: fadeInUp 1.6s ease-out;
+        }
+
+        .qr-code {
+            width: 180px;
+            height: 180px;
+            border: 3px solid var(--primary-color);
+            border-radius: 15px;
+            padding: 10px;
+            background-color: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .qr-text {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--primary-dark);
+            font-weight: 500;
+        }
+
+        /* Ajuste para pantallas pequeñas */
+        @media (max-width: 1068px) {
+            .qr-container {
+                bottom: 150px;
+                right: 120px;
+            }
+            
+            .qr-code {
+                width: 180px;
+                height: 180px;
+            }
+            
+            .qr-text {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    <div class="slides-container" id="slidesContainer">
+        
+        <!-- Slide 1: Portada -->
+        <section class="slide cover-slide" id="slide1">
+            <div style="margin-bottom: 2rem;">
+                <img src="https://aloia.ai/assets/img/aloia-color.png" alt="Aloia Logo" style="height: 120px; width: auto;">
+            </div>
+            <h1 class="cover-title">PLATAFORMA BRIA</h1>
+            <div class="cover-subtitle">Transformación Digital que Elimina el 80% de Tareas Manuales</div>
+            <div class="cover-client">Presentado a: Tropper</div>
+            
+            
+            
+            <div class="footer">
+                <div>Jueves, 7 de agosto de 2025</div>
+                <div class="page-number">1/11</div>
+            </div>
+        </section>
+
+
+        <!-- Slide 2: Resumen Ejecutivo -->
+        <section class="slide" id="slide2">
+            <div class="header">
+                <div class="logo">ALOIA + BRIA</div>
+                <div class="client">Tropper</div>
+            </div>
+            
+            <div class="slide-content">
+                <h2 class="slide-title">Resumen Ejecutivo</h2>
+                
+                <div class="slide-text" style="text-align: center; margin-bottom: 2rem;">
+                    Integración inteligente SIT + SAMSARA con ALOIA+BRIA
+                </div>
+                
+                <div class="value-grid">
+                    <div class="value-card">
+                        <div class="value-icon"><i class="fas fa-robot"></i></div>
+                        <div class="value-title">80% Menos Tareas Manuales</div>
+                        <div class="value-description">Automatización inteligente de procesos operativos</div>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon"><i class="fas fa-link"></i></div>
+                        <div class="value-title">Integración Total</div>
+                        <div class="value-description">Conexión perfecta entre SIT y SAMSARA</div>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon"><i class="fas fa-chart-line"></i></div>
+                        <div class="value-title">3 Modelos Flexibles</div>
+                        <div class="value-description">Inversión adaptada a sus necesidades</div>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon"><i class="fas fa-calendar-check"></i></div>
+                        <div class="value-title">8-12 Meses</div>
+                        <div class="value-description">Implementación completa y funcional</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div>Propuesta Económica</div>
+                <div class="page-number">2/11</div>
+            </div>
+        </section>
+        
+        <!-- Slide 3: Comprensión del Problema - Situación Actual -->
+        <section class="slide" id="slide3">
+            <div class="header">
+                <div class="logo">ALOIA + BRIA</div>
+                <div class="client">Tropper</div>
+            </div>
+            
+            <div class="slide-content">
+                <h2 class="slide-title">Situación Actual</h2>
+                
+                <div class="cards-container">
+                    <div class="card" style="width: 100%;">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                            <div class="card-title">Desafíos Identificados</div>
+                        </div>
+                        <div class="card-content">
+                            <div class="features-list" style="flex-direction: column;">
+                                <div class="feature-item" style="width: 100%;">
+                                    <div class="feature-icon"><i class="fas fa-user-clock"></i></div>
+                                    <div class="feature-text">Procesos manuales que consumen <strong>40+ horas semanales</strong></div>
+                                </div>
+                                <div class="feature-item" style="width: 100%;">
+                                    <div class="feature-icon"><i class="fas fa-unlink"></i></div>
+                                    <div class="feature-text">Sistemas desconectados <strong>(SIT y SAMSARA sin comunicación)</strong></div>
+                                </div>
+                                <div class="feature-item" style="width: 100%;">
+                                    <div class="feature-icon"><i class="fas fa-database"></i></div>
+                                    <div class="feature-text">"Inconsistencias en la calidad de datos" (registros sin estandarizar, información fragmentada)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="highlight-box" style="margin-top: 2rem;">
+                    <div class="highlight-text">
+                        <i class="fas fa-chart-line" style="margin-right: 1rem;"></i>
+                        Impacto en el Negocio
+                    </div>
+                </div>
+                
+                <div class="features-list" style="margin-top: 2rem;">
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-dollar-sign"></i></div>
+                        <div class="feature-text">Pérdidas no detectadas en insumos</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-wifi-slash"></i></div>
+                        <div class="feature-text">Falta de datos para conectividad en tiempo real</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-times-circle"></i></div>
+                        <div class="feature-text">Conciliaciones manuales propensas a errores</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-expand-alt"></i></div>
+                        <div class="feature-text">Imposibilidad de escalar operaciones eficientemente</div>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 2rem; font-size: 1.2rem; color: var(--primary-purple); font-weight: 600;">
+                    Oportunidad: Revolucionar la industria con cambios escalables pero de gran impacto al servicio
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div>Propuesta Económica</div>
+                <div class="page-number">3/11</div>
+            </div>
+        </section>
+        
+        <!-- Slide 4: Arquitectura BRIA -->
+        <section class="slide" id="slide4">
+            <div class="header">
+                <div class="logo">ALOIA + BRIA</div>
+                <div class="client">Tropper</div>
+            </div>
+            
+            <div class="slide-content">
+                <h2 class="slide-title">Arquitectura BRIA</h2>
+                <h3 class="slide-subtitle">Solución Técnica Integral</h3>
+                
+                <div class="cards-container">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-cubes"></i></div>
+                            <div class="card-title">Plataforma Modular</div>
+                        </div>
+                        <div class="card-content">
+                            Arquitectura escalable que permite agregar o modificar módulos según las necesidades del negocio
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-plug"></i></div>
+                            <div class="card-title">Integración Nativa</div>
+                        </div>
+                        <div class="card-content">
+                            Conexión directa con SAMSARA y ERP SIT sin necesidad de desarrollos adicionales
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-brain"></i></div>
+                            <div class="card-title">Motor de IA</div>
+                        </div>
+                        <div class="card-content">
+                            Automatización inteligente que aprende y optimiza procesos continuamente
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card" style="width: 100%; margin-top: 2rem;">
+                    <div class="card-header">
+                        <div class="card-icon"><i class="fas fa-shield-alt"></i></div>
+                        <div class="card-title">Garantías de Continuidad</div>
+                    </div>
+                    <div class="card-content">
+                        <div class="features-list">
+                            <div class="feature-item">
+                                <div class="feature-icon"><i class="fas fa-book"></i></div>
+                                <div class="feature-text">Documentación técnica completa</div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon"><i class="fas fa-graduation-cap"></i></div>
+                                <div class="feature-text">40 horas de capacitación técnica incluidas</div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon"><i class="fas fa-code"></i></div>
+                                <div class="feature-text">Opción de compra de código</div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon"><i class="fas fa-headset"></i></div>
+                                <div class="feature-text">Soporte local en México</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 2rem;">
+                    <span style="font-size: 1.1rem; color: var(--primary-purple);">
+                        <i class="fas fa-code-branch"></i> APIs abiertas para crecimiento futuro
+                    </span>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div>Propuesta Económica</div>
+                <div class="page-number">4/11</div>
+            </div>
+        </section>
+        
+        <!-- Slide 5: Módulos Operational -->
+        <section class="slide" id="slide5">
+            <div class="header">
+                <div class="logo">ALOIA + BRIA</div>
+                <div class="client">Tropper</div>
+            </div>
+            
+            <div class="slide-content">
+                <h2 class="slide-title" style="text-align: center;">Módulos Operational</h2>
+                <h3 class="slide-subtitle" style="text-align: center;">7 Módulos Core para Transformación Inmediata</h3>
+                
+                <div class="module-grid-centered">
+                    <div class="module-card">
+                        <div class="module-icon"><i class="fas fa-route"></i></div>
+                        <div class="module-title">Gestión de Operaciones</div>
+                    </div>
+                    
+                    <div class="module-card">
+                        <div class="module-icon"><i class="fas fa-broadcast-tower"></i></div>
+                        <div class="module-title">Torre de Control</div>
+                    </div>
+                    
+                    <div class="module-card">
+                        <div class="module-icon"><i class="fas fa-gas-pump"></i></div>
+                        <div class="module-title">Control de Combustible</div>
+                    </div>
+                    
+                    <div class="module-card">
+                        <div class="module-icon"><i class="fas fa-users"></i></div>
+                        <div class="module-title">CRM y Gestión de Clientes</div>
+                    </div>
+                    
+                    <div class="module-card">
+                        <div class="module-icon"><i class="fas fa-microchip"></i></div>
+                        <div class="module-title">Aloia IA</div>
+                    </div>
+                    
+                    <div class="module-card">
+                        <div class="module-icon"><i class="fas fa-plug"></i></div>
+                        <div class="module-title">Integraciones</div>
+                    </div>
+                    
+                    <div class="module-card">
+                        <div class="module-icon"><i class="fas fa-chart-bar"></i></div>
+                        <div class="module-title">Dashboards</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="qr-container">
+                <img src="qr-code.png" alt="QR Code" class="qr-code">
+                <p class="qr-text">Escanea para ver<br>detalles de módulos</p>
+            </div>
+            
+            <div class="footer">
+                <div>Propuesta Económica</div>
+                <div class="page-number">5/11</div>
+            </div>
+        </section>
+        
+        <!-- Slide 6: Módulos Enterprise -->
+        <section class="slide" id="slide6">
+            <div class="header">
+                <div class="logo">ALOIA + BRIA</div>
+                <div class="client">Tropper</div>
+            </div>
+            
+            <div class="slide-content">
+                <h2 class="slide-title" style="text-align: center;">Módulos Enterprise</h2>
+                <h3 class="slide-subtitle" style="text-align: center;">Funcionalidades Avanzadas Adicionales</h3>
+                
+                <div class="module-grid-centered">
+                    <div class="module-card">
+                        <div class="module-icon"><i class="fas fa-wrench"></i></div>
+                        <div class="module-title">Gestión de Mantenimiento</div>
+                    </div>
+                    
+                    <div class="module-card">
+                        <div class="module-icon"><i class="fas fa-warehouse"></i></div>
+                        <div class="module-title">Control de Inventarios</div>
+                    </div>
+                    
+                    <div class="module-card">
+                        <div class="module-icon"><i class="fas fa-user-tie"></i></div>
+                        <div class="module-title">RRHH Digital</div>
+                    </div>
+                </div>
+                
+                <div class="highlight-box" style="margin-top: 3rem; max-width: 600px;">
+                    <div class="highlight-text">
+                        <i class="fas fa-plus-circle" style="margin-right: 1rem;"></i>
+                        Enterprise = Todos los Operational + 3 Adicionales
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div>Propuesta Económica</div>
+                <div class="page-number">6/11</div>
+            </div>
+        </section>
+        
+        <!-- Slide 7: Opciones de Inversión -->
+        <section class="slide" id="slide7">
+            <div class="header">
+                <div class="logo">ALOIA + BRIA</div>
+                <div class="client">Tropper</div>
+            </div>
+            
+            <div class="slide-content">
+                <h2 class="slide-title">Opciones de Inversión</h2>
+                <h3 class="slide-subtitle">3 Modelos Adaptados a Sus Necesidades</h3>
+                
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Característica</th>
+                                <th>SaaS Operational</th>
+                                <th>SaaS Enterprise</th>
+                                <th>Full Code Operational</th>
+                                <th>Full Code Enterprise</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Pago</strong></td>
+                                <td>$432,000/mes × 8 meses mínimo</td>
+                                <td>$576,000/mes × 12 meses mínimo</td>
+                                <td>$9,331,200 MXN total</td>
+                                <td>$11,059,200 MXN total</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Módulos incluidos</strong></td>
+                                <td>7 módulos core</td>
+                                <td>Todos (10 módulos)</td>
+                                <td>7 módulos core</td>
+                                <td>Todos (10 módulos)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Aloia IA</strong></td>
+                                <td>✓ Incluido siempre</td>
+                                <td>✓ Incluido siempre</td>
+                                <td>1 año gratis ($936,000)</td>
+                                <td>1 año gratis ($936,000)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Soporte técnico</strong></td>
+                                <td>✓ 12/5 incluido</td>
+                                <td>✓ 12/5 incluido</td>
+                                <td>3 meses incluidos</td>
+                                <td>3 meses incluidos</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Setup inicial</strong></td>
+                                <td>$68,000 MXN</td>
+                                <td>$86,000 MXN</td>
+                                <td>Incluido</td>
+                                <td>Incluido</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Tiempo mínimo</strong></td>
+                                <td>8 meses</td>
+                                <td>12 meses</td>
+                                <td>8 pagos mensuales</td>
+                                <td>12 pagos mensuales</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div>Propuesta Económica</div>
+                <div class="page-number">7/11</div>
+            </div>
+        </section>
+        
+        <!-- Slide 8: Funciones L -->
+        <section class="slide" id="slide8">
+            <div class="header">
+                <div class="logo">ALOIA + BRIA</div>
+                <div class="client">Tropper</div>
+            </div>
+            
+            <div class="slide-content">
+                <h2 class="slide-title">Funciones L: Módulo Aloia</h2>
+                <h3 class="slide-subtitle">IA Avanzada Exclusiva en Modalidad SaaS</h3>
+                
+                <div class="two-column">
+                    <div class="column">
+                        <div class="card" style="width: 100%;">
+                            <div class="card-header">
+                                <div class="card-icon"><i class="fas fa-brain"></i></div>
+                                <div class="card-title">¿Qué son las Funciones L?</div>
+                            </div>
+                            <div class="card-content">
+                                <p style="font-size: 1.1rem; margin-bottom: 1rem;">
+                                    El Módulo Aloia integra capacidades avanzadas de inteligencia artificial que transforman la operación mediante automatización inteligente y predicción.
+                                </p>
+                                <p style="margin-top: 1rem;">
+                                    <strong>Disponibilidad:</strong><br>
+                                    • Solo en modalidad SaaS<br>
+                                    • Incluidas en SaaS Enterprise<br>
+                                    • Parciales en SaaS Operational
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="column">
+                        <div class="functions-list">
+                            <ul>
+                                <li>Llamadas automáticas de confirmación pre-ruta</li>
+                                <li>Calculadora de rutas eficientes</li>
+                                <li>Avisos preventivos de problemas</li>
+                                <li>Estimación de problemas futuros</li>
+                                <li>Comunicación por múltiples medios</li>
+                                <li>Recomendaciones de asignación de recursos</li>
+                                <li>Asistente digital para verificaciones</li>
+                                <li>Estimación de demanda y recursos necesarios</li>
+                                <li>Planificación de rutas por eficiencia</li>
+                                <li>Notificaciones de retrasos e incidentes</li>
+                                <li>Registro de incidentes de manejo</li>
+                                <li>Verificaciones pre-salida con recordatorios</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div>Propuesta Económica</div>
+                <div class="page-number">8/11</div>
+            </div>
+        </section>
+        
+        <!-- Slide 9: Gestión de Riesgos y Soporte -->
+        <section class="slide" id="slide9">
+            <div class="header">
+                <div class="logo">ALOIA + BRIA</div>
+                <div class="client">Tropper</div>
+            </div>
+            
+            <div class="slide-content">
+                <h2 class="slide-title">Gestión de Riesgos y Soporte</h2>
+                
+                <div class="two-column">
+                    <div class="column">
+                        <h3 style="color: var(--primary-color); margin-bottom: 1rem;">Matriz de Riesgos</h3>
+                        <div class="card" style="width: 100%;">
+                            <div class="card-content">
+                                <div style="margin-bottom: 1rem;">
+                                    <strong style="color: var(--primary-red);">Cambios en API SAMSARA</strong><br>
+                                    <span style="color: var(--primary-purple);">→ Mitigación:</span> Incluido en SaaS / Cotizable en Full Code
+                                </div>
+                                <div style="margin-bottom: 1rem;">
+                                    <strong style="color: var(--primary-red);">Calidad de datos</strong><br>
+                                    <span style="color: var(--primary-purple);">→ Mitigación:</span> Fase 0 obligatoria
+                                </div>
+                                <div style="margin-bottom: 1rem;">
+                                    <strong style="color: var(--primary-red);">Adopción usuarios</strong><br>
+                                    <span style="color: var(--primary-purple);">→ Mitigación:</span> Capacitación incluida
+                                </div>
+                                <div>
+                                    <strong style="color: var(--primary-red);">Documentación ERP SIT</strong><br>
+                                    <span style="color: var(--primary-purple);">→ Mitigación:</span> Integración totalmente documentada
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="column">
+                        <h3 style="color: var(--primary-color); margin-bottom: 1rem;">Soporte y Mantenimiento</h3>
+                        <div class="card" style="width: 100%; border: 3px solid var(--primary-color);">
+                            <div class="card-header">
+                                <div class="card-icon"><i class="fas fa-cloud"></i></div>
+                                <div class="card-title">SaaS</div>
+                            </div>
+                            <div class="card-content">
+                                • Soporte 12/5 incluido<br>
+                                • SLA 99.5% disponibilidad<br>
+                                • Actualizaciones automáticas<br>
+                                • Sin costos adicionales
+                            </div>
+                        </div>
+                        
+                        <div class="card" style="width: 100%; margin-top: 1rem;">
+                            <div class="card-header">
+                                <div class="card-icon"><i class="fas fa-server"></i></div>
+                                <div class="card-title">Full Code</div>
+                            </div>
+                            <div class="card-content">
+                                • 3 meses soporte incluido post-entrega<br>
+                                • Después: $1,780/hora desarrollo<br>
+                                • $1,385/hora soporte<br>
+                                • Bolsas de horas con descuento disponibles
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div>Propuesta Económica</div>
+                <div class="page-number">9/11</div>
+            </div>
+        </section>
+        
+        <!-- Slide 10: Condiciones Comerciales y Garantías -->
+        <section class="slide" id="slide10">
+            <div class="header">
+                <div class="logo">ALOIA + BRIA</div>
+                <div class="client">Tropper</div>
+            </div>
+            
+            <div class="slide-content">
+                <h2 class="slide-title">Condiciones Comerciales</h2>
+                
+                <div class="cards-container">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-file-contract"></i></div>
+                            <div class="card-title">Términos Generales</div>
+                        </div>
+                        <div class="card-content">
+                            • <strong>Cancelación SaaS:</strong> 30 días de anticipación<br>
+                            • <strong>Vigencia propuesta:</strong> 30 días<br>
+                            • <strong>Inicio:</strong> Inmediato tras firma<br>
+                            • <strong>Propiedad intelectual:</strong> Según modelo elegido
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-shopping-cart"></i></div>
+                            <div class="card-title">Opción de Compra SaaS</div>
+                        </div>
+                        <div class="card-content">
+                            • Disponible al año 3<br>
+                            • <strong>Costo: 50%</strong> del monto de inversión acumulado<br>
+                            • Incluye código completo<br>
+                            • No incluye funciones L
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-shield-alt"></i></div>
+                            <div class="card-title">Garantías Anti-Dependencia</div>
+                        </div>
+                        <div class="card-content">
+                            • Documentación técnica progresiva<br>
+                            • APIs abiertas y estándares de industria<br>
+                            • Opción de compra preferencial<br>
+                            • Capacitación técnica completa
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="highlight-box" style="margin-top: 2rem; background: linear-gradient(135deg, var(--primary-purple), var(--primary-color));">
+                    <div class="highlight-text">
+                        <i class="fas fa-star" style="margin-right: 1rem;"></i>
+                        Factores Diferenciadores
+                    </div>
+                </div>
+                
+                <div class="features-list" style="margin-top: 2rem; justify-content: center;">
+                    <div class="feature-item" style="width: auto; margin: 0 2rem;">
+                        <div class="feature-icon"><i class="fas fa-brain"></i></div>
+                        <div class="feature-text">IA aplicada específicamente a transporte de personal</div>
+                    </div>
+                    <div class="feature-item" style="width: auto; margin: 0 2rem;">
+                        <div class="feature-icon"><i class="fas fa-magic"></i></div>
+                        <div class="feature-text">Funciones L exclusivas que revolucionan la operación</div>
+                    </div>
+                    <div class="feature-item" style="width: auto; margin: 0 2rem;">
+                        <div class="feature-icon"><i class="fas fa-users"></i></div>
+                        <div class="feature-text">10+ años en transporte + 3 años integrando IA</div>
+                    </div>
+                    <div class="feature-item" style="width: auto; margin: 0 2rem;">
+                        <div class="feature-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div class="feature-text">Soporte local en México</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div>Propuesta Económica</div>
+                <div class="page-number">10/11</div>
+            </div>
+        </section>
+        
+        <!-- Slide 11: Cierre -->
+        <section class="slide" id="slide11">
+            <div class="header">
+                <div class="logo">ALOIA + BRIA</div>
+                <div class="client">Tropper</div>
+            </div>
+            
+            <div class="slide-content" style="justify-content: center; text-align: center;">
+                <h2 class="slide-title" style="font-size: 3.5rem;">Nuestro Compromiso</h2>
+                
+                <div class="slide-text" style="font-size: 1.3rem; max-width: 900px; margin: 0 auto 3rem;">
+                    En Aloia, nos comprometemos a ser su socio estratégico en la transformación digital, 
+                    con un enfoque pro-negocio que prioriza el ahorro, la eficiencia y el crecimiento predecible de su organización.
+                </div>
+                
+                <div class="cards-container" style="justify-content: center;">
+                    <div class="card" style="width: 45%;">
+                        <div class="card-header" style="justify-content: center;">
+                            <div class="card-icon"><i class="fas fa-piggy-bank"></i></div>
+                            <div class="card-title">Ahorro Garantizado</div>
+                        </div>
+                        <div class="card-content" style="text-align: center;">
+                            Reducción comprobada de costos operativos desde el primer mes de implementación
+                        </div>
+                    </div>
+                    
+                    <div class="card" style="width: 45%;">
+                        <div class="card-header" style="justify-content: center;">
+                            <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+                            <div class="card-title">Crecimiento Predecible</div>
+                        </div>
+                        <div class="card-content" style="text-align: center;">
+                            Escalabilidad sin incremento proporcional de costos, preparados para su expansión
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="highlight-box" style="max-width: 700px; margin: 3rem auto; background: linear-gradient(135deg, var(--primary-purple), var(--primary-color));">
+                    <div class="highlight-text">
+                        <i class="fas fa-handshake" style="margin-right: 1rem;"></i>
+                        Juntos, transformaremos los desafíos en oportunidades de mejora continua
+                    </div>q
+                </div>
+                
+                <div style="margin-top: 2rem;">
+                    <img src="https://aloia.ai/assets/img/aloia-color.png" alt="Aloia Logo" style="height: 80px; width: auto;">
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div>Transformando el Transporte de Personal con IA</div>
+                <div class="page-number">11/11</div>
+            </div>
+        </section>
+        
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slidesContainer = document.getElementById('slidesContainer');
+            const progressBar = document.getElementById('progressBar');
+            const totalSlides = document.querySelectorAll('.slide').length;
+            
+            slidesContainer.addEventListener('scroll', function() {
+                const scrollPosition = slidesContainer.scrollTop;
+                const slideHeight = window.innerHeight;
+                const currentSlideIndex = Math.round(scrollPosition / slideHeight) + 1;
+                
+                // Update progress bar
+                const progress = ((currentSlideIndex - 1) / (totalSlides - 1)) * 100;
+                progressBar.style.width = `${progress}%`;
+            });
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                const currentScroll = slidesContainer.scrollTop;
+                const slideHeight = window.innerHeight;
+                
+                if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') {
+                    slidesContainer.scrollTop = currentScroll + slideHeight;
+                    e.preventDefault();
+                } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+                    slidesContainer.scrollTop = currentScroll - slideHeight;
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

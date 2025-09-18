@@ -1,0 +1,512 @@
+/* Estilos de presentación para Aloia */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+/* Variables CSS - Colores de aloia.ai */
+:root {
+    /* Colores principales */
+    --aloia-crimson: #F2294E;
+    --aloia-fuchsia: #D9326F;
+    --aloia-magenta-dark: #BF3B91;
+    --aloia-coral-flame: #F25244;
+    --aloia-obsidian: #0D0D0D;
+    /* Degradado vibrante */
+    --aloia-magenta-warm: #BE3780;
+    --aloia-electric-red: #EE2C53;
+    --aloia-fire-orange: #FD5F44;
+    /* Colores de soporte */
+    --light-gray: #CCB6B6;
+    --white: #F9F9F9;
+    --aloia-gradient: linear-gradient(90deg, #F2294E 0%, #EE2C53 50%, #BF3B91 100%);
+}
+
+/* Aplicar Poppins globalmente */
+* {
+    font-family: 'Poppins', sans-serif;
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, var(--aloia-crimson), var(--aloia-fuchsia), var(--aloia-magenta-dark), var(--aloia-coral-flame));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  font-weight: bold;
+  display: inline-block; /* para asegurar que se aplique bien */
+}
+
+
+/* Grid de servicios */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto auto;
+    gap: 1.5rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.service-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    min-height: 300px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.service-card:hover {
+  transform: translateY(-10px);
+  border-color: var(--aloia-electric-red);
+  box-shadow: 
+    0 0 5px var(--aloia-electric-red),
+    0 0 10px var(--aloia-electric-red),
+    0 0 20px var(--aloia-electric-red),
+    0 0 40px var(--aloia-electric-red),
+    0 0 80px var(--aloia-electric-red);
+}
+
+.service-card .content {
+    height: 100%;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+}
+
+.service-card .icon-wrapper {
+    width: 50px;
+    height: 50px;
+    background: rgba(174, 58, 141, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.service-card .icon-wrapper i {
+    font-size: 1.5rem;
+    color: var(--aloia-crimson);
+}
+
+.service-card h3 {
+    font-size: 2rem;
+    color: white;
+    margin: 0;
+    line-height: 1;
+}
+
+.service-card .number {
+    font-size: 4rem;
+    color: var(--aloia-electric-red);
+    margin: 1rem 0;
+}
+
+.service-card p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1rem;
+    margin: 0;
+}
+
+.service-card:hover .number {
+    transform: scale(1.1);
+}
+
+/* Iconos tecnológicos */
+.tech-icon {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));
+    transition: all 0.3s ease;
+    margin: auto;
+    display: block;
+    padding: 10px;
+}
+
+.tech-icon:hover {
+    transform: scale(1.2);
+    filter: drop-shadow(0 0 20px rgba(255,255,255,0.5));
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 150px;
+}
+
+/* Tarjetas de características */
+.feature-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    min-height: 320px;
+    font-size: 0.9rem;
+    height: 100%;
+}
+
+.feature-card:hover {
+  transform: translateY(-10px);
+  border-color: var(--aloia-electric-red);
+  box-shadow: 
+    0 0 5px var(--aloia-electric-red),
+    0 0 10px var(--aloia-electric-red),
+    0 0 20px var(--aloia-electric-red),
+    0 0 40px var(--aloia-electric-red),
+    0 0 80px var(--aloia-electric-red);
+}
+
+
+.feature-icon {
+    font-size: 1.8rem;
+    color: var(--aloia-electric-red);
+    margin-bottom: 0.5rem;
+}
+
+/* Tarjetas de testimonios */
+.testimonial-card {
+    background: rgba(255, 255, 255, 0.1);
+    width: 100%;
+    max-width: 350px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    padding: 2rem;
+    margin: 0 auto;
+    height: 100%;
+    transition: all 0.3s ease;
+}
+
+.testimonial-card:hover {
+ transform: translateY(-10px);
+  border-color: var(--aloia-electric-red);
+  box-shadow: 
+    0 0 5px var(--aloia-electric-red),
+    0 0 10px var(--aloia-electric-red),
+    0 0 20px var(--aloia-electric-red),
+    0 0 40px var(--aloia-electric-red),
+    0 0 80px var(--aloia-electric-red);
+}
+
+.testimonial-card p {
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.testimonial-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.testimonial-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.quote-icon {
+    font-size: 2rem;
+    color: rgba(255, 255, 255, 0.2);
+    margin-bottom: 1rem;
+}
+
+.client-info {
+    color: white;
+}
+
+.client-info small {
+    font-size: 1.5rem;
+    opacity: 0.8;
+    letter-spacing: -0.2px;
+}
+
+.stats {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 1rem;
+}
+
+.stat h4 {
+    color: var(--aloia-electric-red);
+    font-size: 2rem;
+    margin: 0;
+}
+
+.stat p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+/* Botones */
+.cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.btn-lg {
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+}
+
+.btn-lg:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary {
+    background-color: var(--aloia-electric-red);
+    border: none;
+}
+
+.btn-primary:hover:not(:disabled) {
+    background: var(--aloia-gradient);
+}
+
+.btn-primary:disabled {
+    background-color: rgba(253, 95, 68, 0.3);
+    cursor: not-allowed;
+}
+
+.btn-secondary {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Tipografía para Reveal.js */
+.reveal h1, 
+.reveal h2, 
+.reveal h3, 
+.reveal h4, 
+.reveal h5, 
+.reveal h6 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.reveal p {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+}
+
+.reveal .lead {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+}
+
+.reveal .stats h4 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+}
+
+/* Calculadora de precios */
+.pricing-section {
+    padding: 2rem 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.pricing-section .calculator-title {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.pricing-section {
+    padding-top: 1rem !important;
+    padding-bottom: 5rem;
+}
+
+.containercal {
+    width: 100%;
+    padding-right: var(--bs-gutter-x, 0.75rem);
+    padding-left: var(--bs-gutter-x, 0.75rem);
+    margin-right: auto;
+    margin-left: auto;
+    padding-top: 0.10rem !important;
+    max-width: 1320px;
+}
+
+.config-card, .summary-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    padding: 1rem;
+    height: 100%;
+}
+
+.service-toggle {
+    padding: 0.5rem;
+    margin-bottom: 0.75rem;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.form-check-input {
+    width: 3.5rem !important;
+    height: 1.8rem !important;
+    border-radius: 2rem !important;
+}
+
+.reveal .progress {
+    background: rgba(0, 0, 0, .2);
+    color: var(--aloia-electric-red);
+}
+
+.reveal .controls button {
+    position: absolute;
+    padding: 0;
+    background-color: transparent;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+    color: var(--aloia-fuchsia);
+    transform: scale(.9999);
+    transition: color .2s ease, opacity .2s ease, transform .2s ease;
+    z-index: 2;
+    pointer-events: auto;
+    font-size: inherit;
+    visibility: hidden;
+    opacity: 0;
+    -webkit-appearance: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.form-check-input:checked {
+    background-color: var(--aloia-electric-red);
+    border-color: var(--aloia-electric-red);
+}
+
+
+.form-check-label {
+    color: white;
+    cursor: pointer;
+}
+
+.form-select {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.form-select:disabled {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.form-select option {
+    background-color: var(--aloia-obsidian);
+    color: white;
+}
+
+.progress {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.progress-bar {
+    background-color: var(--aloia-fire-orange);
+}
+
+.summary-card {
+    color: white;
+    font-size: 18px;
+}
+
+#serviceSummary .service-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.form-control {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.form-control:focus {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: white;
+}
+
+.input-group-text {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .service-card {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 15px;
+        aspect-ratio: 1;
+        transition: all 0.3s ease;
+    }
+    
+    .service-card.wide {
+        grid-column: span 1;
+        height: 300px;
+    }
+    
+    .service-card h3 {
+        font-size: 1.8rem;
+    }
+    
+    .service-card .number {
+        font-size: 3rem;
+    }
+    
+    .feature-card h4 {
+        font-size: 1.1rem;
+        line-height: 1.3;
+        margin-bottom: 0.5rem;
+    }
+    
+    .list-unstyled li {
+        margin-bottom: 0.5rem !important;
+        font-size: 0.85rem;
+    }
+    
+    .price-tag h3 {
+        font-size: 1.8rem !important;
+    }
+    
+    .small {
+        font-size: 0.875rem;
+        line-height: 1.4;
+    }
+    
+    .usage-limit .badge {
+        font-size: 0.75rem;
+        padding: 0.25rem 0.5rem;
+    }
+}

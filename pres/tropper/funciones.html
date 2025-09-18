@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulos BRIA - Detalle de Funciones</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #FD6144;
+            --primary-dark: #161212;
+            --primary-red: #FD3244;
+            --primary-purple: #AE3A8D;
+            --light-gray: #CCB6B6;
+            --white: #F9F9F9;
+            --shadow-color: rgba(0, 0, 0, 0.15);
+            --background-gray: #f5f5f5;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: var(--background-gray);
+            color: var(--primary-dark);
+            padding: 1rem;
+            line-height: 1.6;
+        }
+        
+        .header {
+            background-color: var(--white);
+            padding: 1.5rem;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .header img {
+            height: 60px;
+            width: auto;
+            margin-bottom: 1rem;
+        }
+        
+        .header h1 {
+            font-size: 1.8rem;
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .header p {
+            color: var(--primary-color);
+            font-size: 1rem;
+        }
+        
+        .legend {
+            background-color: var(--white);
+            padding: 1.5rem;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .legend h2 {
+            font-size: 1.3rem;
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.8rem;
+        }
+        
+        .legend-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-size: 1.2rem;
+            color: white;
+        }
+        
+        .legend-icon.included {
+            background-color: var(--primary-color);
+        }
+        
+        .legend-icon.license {
+            background-color: var(--primary-purple);
+        }
+        
+        .modules-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .module-section {
+            background-color: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .module-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s ease;
+        }
+        
+        .module-header:hover {
+            background-color: var(--primary-red);
+        }
+        
+        .module-header.enterprise {
+            background-color: var(--primary-purple);
+        }
+        
+        .module-header.enterprise:hover {
+            background-color: #8A2E6F;
+        }
+        
+        .module-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .module-icon {
+            font-size: 1.5rem;
+        }
+        
+        .module-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .module-type {
+            font-size: 0.8rem;
+            background-color: rgba(255,255,255,0.2);
+            padding: 0.2rem 0.8rem;
+            border-radius: 15px;
+        }
+        
+        .toggle-icon {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .module-header.active .toggle-icon {
+            transform: rotate(180deg);
+        }
+        
+        .module-content {
+            padding: 1.5rem;
+            display: none;
+            background-color: var(--white);
+        }
+        
+        .module-content.active {
+            display: block;
+        }
+        
+        .function-list {
+            list-style: none;
+        }
+        
+        .function-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            padding: 0.8rem;
+            background-color: var(--background-gray);
+            border-radius: 10px;
+            transition: transform 0.2s ease;
+        }
+        
+        .function-item:hover {
+            transform: translateX(5px);
+        }
+        
+        .function-icon {
+            width: 25px;
+            height: 25px;
+            min-width: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-size: 0.9rem;
+            color: white;
+        }
+        
+        .function-icon.cl {
+            background-color: var(--primary-color);
+        }
+        
+        .function-icon.l {
+            background-color: var(--primary-purple);
+        }
+        
+        .function-text {
+            flex: 1;
+            font-size: 0.95rem;
+            color: var(--primary-dark);
+        }
+        
+        .function-badge {
+            display: inline-block;
+            background-color: var(--primary-purple);
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            margin-left: 0.5rem;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem 1rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        @media (min-width: 768px) {
+            body {
+                padding: 2rem;
+                max-width: 800px;
+                margin: 0 auto;
+            }
+            
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .modules-container {
+                gap: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="https://aloia.ai/assets/img/aloia-color.png" alt="Aloia Logo">
+        <h1>Módulos BRIA</h1>
+        <p>Detalle completo de funciones por módulo</p>
+    </div>
+    
+    <div class="legend">
+        <h2>Leyenda</h2>
+        <div class="legend-item">
+            <div class="legend-icon included">
+                <i class="fas fa-check"></i>
+            </div>
+            <div>
+                <strong>Incluido en el paquete</strong><br>
+                <small>Función disponible sin costo adicional</small>
+            </div>
+        </div>
+        <div class="legend-item">
+            <div class="legend-icon license">
+                <i class="fas fa-star"></i>
+            </div>
+            <div>
+                <strong>[L] Función con licenciamiento SaaS</strong><br>
+                <small>IA avanzada exclusiva modalidad SaaS</small>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modules-container">
+        <!-- Módulo 1: Gestión de Operaciones -->
+        <div class="module-section">
+            <div class="module-header" onclick="toggleModule(this)">
+                <div class="module-title">
+                    <i class="fas fa-route module-icon"></i>
+                    <div>
+                        <div class="module-name">Gestión de Operaciones</div>
+                        <div class="module-type">Operational</div>
+                    </div>
+                </div>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+            </div>
+            <div class="module-content">
+                <ul class="function-list">
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Distribución de órdenes por disponibilidad de unidades</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Cierre de viajes por ubicación GPS</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Registro de kilometraje por GPS</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Monitor de estado de viajes en curso</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Historial completo de trayectos</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Evaluación de desempeño por conductor</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon l"><i class="fas fa-star"></i></div>
+                        <div class="function-text">Planificación de rutas por eficiencia <span class="function-badge">[L]</span></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Módulo 2: Torre de Control -->
+        <div class="module-section">
+            <div class="module-header" onclick="toggleModule(this)">
+                <div class="module-title">
+                    <i class="fas fa-broadcast-tower module-icon"></i>
+                    <div>
+                        <div class="module-name">Torre de Control</div>
+                        <div class="module-type">Operational</div>
+                    </div>
+                </div>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+            </div>
+            <div class="module-content">
+                <ul class="function-list">
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Ubicación en vivo de toda la flota</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Progreso de rutas programadas</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon l"><i class="fas fa-star"></i></div>
+                        <div class="function-text">Notificaciones de retrasos e incidentes <span class="function-badge">[L]</span></div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Cumplimiento de horarios por cliente</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon l"><i class="fas fa-star"></i></div>
+                        <div class="function-text">Registro de incidentes de manejo <span class="function-badge">[L]</span></div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon l"><i class="fas fa-star"></i></div>
+                        <div class="function-text">Verificaciones pre-salida con recordatorios <span class="function-badge">[L]</span></div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Acceso del cliente a sus servicios</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Procesamiento de alertas GPS</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon l"><i class="fas fa-star"></i></div>
+                        <div class="function-text">Verificación de inicio de ruta por GPS <span class="function-badge">[L]</span></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Módulo 3: Control de Combustible -->
+        <div class="module-section">
+            <div class="module-header" onclick="toggleModule(this)">
+                <div class="module-title">
+                    <i class="fas fa-gas-pump module-icon"></i>
+                    <div>
+                        <div class="module-name">Control de Combustible</div>
+                        <div class="module-type">Operational</div>
+                    </div>
+                </div>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+            </div>
+            <div class="module-content">
+                <ul class="function-list">
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Importación de transacciones de gasolineras</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Verificación de rendimiento por tres fuentes</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Registro de kilómetros sin carga</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Inventario de aditivo UREA</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Detección de pérdidas de combustible</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon l"><i class="fas fa-star"></i></div>
+                        <div class="function-text">Recomendación de rutas por eficiencia histórica <span class="function-badge">[L]</span></div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon l"><i class="fas fa-star"></i></div>
+                        <div class="function-text">Avisos de bajo rendimiento al conductor <span class="function-badge">[L]</span></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Módulo 4: Gestión de Mantenimiento -->
+        <div class="module-section">
+            <div class="module-header enterprise" onclick="toggleModule(this)">
+                <div class="module-title">
+                    <i class="fas fa-wrench module-icon"></i>
+                    <div>
+                        <div class="module-name">Gestión de Mantenimiento</div>
+                        <div class="module-type">Enterprise</div>
+                    </div>
+                </div>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+            </div>
+            <div class="module-content">
+                <ul class="function-list">
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Programación de servicios por kilometraje</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Estimación de necesidades de refacciones</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Localización exacta de refacciones en almacén</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Avisos de refacciones por agotarse</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Historial de servicios por unidad</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Estado actual del taller</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Resumen de costos y disponibilidad</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Gestión de aditivo UREA</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Estimación de fallas futuras</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Avisos de inventario bajo</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Recomendaciones de mantenimiento</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Módulo 5: Control de Inventarios -->
+        <div class="module-section">
+            <div class="module-header enterprise" onclick="toggleModule(this)">
+                <div class="module-title">
+                    <i class="fas fa-warehouse module-icon"></i>
+                    <div>
+                        <div class="module-name">Control de Inventarios</div>
+                        <div class="module-type">Enterprise</div>
+                    </div>
+                </div>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+            </div>
+            <div class="module-content">
+                <ul class="function-list">
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Seguimiento de productos en consignación</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Comparación con facturas recibidas</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Seguimiento detallado de lubricantes</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Registro de movimientos entre almacenes</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Avisos para reabastecer inventario</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Módulo 6: Gestión de Personal - RRHH -->
+        <div class="module-section">
+            <div class="module-header enterprise" onclick="toggleModule(this)">
+                <div class="module-title">
+                    <i class="fas fa-user-tie module-icon"></i>
+                    <div>
+                        <div class="module-name">Gestión de Personal - RRHH</div>
+                        <div class="module-type">Enterprise</div>
+                    </div>
+                </div>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+            </div>
+            <div class="module-content">
+                <ul class="function-list">
+                    <li class="function-item">
+                        <div class="function-icon l"><i class="fas fa-star"></i></div>
+                        <div class="function-text">Registro de candidatos con validación de documentos <span class="function-badge">[L]</span></div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Base de candidatos disponibles</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Archivo digital del empleado</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Seguimiento de candidatos y empleados</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Firma digital de contratos</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Capacitación continua del personal</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon l"><i class="fas fa-star"></i></div>
+                        <div class="function-text">Preselección y gestión de candidatos <span class="function-badge">[L]</span></div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon l"><i class="fas fa-star"></i></div>
+                        <div class="function-text">Verificación de documentos digitales <span class="function-badge">[L]</span></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Módulo 7: Gestión de Clientes -->
+        <div class="module-section">
+            <div class="module-header" onclick="toggleModule(this)">
+                <div class="module-title">
+                    <i class="fas fa-users module-icon"></i>
+                    <div>
+                        <div class="module-name">Gestión de Clientes</div>
+                        <div class="module-type">Operational</div>
+                    </div>
+                </div>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+            </div>
+            <div class="module-content">
+                <ul class="function-list">
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Archivo de condiciones por cliente</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon l"><i class="fas fa-star"></i></div>
+                        <div class="function-text">Creación de cotizaciones empresariales <span class="function-badge">[L]</span></div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon l"><i class="fas fa-star"></i></div>
+                        <div class="function-text">Creación de cotizaciones particulares <span class="function-badge">[L]</span></div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon l"><i class="fas fa-star"></i></div>
+                        <div class="function-text">Apoyo en proceso de ventas <span class="function-badge">[L]</span></div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Reportes semanales con aprobación</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Consulta en línea para clientes</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Avisos por email del estado de servicios</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Módulo 8: Aloia IA -->
+        <div class="module-section">
+            <div class="module-header" onclick="toggleModule(this)">
+                <div class="module-title">
+                    <i class="fas fa-microchip module-icon"></i>
+                    <div>
+                        <div class="module-name">Aloia IA - Asistente IA Full Service</div>
+                        <div class="module-type">Operational</div>
+                    </div>
+                </div>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+            </div>
+            <div class="module-content">
+                <ul class="function-list">
+                    <li class="function-item">
+                        <div class="function-icon l"><i class="fas fa-star"></i></div>
+                        <div class="function-text">Llamadas de confirmación pre-ruta <span class="function-badge">[L]</span></div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon l"><i class="fas fa-star"></i></div>
+                        <div class="function-text">Calculadora de rutas eficientes <span class="function-badge">[L]</span></div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon l"><i class="fas fa-star"></i></div>
+                        <div class="function-text">Avisos preventivos de problemas <span class="function-badge">[L]</span></div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon l"><i class="fas fa-star"></i></div>
+                        <div class="function-text">Estimación de problemas futuros <span class="function-badge">[L]</span></div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon l"><i class="fas fa-star"></i></div>
+                        <div class="function-text">Comunicación por múltiples medios <span class="function-badge">[L]</span></div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon l"><i class="fas fa-star"></i></div>
+                        <div class="function-text">Recomendaciones de asignación de recursos <span class="function-badge">[L]</span></div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon l"><i class="fas fa-star"></i></div>
+                        <div class="function-text">Asistente digital para verificaciones <span class="function-badge">[L]</span></div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon l"><i class="fas fa-star"></i></div>
+                        <div class="function-text">Estimación de demanda y recursos necesarios <span class="function-badge">[L]</span></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Módulo 9: Conexiones con Sistemas -->
+        <div class="module-section">
+            <div class="module-header" onclick="toggleModule(this)">
+                <div class="module-title">
+                    <i class="fas fa-plug module-icon"></i>
+                    <div>
+                        <div class="module-name">Conexiones con Sistemas</div>
+                        <div class="module-type">Operational</div>
+                    </div>
+                </div>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+            </div>
+            <div class="module-content">
+                <ul class="function-list">
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Recepción continua de datos GPS</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Cierre de servicios por ubicación GPS</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Registro de incidentes de conducción</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Sincronización completa de datos operativos</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Actualización continua entre sistemas</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Complemento de información en sistema principal</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Módulo 10: Tableros de Control -->
+        <div class="module-section">
+            <div class="module-header" onclick="toggleModule(this)">
+                <div class="module-title">
+                    <i class="fas fa-chart-bar module-icon"></i>
+                    <div>
+                        <div class="module-name">Tableros de Control</div>
+                        <div class="module-type">Operational</div>
+                    </div>
+                </div>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+            </div>
+            <div class="module-content">
+                <ul class="function-list">
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Comparativo de rutas planeadas vs ejecutadas</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Estado de órdenes de servicio</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Calificación de eficiencia por conductor</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Rendimiento de combustible por unidad</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Ranking de eficiencia en combustible</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Monitor de problemas de combustible</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Indicador de puntualidad por cliente</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Estado de verificaciones pre-salida</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Vista general de la flota en tiempo real</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Proceso de contratación por región</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Duración del proceso de contratación</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Estimación de rotación de personal</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Cumplimiento de acuerdos por cliente</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Problemas reportados y solucionados</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Satisfacción y renovación de contratos</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Ranking de conductores con alertas de bajo desempeño</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Reporte de pérdidas en inventario</div>
+                    </li>
+                    <li class="function-item">
+                        <div class="function-icon cl"><i class="fas fa-check"></i></div>
+                        <div class="function-text">Indicadores de contratación por región</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p><strong>ALOIA + BRIA</strong></p>
+        <p>Transformando el Transporte de Personal con IA</p>
+        <p>© 2025 Aloia. Todos los derechos reservados.</p>
+    </div>
+    
+    <script>
+        function toggleModule(header) {
+            header.classList.toggle('active');
+            const content = header.nextElementSibling;
+            content.classList.toggle('active');
+        }
+        
+        // Auto-open first module
+        document.addEventListener('DOMContentLoaded', function() {
+            const firstModule = document.querySelector('.module-header');
+            if (firstModule) {
+                toggleModule(firstModule);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propuesta Económica Reportex - Nauta Software</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #F04E59;
+            --primary-dark: #1E1E1E;
+            --primary-light: #F47983;
+            --white: #ffffff;
+            --light-gray: #f5f5f5;
+            --text-light: #e0e0e0;
+            --shadow-color: rgba(0, 0, 0, 0.15);
+            --gradient-start: #F04E59;
+            --gradient-mid: #E94057;
+            --gradient-end: #F04E59;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: var(--white);
+            color: var(--primary-dark);
+            overflow: hidden;
+        }
+        
+        .slides-container {
+            height: 100vh;
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll;
+            scroll-behavior: smooth;
+        }
+        
+        .slide {
+            height: 100vh;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            background-color: var(--white);
+        }
+        
+        /* Header styling */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            width: 100%;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+        
+        .client {
+            font-size: 1rem;
+            color: var(--primary-color);
+        }
+        
+        /* Slide content styling */
+        .slide-content {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            padding: 0 2rem;
+        }
+        
+        .slide-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: var(--primary-dark);
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        .slide-subtitle {
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            animation: fadeInUp 1.2s ease-out;
+        }
+        
+        .slide-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            animation: fadeInUp 1.4s ease-out;
+        }
+        
+        /* Card styles */
+        .cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 1rem;
+            animation: fadeInUp 1.6s ease-out;
+        }
+        
+        .card {
+            background-color: var(--white);
+            border-radius: 45px;
+            padding: 1.5rem;
+            width: calc(33% - 1.5rem);
+            min-width: 250px;
+            box-shadow: 10px 10px 0 var(--shadow-color);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 15px 15px 0 var(--shadow-color);
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .card-icon {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+        
+        .card-content {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: var(--primary-dark);
+            flex-grow: 1;
+        }
+        
+        .card-tag {
+            display: inline-block;
+            background-color: var(--primary-color);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-top: 1rem;
+            color: var(--white);
+        }
+        
+        /* Table styles */
+        .table-container {
+            margin-top: 2rem;
+            width: 100%;
+            animation: fadeInUp 1.6s ease-out;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--white);
+            border-radius: 45px;
+            overflow: hidden;
+            box-shadow: 10px 10px 0 var(--shadow-color);
+        }
+        
+        thead {
+            background-color: var(--primary-light);
+        }
+        
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        th {
+            font-weight: 600;
+        }
+        
+        /* Feature list styles */
+        .features-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 1rem;
+            animation: fadeInUp 1.6s ease-out;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            width: calc(50% - 0.75rem);
+            margin-bottom: 1rem;
+        }
+        
+        .feature-icon {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin-right: 1rem;
+            margin-top: 0.2rem;
+        }
+        
+        .feature-text {
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        
+        /* Footer */
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.5rem;
+            width: 100%;
+            font-size: 0.8rem;
+            color: var(--primary-dark);
+        }
+        
+        .page-number {
+            font-size: 0.9rem;
+            color: var(--primary-dark);
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Cover slide specific */
+        .cover-slide {
+            background-color: var(--white);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .cover-logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            animation: fadeInUp 0.8s ease-out;
+            color: var(--primary-dark);
+        }
+        
+        .cover-title {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease-out;
+            color: var(--primary-dark);
+        }
+        
+        .cover-subtitle {
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+            animation: fadeInUp 1.2s ease-out;
+        }
+        
+        .cover-client {
+            font-size: 1.2rem;
+            animation: fadeInUp 1.4s ease-out;
+            color: var(--primary-dark);
+        }
+        
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 5px;
+            background: var(--primary-color);
+            width: 0%;
+            z-index: 100;
+            transition: width 0.3s ease;
+        }
+        
+        /* Two column layout */
+        .two-column {
+            display: flex;
+            gap: 2rem;
+            margin-top: 1rem;
+            animation: fadeInUp 1.6s ease-out;
+        }
+        
+        .column {
+            flex: 1;
+        }
+        
+        .highlight-box {
+            background-color: var(--primary-color);
+            border-radius: 45px;
+            padding: 1.5rem;
+            margin: 0 auto;
+            max-width: 800px;
+            box-shadow: 10px 10px 0 var(--shadow-color);
+        }
+        
+        .highlight-text {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: white;
+            margin: 0;
+            text-align: center;
+        }
+        
+        @keyframes modalopen {
+            from {opacity: 0; transform: translateY(-60px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+        
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .value-card {
+            background-color: var(--light-gray);
+            border-radius: 25px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 5px 5px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .value-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .value-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .value-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+        }
+        
+        .value-description {
+            font-size: 1rem;
+            color: var(--primary-dark);
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 2rem auto 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 4px;
+            background-color: var(--primary-light);
+            transform: translateX(-50%);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            width: calc(50% - 40px);
+        }
+        
+        .timeline-item:nth-child(odd) {
+            float: left;
+            clear: both;
+        }
+        
+        .timeline-item:nth-child(even) {
+            float: right;
+            clear: both;
+        }
+        
+        .timeline-content {
+            background-color: var(--white);
+            border-radius: 25px;
+            padding: 1.5rem;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .timeline-date {
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .numbered-list {
+            counter-reset: item;
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .numbered-list li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            counter-increment: item;
+        }
+
+        .numbered-list li::before {
+            content: counter(item);
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+            border-radius: 50%;
+            width: 2rem;
+            height: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            flex-shrink: 0;
+            margin-top: 0.2rem;
+        }
+        
+        .numbered-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    <div class="slides-container" id="slidesContainer">
+        
+        <!-- Slide 1: Cover -->
+        <section class="slide cover-slide" id="slide1">
+            <div style="margin-bottom: 2rem;">
+                <img src="https://aloia.ai/assets/img/aloia-color.png" alt="Aloia Logo" style="height: 120px; width: auto;">
+            </div>
+            <h1 class="cover-title">PROPUESTA DE RÉPLICA<br>Y MEJORA DE REPORTEX</h1>
+            <div class="cover-subtitle">Plataforma web con análisis de datos potenciado por IA</div>
+            <div class="cover-client">Presentado a: Nauta Software<br>Atención: Diego Vargas y Carlos Nova</div>
+            
+            <div class="footer">
+                <div>Mayo 2025</div>
+                <div class="page-number">1/12</div>
+            </div>
+        </section>
+        
+        <!-- Slide 2: Objetivos de la Solución -->
+        <section class="slide" id="slide2">
+            <div class="header">
+                <div class="logo">ALOIA TECH</div>
+                <div class="client">Nauta Software</div>
+            </div>
+            
+            <div class="slide-content">
+                <h2 class="slide-title" style="font-size: 3rem; text-align: center; margin-bottom: 1.5rem;">Objetivos de la Solución</h2>
+                
+                <div class="value-grid">
+                    <div class="value-card">
+                        <div class="value-icon"><i class="fas fa-globe"></i></div>
+                        <div class="value-title">Acceso Web Universal</div>
+                        <div class="value-description">Replicaremos completamente Reportex en un entorno web accesible desde cualquier navegador, eliminando la necesidad de instalar archivos .exe.</div>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon"><i class="fas fa-palette"></i></div>
+                        <div class="value-title">Experiencia Mejorada</div>
+                        <div class="value-description">Mejoraremos la apariencia y disposición de cada pantalla para ofrecer una experiencia de usuario más fluida y sencilla.</div>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon"><i class="fas fa-robot"></i></div>
+                        <div class="value-title">Asistente de IA</div>
+                        <div class="value-description">Incorporaremos un asistente de IA que permitirá realizar consultas detalladas y obtener resúmenes automáticos de los datos ASC.</div>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon"><i class="fas fa-chart-line"></i></div>
+                        <div class="value-title">Modelo Escalable</div>
+                        <div class="value-description">Estableceremos un modelo de comercialización flexible que se adapte al crecimiento en conversaciones con IA y usuarios.</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div>Propuesta Económica</div>
+                <div class="page-number">2/12</div>
+            </div>
+        </section>
+        
+        <!-- Slide 3: Funcionalidades Base -->
+        <section class="slide" id="slide3">
+            <div class="header">
+                <div class="logo">ALOIA TECH</div>
+                <div class="client">Nauta Software</div>
+            </div>
+            
+            <div class="slide-content">
+                <h2 class="slide-title" style="font-size: 3rem; text-align: center; margin-bottom: 1.5rem;">Funcionalidades Base</h2>
+                
+                <div class="features-list" style="justify-content: center; gap: 1rem;">
+                    <div class="feature-item" style="width: 100%; margin-bottom: 1.5rem;">
+                        <div class="feature-icon"><i class="fas fa-file-code"></i></div>
+                        <div class="feature-text">
+                            <strong>Conversión de archivos ASC:</strong> Módulo especializado que convierte archivos ASC a formato legible y los procesa para extraer información relevante.
+                        </div>
+                    </div>
+                    
+                    <div class="feature-item" style="width: 100%; margin-bottom: 1.5rem;">
+                        <div class="feature-icon"><i class="fas fa-chart-bar"></i></div>
+                        <div class="feature-text">
+                            <strong>Reportes dinámicos:</strong> Generación automática de reportes con tablas y gráficos interactivos a partir de los datos extraídos.
+                        </div>
+                    </div>
+                    
+                    <div class="feature-item" style="width: 100%; margin-bottom: 1.5rem;">
+                        <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+                        <div class="feature-text">
+                            <strong>Acceso seguro:</strong> Sistema completo de inicio de sesión, registro de usuarios y panel de administración con gestión de roles.
+                        </div>
+                    </div>
+                    
+                    <div class="feature-item" style="width: 100%; margin-bottom: 1.5rem;">
+                        <div class="feature-icon"><i class="fas fa-brain"></i></div>
+                        <div class="feature-text">
+                            <strong>Asistente de IA:</strong> Interfaz conversacional que responde preguntas y proporciona insights basados en los datos de los archivos ASC.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div>Propuesta Económica</div>
+                <div class="page-number">3/12</div>
+            </div>
+        </section>
+        
+        <!-- Slide 4: Principales Mejoras Funcionales -->
+        <section class="slide" id="slide4">
+            <div class="header">
+                <div class="logo">ALOIA TECH</div>
+                <div class="client">Nauta Software</div>
+            </div>
+            
+            <div class="slide-content">
+                <h2 class="slide-title" style="font-size: 3rem; text-align: center; margin-bottom: 1.5rem;">Principales Mejoras Funcionales</h2>
+                
+                <div class="cards-container">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-cloud"></i></div>
+                            <div class="card-title">Versión 100% Web</div>
+                        </div>
+                        <div class="card-content">
+                            <p>Plataforma completamente web que no requiere instalación de software adicional en los equipos del cliente.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-magic"></i></div>
+                            <div class="card-title">Interfaz Mejorada</div>
+                        </div>
+                        <div class="card-content">
+                            <p>Navegación intuitiva con filtros dinámicos y elementos interactivos que agilizan la selección y análisis de datos.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-folder-open"></i></div>
+                            <div class="card-title">Expediente Digital</div>
+                        </div>
+                        <div class="card-content">
+                            <p>Módulo de expediente digital de comercio exterior incluido, con posibilidad de integrar nuevos módulos en Fase 2.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="highlight-box" style="margin-top: 2rem;">
+                    <p class="highlight-text">
+                        <i class="fas fa-star" style="margin-right: 0.5rem;"></i>
+                        Dos nuevas funcionalidades cada mes sin costo adicional para evolución continua
+                    </p>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div>Propuesta Económica</div>
+                <div class="page-number">4/12</div>
+            </div>
+        </section>
+        
+        <!-- Slide 5: Paquetes de Conversaciones + Análisis IA -->
+        <section class="slide" id="slide5">
+            <div class="header">
+                <div class="logo">ALOIA TECH</div>
+                <div class="client">Nauta Software</div>
+            </div>
+            
+            <div class="slide-content">
+                <h2 class="slide-title" style="font-size: 2.5rem; text-align: center; margin-bottom: 1rem;">Paquetes de Conversaciones + Análisis IA</h2>
+                
+                <div style="display: flex; justify-content: center; width: 100%; padding: 0 2rem;">
+                    <p class="slide-text" style="font-size: 1.2rem; text-align: center; margin-bottom: 2rem; max-width: 800px;">
+                        Cada paquete incluye un número determinado de consultas mensuales al asistente de IA para analizar los archivos ASC cargados.
+                    </p>
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width: 33%; text-align: center;">Paquete</th>
+                                <th style="width: 33%; text-align: center;">Conversaciones/mes</th>
+                                <th style="width: 34%; text-align: center;">Mensualidad</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="text-align: center; font-weight: 600; background-color: #f8f8f8;">
+                                    <i class="fas fa-box" style="color: var(--primary-color); margin-right: 0.5rem;"></i>
+                                    Básico
+                                </td>
+                                <td style="text-align: center; font-size: 1.1rem; font-weight: 600;">240</td>
+                                <td style="text-align: center; font-size: 1.1rem; font-weight: 600; color: var(--primary-color);">$1,560 MXN</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; font-weight: 600; background-color: #f8f8f8;">
+                                    <i class="fas fa-boxes" style="color: var(--primary-color); margin-right: 0.5rem;"></i>
+                                    Intermedio
+                                </td>
+                                <td style="text-align: center; font-size: 1.1rem; font-weight: 600;">500</td>
+                                <td style="text-align: center; font-size: 1.1rem; font-weight: 600; color: var(--primary-color);">$1,980 MXN</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; font-weight: 600; background-color: #f8f8f8;">
+                                    <i class="fas fa-cubes" style="color: var(--primary-color); margin-right: 0.5rem;"></i>
+                                    Avanzado
+                                </td>
+                                <td style="text-align: center; font-size: 1.1rem; font-weight: 600;">700</td>
+                                <td style="text-align: center; font-size: 1.1rem; font-weight: 600; color: var(--primary-color);">$2,480 MXN</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div style="margin-top: 2rem; background-color: var(--light-gray); border-left: 4px solid var(--primary-color); padding: 1.5rem; border-radius: 0 10px 10px 0;">
+                    <p style="font-size: 1.1rem; color: var(--primary-dark);">
+                        <i class="fas fa-info-circle" style="color: var(--primary-color); margin-right: 0.5rem;"></i>
+                        <strong>Licencia base:</strong> Incluye 5 usuarios por empresa, aplicable hasta 5 empresas distintas (25 usuarios totales + usuarios de Nauta).
+                    </p>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div>Propuesta Económica</div>
+                <div class="page-number">5/12</div>
+            </div>
+        </section>
+        
+        <!-- Slide 6: Modelo de Licenciamiento -->
+        <section class="slide" id="slide6">
+            <div class="header">
+                <div class="logo">ALOIA TECH</div>
+                <div class="client">Nauta Software</div>
+            </div>
+            
+            <div class="slide-content">
+                <h2 class="slide-title" style="font-size: 2.5rem; text-align: center; margin-bottom: 2rem;">Modelo de Licenciamiento por Empresa y Usuario</h2>
+                
+                <div class="features-list" style="justify-content: center;">
+                    <div class="feature-item" style="width: 100%; margin-bottom: 2rem;">
+                        <div class="feature-icon" style="font-size: 2rem;"><i class="fas fa-users"></i></div>
+                        <div class="feature-text" style="font-size: 1.2rem;">
+                            <strong>Licencia básica:</strong> Cubre 5 usuarios por cada empresa, aplicable hasta 5 empresas distintas.
+                        </div>
+                    </div>
+                    
+                    <div class="feature-item" style="width: 100%; margin-bottom: 2rem;">
+                        <div class="feature-icon" style="font-size: 2rem;"><i class="fas fa-building"></i></div>
+                        <div class="feature-text" style="font-size: 1.2rem;">
+                            <strong>Cobertura inicial:</strong> Además de los usuarios de Nauta, se incluyen 25 usuarios distribuidos en 5 empresas diferentes.
+                        </div>
+                    </div>
+                    
+                    <div class="feature-item" style="width: 100%; margin-bottom: 2rem;">
+                        <div class="feature-icon" style="font-size: 2rem;"><i class="fas fa-expand-arrows-alt"></i></div>
+                        <div class="feature-text" style="font-size: 1.2rem;">
+                            <strong>Escalabilidad:</strong> Para empresas adicionales más allá de las cinco iniciales, se negociará una extensión de licencia o paquete de usuarios extra.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="highlight-box" style="margin-top: 2rem;">
+                    <p class="highlight-text">
+                        Este esquema facilita poner en marcha la plataforma con varios clientes externos sin cargos sorpresa por usuario.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div>Propuesta Económica</div>
+                <div class="page-number">6/12</div>
+            </div>
+        </section>
+        
+        <!-- Slide 7: Confirmación de Inversión -->
+        <section class="slide" id="slide7">
+            <div class="header">
+                <div class="logo">ALOIA TECH</div>
+                <div class="client">Nauta Software</div>
+            </div>
+            
+            <div class="slide-content" style="align-items: center; text-align: center;">
+                <h2 class="slide-title" style="font-size: 3.5rem; margin-bottom: 2rem;">Confirmación de Inversión</h2>
+                
+                <div style="background-color: var(--primary-color); border-radius: 45px; padding: 3rem; margin-bottom: 3rem; box-shadow: 10px 10px 0 var(--shadow-color); max-width: 600px; margin-left: auto; margin-right: auto;">
+                    <h3 style="color: white; font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem;">$17,947 MXN</h3>
+                    <p style="color: white; font-size: 1.3rem; font-weight: 500;">Inversión mensual total</p>
+                </div>
+                
+                <div class="features-list" style="justify-content: center; max-width: 900px; margin: 0 auto;">
+                    <div class="feature-item" style="width: 100%; margin-bottom: 1.5rem; justify-content: center;">
+                        <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                        <div class="feature-text" style="font-size: 1.2rem;">
+                            Réplica completa de la plataforma Reportex en entorno web
+                        </div>
+                    </div>
+                    
+                    <div class="feature-item" style="width: 100%; margin-bottom: 1.5rem; justify-content: center;">
+                        <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                        <div class="feature-text" style="font-size: 1.2rem;">
+                            Mejora completa de apariencia y usabilidad de cada pantalla
+                        </div>
+                    </div>
+                    
+                    <div class="feature-item" style="width: 100%; margin-bottom: 1.5rem; justify-content: center;">
+                        <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                        <div class="feature-text" style="font-size: 1.2rem;">
+                            Alojamiento en servidor, configuración inicial y mantenimiento continuo
+                        </div>
+                    </div>
+                    
+                    <div class="feature-item" style="width: 100%; margin-bottom: 1.5rem; justify-content: center;">
+                        <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                        <div class="feature-text" style="font-size: 1.2rem;">
+                            <strong>Dos nuevas funcionalidades o mejoras mensuales sin costo adicional</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div>Propuesta Económica</div>
+                <div class="page-number">7/12</div>
+            </div>
+        </section>
+        
+        <!-- Slide 8: Soporte y Mantenimiento -->
+        <section class="slide" id="slide8">
+            <div class="header">
+                <div class="logo">ALOIA TECH</div>
+                <div class="client">Nauta Software</div>
+            </div>
+            
+            <div class="slide-content" style="align-items: center; text-align: center; justify-content: center;">
+                <h2 class="slide-title" style="font-size: 3rem; margin-bottom: 3rem;">Soporte y Mantenimiento</h2>
+                
+                <div style="display: flex; gap: 2rem; justify-content: center; max-width: 900px; margin: 0 auto;">
+                    <div class="card" style="width: 45%;">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-clock"></i></div>
+                            <div class="card-title">Horario de Soporte</div>
+                        </div>
+                        <div class="card-content">
+                            <p style="font-size: 1.1rem; margin-bottom: 1rem;">Soporte técnico durante <strong>8 horas al día, 5 días a la semana</strong>.</p>
+                            <div style="background-color: var(--light-gray); border-radius: 15px; padding: 1rem;">
+                                <p style="font-weight: 600; color: var(--primary-color); margin-bottom: 0.5rem;">Canales de atención:</p>
+                                <ul style="padding-left: 1.5rem;">
+                                    <li>Sistema de tickets</li>
+                                    <li>Atención vía WhatsApp para equipo Nauta</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card" style="width: 45%;">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-tools"></i></div>
+                            <div class="card-title">Servicios Incluidos</div>
+                        </div>
+                        <div class="card-content">
+                            <div style="margin-bottom: 1rem;">
+                                <div style="display: flex; align-items: center; margin-bottom: 0.8rem;">
+                                    <i class="fas fa-bug" style="color: var(--primary-color); margin-right: 0.5rem;"></i>
+                                    <span>Corrección de errores</span>
+                                </div>
+                                <div style="display: flex; align-items: center; margin-bottom: 0.8rem;">
+                                    <i class="fas fa-sync-alt" style="color: var(--primary-color); margin-right: 0.5rem;"></i>
+                                    <span>Actualizaciones periódicas</span>
+                                </div>
+                                <div style="display: flex; align-items: center;">
+                                    <i class="fas fa-plus-circle" style="color: var(--primary-color); margin-right: 0.5rem;"></i>
+                                    <span>Implementación de 2 mejoras mensuales</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div>Propuesta Económica</div>
+                <div class="page-number">8/12</div>
+            </div>
+        </section>
+        
+        <!-- Slide 9: Autonomía y Gobernanza -->
+        <section class="slide" id="slide9">
+            <div class="header">
+                <div class="logo">ALOIA TECH</div>
+                <div class="client">Nauta Software</div>
+            </div>
+            
+            <div class="slide-content">
+                <h2 class="slide-title" style="font-size: 3rem; text-align: center; margin-bottom: 2rem;">Autonomía y Gobernanza</h2>
+                
+                <div class="cards-container">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-user-cog"></i></div>
+                            <div class="card-title">Gestión de Roles</div>
+                        </div>
+                        <div class="card-content">
+                            <p>Módulo completo de gestión de roles y permisos que permite a Nauta crear, editar y asignar perfiles de usuario de forma totalmente autónoma.</p>
+                            <div class="card-tag">Control Total</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-shield-alt"></i></div>
+                            <div class="card-title">Control de Acceso</div>
+                        </div>
+                        <div class="card-content">
+                            <p>Control completo sobre quién accede a cada sección de la plataforma y con qué nivel de autoridad, sin dependencia externa.</p>
+                            <div class="card-tag">Seguridad</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-chart-pie"></i></div>
+                            <div class="card-title">Panel de Métricas</div>
+                        </div>
+                        <div class="card-content">
+                            <p>Dashboard en tiempo real que muestra el uso de la plataforma y el consumo de conversaciones de IA con métricas detalladas.</p>
+                            <div class="card-tag">Tiempo Real</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="highlight-box" style="margin-top: 2rem;">
+                    <p class="highlight-text">
+                        <i class="fas fa-crown" style="margin-right: 0.5rem;"></i>
+                        Nauta tendrá control total y autonomía sobre la administración de su plataforma
+                    </p>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div>Propuesta Económica</div>
+                <div class="page-number">9/12</div>
+            </div>
+        </section>
+        
+        <!-- Slide 10: Fase 2 - Módulos Adicionales -->
+        <section class="slide" id="slide10">
+            <div class="header">
+                <div class="logo">ALOIA TECH</div>
+                <div class="client">Nauta Software</div>
+            </div>
+            
+            <div class="slide-content">
+                <h2 class="slide-title" style="font-size: 3rem; text-align: center; margin-bottom: 2rem;">Fase 2: Módulos Adicionales</h2>
+                
+                    <div class="features-list" style="justify-content: center;">
+                        <div class="feature-item" style="display: flex; align-items: center; width: 100%; margin-bottom: 2rem;">
+                            <div class="feature-icon" style="font-size: 2rem; margin-right: 1rem;"><i class="fas fa-file-contract"></i></div>
+                            <div class="feature-text" style="font-size: 1.2rem;">
+                                <strong>Expediente Digital de Comercio Exterior:</strong> Gestión completa de documentación y procesos aduanales en línea.
+                            </div>
+                        </div>
+                        
+                        <div class="feature-item" style="display: flex; align-items: center; width: 100%; margin-bottom: 2rem;">
+                            <div class="feature-icon" style="font-size: 2rem; margin-right: 1rem;"><i class="fas fa-puzzle-piece"></i></div>
+                            <div class="feature-text" style="font-size: 1.2rem;">
+                                <strong>Módulos Funcionales Adicionales:</strong> Evaluación e integración de bitácoras especializadas e integraciones con terceros según necesidades.
+                            </div>
+                        </div>
+                        
+                        <div class="feature-item" style="display: flex; align-items: center; width: 100%; margin-bottom: 2rem;">
+                            <div class="feature-icon" style="font-size: 2rem; margin-right: 1rem;"><i class="fas fa-calendar-alt"></i></div>
+                            <div class="feature-text" style="font-size: 1.2rem;">
+                                <strong>Planificación Estratégica:</strong> Definición de prioridades y cronograma de entrega para cada nuevo módulo a incorporar.
+                            </div>
+                        </div>
+                    </div>
+                
+                <div style="margin-top: 2rem; background-color: var(--light-gray); border-left: 8px solid var(--primary-color); padding: 1.5rem; border-radius: 0 10px 10px 0;">
+                    <p style="font-size: 1.2rem; color: var(--primary-dark); line-height: 1.5;">
+                        <i class="fas fa-lightbulb" style="color: var(--primary-color); margin-right: 0.5rem;"></i>
+                        <strong>Enfoque modular:</strong> Cada módulo se desarrolla según prioridades definidas conjuntamente, asegurando máximo valor y ROI en cada implementación.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div>Propuesta Económica</div>
+                <div class="page-number">10/12</div>
+            </div>
+        </section>
+        
+        <!-- Slide 11: Opción de Salida -->
+        <section class="slide" id="slide11">
+            <div class="header">
+                <div class="logo">ALOIA TECH</div>
+                <div class="client">Nauta Software</div>
+            </div>
+            
+            <div class="slide-content">
+                <h2 class="slide-title" style="font-size: 2.5rem; text-align: center; margin-bottom: 2rem;">Opción de Salida ("Code Take-Over")</h2>
+                
+                <div class="cards-container">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-code"></i></div>
+                            <div class="card-title">Licencia Perpetua</div>
+                        </div>
+                        <div class="card-content">
+                            <p>Pago único para ceder el repositorio completo, documentación técnica y tres meses de soporte post-transferencia para garantizar continuidad.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-vault"></i></div>
+                            <div class="card-title">Custodia de Código</div>
+                        </div>
+                        <div class="card-content">
+                            <p>Depósito del código fuente en servicio de custodia (escrow). Nauta puede liberarlo cuando decida activar la cláusula de "take-over".</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-server"></i></div>
+                            <div class="card-title">Migración de Infraestructura</div>
+                        </div>
+                        <div class="card-content">
+                            <p>Plan completo de traspaso: respaldo de datos, transferencia de DNS y certificados, capacitación al equipo interno de Nauta.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 2rem; background-color: var(--light-gray); border-left: 4px solid var(--primary-color); padding: 1.5rem; border-radius: 0 10px 10px 0;">
+                    <p style="font-size: 1.1rem; color: var(--primary-dark);">
+                        <i class="fas fa-handshake" style="color: var(--primary-color); margin-right: 0.5rem;"></i>
+                        <strong>Flexibilidad total:</strong> Nauta mantiene control sobre su futuro tecnológico con opciones claras para la independencia total cuando lo decida.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div>Propuesta Económica</div>
+                <div class="page-number">11/12</div>
+            </div>
+        </section>
+        
+        <!-- Slide 12: Próximos Pasos -->
+        <section class="slide" id="slide12">
+            <div class="header">
+                <div class="logo">ALOIA TECH</div>
+                <div class="client">Nauta Software</div>
+            </div>
+            
+            <div class="slide-content" style="align-items: center; text-align: center; justify-content: center;">
+                <h2 class="slide-title" style="font-size: 3.5rem; margin-bottom: 2rem;">Próximos Pasos</h2>
+                
+                <p class="slide-text" style="font-size: 1.4rem; max-width: 800px; margin-bottom: 3rem;">
+                    Estamos listos para transformar Reportex en una plataforma web de nueva generación con IA integrada.
+                </p>
+                
+                <div class="card" style="width: 60%; max-width: 600px; margin: 0 auto;">
+                    <div class="card-header" style="display: flex; justify-content: center; align-items: center;">
+                        <div class="card-icon" style="margin-right: 0.5rem;"><i class="fas fa-list-ol"></i></div>
+                        <div class="card-title">Plan de Acción</div>
+                    </div>
+                    <div class="card-content">
+                        <ol class="numbered-list" style="text-align: left;">
+                            <li style="display: flex; align-items: center; margin-bottom: 1rem;">Revisar y validar alcance detallado y tarifas definitivas</li>
+                            <li style="display: flex; align-items: center; margin-bottom: 1rem;">Aprobación formal y firma de contrato</li>
+                            <li style="display: flex; align-items: center; margin-bottom: 1rem;">Elaborar plan de trabajo con fechas y responsables</li>
+                            <li style="display: flex; align-items: center;">Kick-off y despliegue del entorno web inicial</li>
+                        </ol>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 3rem;">
+                    <button style="background-color: var(--primary-color); color: white; border: none; padding: 1rem 2.5rem; border-radius: 45px; font-size: 1.2rem; font-weight: 600; cursor: pointer; box-shadow: 5px 5px 15px rgba(0,0,0,0.2);">
+                        <i class="fas fa-rocket" style="margin-right: 0.5rem;"></i> ¡Comencemos la Transformación!
+                    </button>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div>Propuesta Económica</div>
+                <div class="page-number">12/12</div>
+            </div>
+        </section>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slidesContainer = document.getElementById('slidesContainer');
+            const progressBar = document.getElementById('progressBar');
+            const totalSlides = document.querySelectorAll('.slide').length;
+            
+            slidesContainer.addEventListener('scroll', function() {
+                const scrollPosition = slidesContainer.scrollTop;
+                const slideHeight = window.innerHeight;
+                const currentSlideIndex = Math.round(scrollPosition / slideHeight) + 1;
+                
+                // Update progress bar
+                const progress = ((currentSlideIndex - 1) / (totalSlides - 1)) * 100;
+                progressBar.style.width = `${progress}%`;
+            });
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                const currentScroll = slidesContainer.scrollTop;
+                const slideHeight = window.innerHeight;
+                
+                if (e.key === 'ArrowDown' || e.key === 'PageDown') {
+                    slidesContainer.scrollTop = currentScroll + slideHeight;
+                    e.preventDefault();
+                } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+                    slidesContainer.scrollTop = currentScroll - slideHeight;
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

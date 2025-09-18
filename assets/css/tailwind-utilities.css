@@ -1,0 +1,352 @@
+body.bot-open {
+    height: 100dvh;
+/* Opcional para evitar scroll involuntario en móviles */
+}
+
+@layer utilities {
+            .text-gradient {
+                background-clip: text;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+            .scale-103 {
+                transform: scale(1.03);
+            }
+            .rotate-3 {
+                transform: rotate(3deg);
+            }
+            .animate-fade-in {
+                animation: fadeIn 0.8s ease-in-out forwards;
+            }
+            .animate-slide-up {
+                animation: slideUp 0.8s ease-in-out forwards;
+            }
+            .animate-slide-right {
+                transform: translateX(-30px);
+                animation: slideRight 0.8s ease-in-out forwards;
+            }
+            .animate-slide-left {
+                transform: translateX(30px);
+                animation: slideLeft 0.8s ease-in-out forwards;
+            }
+            .animate-delay-100 {
+                animation-delay: 100ms;
+            }
+            .animate-delay-200 {
+                animation-delay: 200ms;
+            }
+            .animate-delay-300 {
+                animation-delay: 300ms;
+            }
+            .animate-delay-400 {
+                animation-delay: 400ms;
+            }
+            .animate-delay-500 {
+                animation-delay: 500ms;
+            }
+            .grayscale {
+                filter: grayscale(100%);
+            }
+            .grayscale-hover:hover {
+                filter: grayscale(0%);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes slideRight {
+            from { transform: translateX(-30px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes slideLeft {
+            from { transform: translateX(30px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes appear {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .client-logo-container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .client-logo-container:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .client-quote {
+            bottom: -80px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+
+        .connector-line {
+            position: relative;
+            width: 30px;
+            margin: 0 -15px;
+        }
+
+        .connector-line::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 30px;
+            height: 2px;
+            background: linear-gradient(to right, #FD3244, #4CAF50);
+            transform: translateY(-50%);
+        }
+
+        .problem-solution-row {
+            transition: all 0.3s ease;
+        }
+
+        .problem-solution-row:hover {
+            transform: translateY(-5px);
+        }
+
+        @keyframes connectLine {
+            0% { width: 0; }
+            100% { width: 30px; }
+        }
+
+        .group:hover .connector-line::after {
+            animation: connectLine 0.5s ease-in-out forwards;
+        }
+
+        /* Carousel styles */
+        .carousel {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .carousel-item {
+            flex: 0 0 auto;
+            width: 150px;
+            margin: 0 15px;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-item:hover {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+
+        /* Service card styles */
+        .service-card {
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-card.featured {
+            position: relative;
+        }
+
+        .service-card.featured::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(to right, #FD6144, #FD3244, #AE3A8D);
+        }
+
+        .service-icon {
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .integration-icon {
+            width: 24px;
+            height: 24px;
+            margin: 0 5px;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .integration-icon:hover {
+            opacity: 1;
+            transform: scale(1.2);
+        }
+
+        .service-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+        .service-card:hover .service-details {
+            max-height: 200px;
+        }
+
+        .circuit-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.05;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .code-typing-bg {
+    animation: typing 15s linear infinite;
+    white-space: pre;
+    font-family: monospace;
+}
+
+@keyframes typing {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-50%); }
+}
+
+.typing-animation {
+    display: flex;
+    align-items: center;
+    column-gap: 4px;
+}
+
+.dot {
+    width: 4px;
+    height: 4px;
+    background-color: white;
+    border-radius: 50%;
+    animation: typing 1.5s infinite ease-in-out;
+}
+
+.dot:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.dot:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes typing {
+    0%, 100% { opacity: 0.3; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.2); }
+}
+
+.timeline-flow {
+    position: relative;
+    overflow: hidden;
+}
+
+.timeline-flow::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent, #FD6144, #FD3244, #AE3A8D, transparent);
+    animation: flowDown 3s infinite linear;
+}
+
+@keyframes flowDown {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
+}
+
+/* Estilos para las pestañas del proceso */
+.process-tab {
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.process-tab::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(to right, #FD6144, #FD3244, #AE3A8D);
+  transition: width 0.3s ease;
+}
+
+.process-tab.active::after,
+.process-tab:hover::after {
+  width: 100%;
+}
+
+.process-tab.active {
+  color: #FD3244;
+}
+
+.process-content {
+  display: none;
+  animation: fadeIn 0.5s ease-in-out forwards;
+}
+
+.process-content.active {
+  display: block;
+}
+
+.shadow-parallel {
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Ocultar el botón flotante de ElevenLabs */
+elevenlabs-convai.elevenlabs-widget-fab {
+  display: none !important;
+}
+
+/* Estilos para el menú desplegable con animación */
+.transition-height {
+    transition: height 0.3s ease, opacity 0.3s ease;
+    overflow: hidden;
+}
+
+.mobile-menu-collapsed {
+    height: 0;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.mobile-menu-expanded {
+    height: auto;
+    opacity: 1;
+}

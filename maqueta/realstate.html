@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propuesta Comercial - Ecosistema Inteligente Real Estate</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #F04E59;
+            --primary-dark: #1E1E1E;
+            --primary-light: #F47983;
+            --white: #ffffff;
+            --light-gray: #f5f5f5;
+            --text-light: #e0e0e0;
+            --shadow-color: rgba(0, 0, 0, 0.15);
+            --gradient-start: #F04E59;
+            --gradient-mid: #E94057;
+            --gradient-end: #F04E59;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: var(--white);
+            color: var(--primary-dark);
+            overflow: hidden;
+        }
+        
+        .slides-container {
+            height: 100vh;
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll;
+            scroll-behavior: smooth;
+        }
+        
+        .slide {
+            height: 100vh;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            background-color: var(--white);
+        }
+        
+        /* Header styling */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            width: 100%;
+        }
+        
+        .logo {
+            height: 50px;
+            width: auto;
+        }
+        
+        .client {
+            font-size: 1rem;
+            color: var(--primary-color);
+        }
+        
+        /* Slide content styling */
+        .slide-content {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            padding: 0 2rem;
+        }
+        
+        .slide-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: var(--primary-dark);
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        .slide-subtitle {
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            animation: fadeInUp 1.2s ease-out;
+        }
+        
+        .slide-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            animation: fadeInUp 1.4s ease-out;
+        }
+        
+        /* Card styles */
+        .cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 1rem;
+            animation: fadeInUp 1.6s ease-out;
+        }
+        
+        .card {
+            background-color: var(--white);
+            border-radius: 45px;
+            padding: 1.5rem;
+            width: calc(33% - 1.5rem);
+            min-width: 250px;
+            box-shadow: 10px 10px 0 var(--shadow-color);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 15px 15px 0 var(--shadow-color);
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .card-icon {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+        
+        .card-content {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: var(--primary-dark);
+            flex-grow: 1;
+        }
+        
+        .card-tag {
+            display: inline-block;
+            background-color: var(--primary-color);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-top: 1rem;
+            color: var(--white);
+        }
+        
+        /* Table styles */
+        .table-container {
+            margin-top: 2rem;
+            width: 100%;
+            animation: fadeInUp 1.6s ease-out;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--white);
+            border-radius: 45px;
+            overflow: hidden;
+            box-shadow: 10px 10px 0 var(--shadow-color);
+        }
+        
+        thead {
+            background-color: var(--primary-light);
+        }
+        
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        th {
+            font-weight: 600;
+        }
+        
+        /* Feature list styles */
+        .features-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 1rem;
+            animation: fadeInUp 1.6s ease-out;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            width: calc(50% - 0.75rem);
+            margin-bottom: 1rem;
+        }
+        
+        .feature-icon {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin-right: 1rem;
+            margin-top: 0.2rem;
+        }
+        
+        .feature-text {
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        
+        /* Footer */
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.5rem;
+            width: 100%;
+            font-size: 0.8rem;
+            color: var(--primary-dark);
+        }
+        
+        .page-number {
+            font-size: 0.9rem;
+            color: var(--primary-dark);
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Cover slide specific */
+        .cover-slide {
+            background-color: var(--white);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .cover-logo {
+            height: 120px;
+            width: auto;
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        .cover-title {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease-out;
+            color: var(--primary-dark);
+        }
+        
+        .cover-subtitle {
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+            animation: fadeInUp 1.2s ease-out;
+        }
+        
+        .cover-client {
+            font-size: 1.2rem;
+            animation: fadeInUp 1.4s ease-out;
+            color: var(--primary-dark);
+        }
+        
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 5px;
+            background: var(--primary-color);
+            width: 0%;
+            z-index: 100;
+            transition: width 0.3s ease;
+        }
+        
+        /* Two column layout */
+        .two-column {
+            display: flex;
+            gap: 2rem;
+            margin-top: 1rem;
+            animation: fadeInUp 1.6s ease-out;
+        }
+        
+        .column {
+            flex: 1;
+        }
+        
+        .highlight-box {
+            background-color: var(--primary-color);
+            border-radius: 45px;
+            padding: 1.5rem;
+            margin: 0 auto;
+            max-width: 800px;
+            box-shadow: 10px 10px 0 var(--shadow-color);
+        }
+        
+        .highlight-text {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: white;
+            margin: 0;
+            text-align: center;
+        }
+        
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .value-card {
+            background-color: var(--light-gray);
+            border-radius: 25px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 5px 5px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .value-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .value-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .value-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+        }
+        
+        .value-description {
+            font-size: 1rem;
+            color: var(--primary-dark);
+        }
+
+        .numbered-list {
+            counter-reset: item;
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .numbered-list li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            counter-increment: item;
+        }
+
+        .numbered-list li::before {
+            content: counter(item);
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+            border-radius: 50%;
+            width: 2rem;
+            height: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            flex-shrink: 0;
+            margin-top: 0.2rem;
+        }
+
+        .problem-stats {
+            background: linear-gradient(135deg, #FF6B6B, #FF8E8E);
+            border-radius: 45px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 10px 10px 0 var(--shadow-color);
+            color: white;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-text {
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .benefit-card {
+            background: linear-gradient(135deg, #4ECDC4, #44A08D);
+            border-radius: 25px;
+            padding: 1.5rem;
+            color: white;
+            text-align: center;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .benefit-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .benefit-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .benefit-description {
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    <div class="slides-container" id="slidesContainer">
+        
+        <!-- Slide 1: Cover -->
+        <section class="slide cover-slide" id="slide1">
+            <div style="margin-bottom: 2rem;">
+                <img src="https://aloia.ai/assets/img/aloia-color.png" alt="Aloia Logo" class="cover-logo">
+            </div>
+            <h1 class="cover-title">ECOSISTEMA INTELIGENTE<br>PARA REAL ESTATE</h1>
+            <div class="cover-subtitle">Automatización Completa de Ventas Inmobiliarias</div>
+            <div class="cover-client">Presentado a: Laura Galvan</div>
+            
+            <div class="footer">
+                <div>Julio 2025</div>
+                <div class="page-number">1/10</div>
+            </div>
+        </section>
+        
+        <!-- Slide 2: Problemas del Real Estate -->
+        <section class="slide" id="slide2">
+            <div class="header">
+                <img src="https://aloia.ai/assets/img/aloia-color.png" alt="Aloia Logo" class="logo">
+                <div class="client">Laura Galvan</div>
+            </div>
+            
+            <div class="slide-content">
+                <h2 class="slide-title" style="font-size: 3rem; text-align: center; margin-bottom: 1.5rem;">¿Cuántas ventas pierdes mientras duermes?</h2>
+                
+                <div class="cards-container" style="justify-content: center;">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-hourglass-half"></i></div>
+                            <div class="card-title">Leads que se enfrían</div>
+                        </div>
+                        <div class="card-content">
+                            <div class="problem-stats">
+                                <div class="stat-number">67%</div>
+                                <div class="stat-text">de tus leads se enfrían en 4 horas</div>
+                            </div>
+                            <p>Mientras tus asesores están ocupados, cada lead sin respuesta inmediata representa $2-8 millones que se evaporan.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-user-tie"></i></div>
+                            <div class="card-title">Vendedores como secretarios</div>
+                        </div>
+                        <div class="card-content">
+                            <div class="problem-stats">
+                                <div class="stat-number">3-4h</div>
+                                <div class="stat-text">diarias respondiendo preguntas básicas</div>
+                            </div>
+                            <p>Tus mejores vendedores pierden tiempo respondiendo "¿Cuánto cuesta?" en lugar de cerrar ventas millonarias.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 2rem; background-color: #FFE5E5; border-left: 8px solid #FF6B6B; padding: 1.5rem; border-radius: 0 25px 25px 0; box-shadow: 5px 5px 15px rgba(0,0,0,0.1);">
+                    <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                        <i class="fas fa-exclamation-triangle" style="color: #FF6B6B; font-size: 1.5rem; margin-right: 1rem;"></i>
+                        <h3 style="color: #FF6B6B; font-size: 1.3rem; font-weight: 600; margin: 0;">Información inconsistente = Pérdida de confianza</h3>
+                    </div>
+                    <p style="font-size: 1.1rem; color: var(--primary-dark); margin: 0; line-height: 1.5;">
+                        WhatsApp dice un precio, Instagram otro, tu portal un tercero. El cliente huye antes de la primera cita.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div>Ecosistema Inteligente Real Estate</div>
+                <div class="page-number">2/10</div>
+            </div>
+        </section>
+        
+        <!-- Slide 3: Beneficios y Transformación -->
+        <section class="slide" id="slide3">
+            <div class="header">
+                <img src="https://aloia.ai/assets/img/aloia-color.png" alt="Aloia Logo" class="logo">
+                <div class="client">Laura Galvan</div>
+            </div>
+            
+            <div class="slide-content">
+                <h2 class="slide-title" style="font-size: 3rem; text-align: center; margin-bottom: 1.5rem;">Convierte cada contacto en oportunidad real</h2>
+                
+                <div class="benefits-grid">
+                    <div class="benefit-card">
+                        <div class="benefit-icon"><i class="fas fa-chart-line"></i></div>
+                        <div class="benefit-title">+300% leads calificados</div>
+                        <div class="benefit-description">Solo recibes prospectos con presupuesto confirmado, zona definida y timeline real.</div>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon"><i class="fas fa-clock"></i></div>
+                        <div class="benefit-title">Atención premium 24/7</div>
+                        <div class="benefit-description">Cada prospecto recibe respuesta inmediata, personalizada e inteligente, incluso a las 2 AM.</div>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon"><i class="fas fa-sync-alt"></i></div>
+                        <div class="benefit-title">Información consistente</div>
+                        <div class="benefit-description">Desde WhatsApp hasta portales: mismos precios, misma disponibilidad, confianza total.</div>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon"><i class="fas fa-target"></i></div>
+                        <div class="benefit-title">Asesores enfocados</div>
+                        <div class="benefit-description">Libéralos de tareas repetitivas. Que hagan lo que mejor saben: vender propiedades de $5+ millones.</div>
+                    </div>
+                </div>
+                
+                <div class="highlight-box" style="margin-top: 2rem;">
+                    <p class="highlight-text">
+                        <i class="fas fa-rocket" style="margin-right: 0.5rem;"></i>
+                        Transforma tu operación inmobiliaria en una máquina de ventas automatizada
+                    </p>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div>Ecosistema Inteligente Real Estate</div>
+                <div class="page-number">3/10</div>
+            </div>
+        </section>
+        
+        <!-- Slide 4: Asistente IA -->
+        <section class="slide" id="slide4">
+            <div class="header">
+                <img src="https://aloia.ai/assets/img/aloia-color.png" alt="Aloia Logo" class="logo">
+                <div class="client">Laura Galvan</div>
+            </div>
+            
+            <div class="slide-content">
+                <h2 class="slide-title" style="font-size: 3rem; text-align: center; margin-bottom: 1.5rem;">Tu asesor virtual que nunca duerme</h2>
+                
+                <div class="cards-container">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-filter"></i></div>
+                            <div class="card-title">Califica automáticamente</div>
+                        </div>
+                        <div class="card-content">
+                            <ul style="padding-left: 1.5rem;">
+                                <li>Presupuesto real vs. wishful thinking</li>
+                                <li>Timeline de compra (inmediata, 6 meses, explorando)</li>
+                                <li>Zona específica en Querétaro</li>
+                                <li>Método de pago preferido</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-plug"></i></div>
+                            <div class="card-title">Integración multi-canal</div>
+                        </div>
+                        <div class="card-content">
+                            <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                                <div><i class="fab fa-whatsapp" style="color: #25D366; margin-right: 0.5rem;"></i> WhatsApp Business</div>
+                                <div><i class="fab fa-instagram" style="color: #E4405F; margin-right: 0.5rem;"></i> Instagram/Facebook DMs</div>
+                                <div><i class="fas fa-globe" style="color: var(--primary-color); margin-right: 0.5rem;"></i> Sitio web</div>
+                                <div><i class="fas fa-building" style="color: var(--primary-color); margin-right: 0.5rem;"></i> Portales inmobiliarios</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-robot"></i></div>
+                            <div class="card-title">Acciones inteligentes</div>
+                        </div>
+                        <div class="card-content">
+                            <ul style="padding-left: 1.5rem;">
+                                <li>Envía fichas técnicas personalizadas</li>
+                                <li>Agenda visitas con disponibilidad real</li>
+                                <li>Calcula pagos con diferentes esquemas</li>
+                                <li>Hace seguimiento post-visita</li>
+                            </ul>
+                            <div class="card-tag">Solo escala cuando importa</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div>Ecosistema Inteligente Real Estate</div>
+                <div class="page-number">4/10</div>
+            </div>
+        </section>
+        
+        <!-- Slide 5: Inversión Chatbot IA -->
+        <section class="slide" id="slide5">
+            <div class="header">
+                <img src="https://aloia.ai/assets/img/aloia-color.png" alt="Aloia Logo" class="logo">
+                <div class="client">Laura Galvan</div>
+            </div>
+            
+            <div class="slide-content">
+                <h2 class="slide-title" style="font-size: 2.5rem; text-align: center; margin-bottom: 1rem;">Inversión Chatbot IA</h2>
+                
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width: 33%; text-align: center;">Conversaciones/mes</th>
+                                <th style="width: 33%; text-align: center;">Integración</th>
+                                <th style="width: 34%; text-align: center;">Mensualidad</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="text-align: center; font-size: 1.1rem; font-weight: 600;">250</td>
+                                <td style="text-align: center; font-weight: 600; background-color: #f8f8f8;">
+                                    <i class="fas fa-globe" style="color: var(--primary-color); margin-right: 0.5rem;"></i>
+                                    Web + WhatsApp
+                                </td>
+                                <td style="text-align: center; font-size: 1.1rem; font-weight: 600; color: var(--primary-color);">$4,999 MXN</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; font-size: 1.1rem; font-weight: 600;">500</td>
+                                <td style="text-align: center; font-weight: 600; background-color: #f8f8f8;">
+                                    <i class="fas fa-share-alt" style="color: var(--primary-color); margin-right: 0.5rem;"></i>
+                                    Todo + Redes Sociales
+                                </td>
+                                <td style="text-align: center; font-size: 1.1rem; font-weight: 600; color: var(--primary-color);">$9,999 MXN</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; font-size: 1.1rem; font-weight: 600;">1000</td>
+                                <td style="text-align: center; font-weight: 600; background-color: #f8f8f8;">
+                                    <i class="fas fa-brain" style="color: var(--primary-color); margin-right: 0.5rem;"></i>
+                                    Todo + IA Avanzada
+                                </td>
+                                <td style="text-align: center; font-size: 1.1rem; font-weight: 600; color: var(--primary-color);">$12,999 MXN</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div style="margin-top: 2rem; background-color: var(--light-gray); border-left: 4px solid var(--primary-color); padding: 1.5rem; border-radius: 0 10px 10px 0;">
+                    <p style="font-size: 1.1rem; color: var(--primary-dark);">
+                        <i class="fas fa-info-circle" style="color: var(--primary-color); margin-right: 0.5rem;"></i>
+                        <strong>Incluye:</strong> Configuración inicial, entrenamiento de IA y soporte completo durante 1.5 semanas.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div>Ecosistema Inteligente Real Estate</div>
+                <div class="page-number">5/10</div>
+            </div>
+        </section>
+        
+        <!-- Slide 6: CRM + Asistente IA -->
+        <section class="slide" id="slide6">
+            <div class="header">
+                <img src="https://aloia.ai/assets/img/aloia-color.png" alt="Aloia Logo" class="logo">
+                <div class="client">Laura Galvan</div>
+            </div>
+            
+            <div class="slide-content">
+                <h2 class="slide-title" style="font-size: 2.5rem; text-align: center; margin-bottom: 1.5rem;">CRM + Asistente IA: Gestión que predice el futuro</h2>
+                
+                <div class="cards-container">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+                            <div class="card-title">Scoring predictivo real</div>
+                        </div>
+                        <div class="card-content">
+                            <p>IA que calcula probabilidad de cierre basada en comportamiento: tiempo de respuesta, consultas, interacciones, visitas.</p>
+                            <div class="card-tag">Inteligencia Artificial</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-magic"></i></div>
+                            <div class="card-title">Pipeline automatizado</div>
+                        </div>
+                        <div class="card-content">
+                            <p>Mueve automáticamente prospectos entre etapas según acciones reales, no tiempo perdido.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            <div class="card-title">Dashboard inteligente</div>
+                        </div>
+                        <div class="card-content">
+                            <ul style="padding-left: 1.5rem; font-size: 0.9rem;">
+                                <li>Conversión por asesor en tiempo real</li>
+                                <li>Propiedades hot vs. inventario muerto</li>
+                                <li>ROI por canal de marketing</li>
+                                <li>Predicciones de ventas mensuales</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="highlight-box" style="margin-top: 2rem;">
+                    <p class="highlight-text">
+                        <i class="fas fa-plug" style="margin-right: 0.5rem;"></i>
+                        Se integra con tu HubSpot actual vía API. No pierdes nada, ganas inteligencia artificial.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div>Ecosistema Inteligente Real Estate</div>
+                <div class="page-number">6/10</div>
+            </div>
+        </section>
+        
+        <!-- Slide 7: Inversión CRM Inteligente -->
+        <section class="slide" id="slide7">
+            <div class="header">
+                <img src="https://aloia.ai/assets/img/aloia-color.png" alt="Aloia Logo" class="logo">
+                <div class="client">Laura Galvan</div>
+            </div>
+            
+            <div class="slide-content">
+                <h2 class="slide-title" style="font-size: 2.5rem; text-align: center; margin-bottom: 1rem;">Inversión CRM Inteligente</h2>
+                
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width: 25%; text-align: center;">Usuarios</th>
+                                <th style="width: 25%; text-align: center;">Propiedades</th>
+                                <th style="width: 25%; text-align: center;">IA Predictiva</th>
+                                <th style="width: 25%; text-align: center;">Mensualidad</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="text-align: center; font-size: 1.1rem; font-weight: 600;">5 usuarios</td>
+                                <td style="text-align: center; font-size: 1.1rem; font-weight: 600;">200</td>
+                                <td style="text-align: center; font-weight: 600; background-color: #f8f8f8;">
+                                    <i class="fas fa-star" style="color: var(--primary-color); margin-right: 0.5rem;"></i>
+                                    Básica
+                                </td>
+                                <td style="text-align: center; font-size: 1.1rem; font-weight: 600; color: var(--primary-color);">$2,500 MXN</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; font-size: 1.1rem; font-weight: 600;">15 usuarios</td>
+                                <td style="text-align: center; font-size: 1.1rem; font-weight: 600;">500</td>
+                                <td style="text-align: center; font-weight: 600; background-color: #f8f8f8;">
+                                    <i class="fas fa-star-half-alt" style="color: var(--primary-color); margin-right: 0.5rem;"></i>
+                                    Avanzada
+                                </td>
+                                <td style="text-align: center; font-size: 1.1rem; font-weight: 600; color: var(--primary-color);">$6,500 MXN</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; font-size: 1.1rem; font-weight: 600;">25 usuarios</td>
+                                <td style="text-align: center; font-size: 1.1rem; font-weight: 600;">1,000</td>
+                                <td style="text-align: center; font-weight: 600; background-color: #f8f8f8;">
+                                    <i class="fas fa-crown" style="color: var(--primary-color); margin-right: 0.5rem;"></i>
+                                    Premium + API
+                                </td>
+                                <td style="text-align: center; font-size: 1.1rem; font-weight: 600; color: var(--primary-color);">$8,750 MXN</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div style="margin-top: 2rem; background-color: var(--light-gray); border-left: 4px solid var(--primary-color); padding: 1.5rem; border-radius: 0 10px 10px 0;">
+                    <p style="font-size: 1.1rem; color: var(--primary-dark);">
+                        <i class="fas fa-tools" style="color: var(--primary-color); margin-right: 0.5rem;"></i>
+                        <strong>Implementación:</strong> 3 días con personalización y uso de marca de la empresa incluidos.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div>Ecosistema Inteligente Real Estate</div>
+                <div class="page-number">7/10</div>
+            </div>
+        </section>
+        
+        <!-- Slide 8: Prospectador Automático -->
+        <section class="slide" id="slide8">
+            <div class="header">
+                <img src="https://aloia.ai/assets/img/aloia-color.png" alt="Aloia Logo" class="logo">
+                <div class="client">Laura Galvan</div>
+            </div>
+            
+            <div class="slide-content">
+                <h2 class="slide-title" style="font-size: 2.5rem; text-align: center; margin-bottom: 1.5rem;">Prospectador Automático: Pipeline que nunca se vacía</h2>
+                
+                <div class="features-list" style="justify-content: center;">
+                    <div class="feature-item" style="width: 100%; margin-bottom: 2rem;">
+                        <div class="feature-icon" style="font-size: 2rem;"><i class="fas fa-search"></i></div>
+                        <div class="feature-text" style="font-size: 1.2rem;">
+                            <strong>Captación masiva automatizada:</strong> Identifica y contacta empresas en crecimiento, ejecutivos con poder adquisitivo, y compradores potenciales en tu mercado objetivo.
+                        </div>
+                    </div>
+                    
+                    <div class="feature-item" style="width: 100%; margin-bottom: 2rem;">
+                        <div class="feature-icon" style="font-size: 2rem;"><i class="fas fa-envelope-open-text"></i></div>
+                        <div class="feature-text" style="font-size: 1.2rem;">
+                            <strong>Outreach personalizado masivo:</strong> Contactos verificados mensualmente, 95% entregabilidad garantizada, secuencias personalizadas por tipo de cliente.
+                        </div>
+                    </div>
+                    
+                    <div class="feature-item" style="width: 100%; margin-bottom: 2rem;">
+                        <div class="feature-icon" style="font-size: 2rem;"><i class="fas fa-sync"></i></div>
+                        <div class="feature-text" style="font-size: 1.2rem;">
+                            <strong>Integración directa con tu CRM:</strong> Cada contacto entra automáticamente a secuencias de nurturing y se sincroniza con tu pipeline.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width: 50%; text-align: center;">Hasta Contactos/mes</th>
+                                <th style="width: 50%; text-align: center;">Mensualidad</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="text-align: center; font-size: 1.1rem; font-weight: 600;">100</td>
+                                <td style="text-align: center; font-size: 1.1rem; font-weight: 600; color: var(--primary-color);">$1,000 MXN</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; font-size: 1.1rem; font-weight: 600;">250</td>
+                                <td style="text-align: center; font-size: 1.1rem; font-weight: 600; color: var(--primary-color);">$2,500 MXN</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; font-size: 1.1rem; font-weight: 600;">500</td>
+                                <td style="text-align: center; font-size: 1.1rem; font-weight: 600; color: var(--primary-color);">$5,000 MXN</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div>Ecosistema Inteligente Real Estate</div>
+                <div class="page-number">8/10</div>
+            </div>
+        </section>
+        
+        <!-- Slide 9: Implementación y Soporte -->
+        <section class="slide" id="slide9">
+            <div class="header">
+                <img src="https://aloia.ai/assets/img/aloia-color.png" alt="Aloia Logo" class="logo">
+                <div class="client">Laura Galvan</div>
+            </div>
+            
+            <div class="slide-content">
+                <h2 class="slide-title" style="font-size: 3rem; text-align: center; margin-bottom: 2rem;">Implementación y Soporte</h2>
+                
+                <div class="cards-container">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-robot"></i></div>
+                            <div class="card-title">Asistente IA</div>
+                        </div>
+                        <div class="card-content">
+                            <p><strong>1.5 semanas</strong> para configuración y entrenamiento inicial completo.</p>
+                            <div class="card-tag">Setup Completo</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-database"></i></div>
+                            <div class="card-title">CRM Inteligente</div>
+                        </div>
+                        <div class="card-content">
+                            <p><strong>3 días</strong> con personalización y uso de marca de la empresa incluidos.</p>
+                            <div class="card-tag">Personalizado</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-search-plus"></i></div>
+                            <div class="card-title">Módulo de Prospectos</div>
+                        </div>
+                        <div class="card-content">
+                            <p><strong>3 días</strong> con personalización y uso de marca de la empresa incluidos.</p>
+                            <div class="card-tag">Listo para usar</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="highlight-box" style="margin-top: 2rem;">
+                    <p class="highlight-text">
+                        <i class="fas fa-headset" style="margin-right: 0.5rem;"></i>
+                        Soporte continuo y capacitación completa para tu equipo incluidos
+                    </p>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div>Ecosistema Inteligente Real Estate</div>
+                <div class="page-number">9/10</div>
+            </div>
+        </section>
+        
+        <!-- Slide 10: Próximos Pasos -->
+        <section class="slide" id="slide10">
+            <div class="header">
+                <img src="https://aloia.ai/assets/img/aloia-color.png" alt="Aloia Logo" class="logo">
+                <div class="client">Laura Galvan</div>
+            </div>
+            
+            <div class="slide-content" style="align-items: center; text-align: center; justify-content: center;">
+                <h2 class="slide-title" style="font-size: 3.5rem; margin-bottom: 2rem;">Próximos Pasos</h2>
+                
+                <p class="slide-text" style="font-size: 1.4rem; max-width: 800px; margin-bottom: 3rem;">
+                    Transforma tu negocio inmobiliario en una máquina de ventas automatizada que trabaja 24/7.
+                </p>
+                
+                <div style="display: flex; justify-content: center; align-items: center; gap: 2rem; max-width: 900px; margin: 0 auto;">
+                    <div style="flex: 1; max-width: 400px;">
+                        <div class="card" style="width: 100%; height: 300px;">
+                            <div class="card-header">
+                                <div class="card-icon"><i class="fas fa-list-ol"></i></div>
+                                <div class="card-title">Plan de Implementación</div>
+                            </div>
+                            <div class="card-content">
+                                <ol class="numbered-list" style="text-align: left; font-size: 0.9rem;">
+                                    <li>Análisis de necesidades específicas</li>
+                                    <li>Configuración del ecosistema inteligente</li>
+                                    <li>Entrenamiento de IA con tu inventario</li>
+                                    <li>Capacitación completa del equipo</li>
+                                    <li>Go live y optimización continua</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="flex: 1; max-width: 400px;">
+                        <div class="card" style="width: 100%; height: 300px;">
+                            <div class="card-header">
+                                <div class="card-icon"><i class="fas fa-user-tie"></i></div>
+                                <div class="card-title">Contacto del Proyecto</div>
+                            </div>
+                            <div class="card-content" style="display: flex; flex-direction: column; justify-content: center;">
+                                <div style="text-align: left;">
+                                    <p style="margin-bottom: 1rem;"><i class="fas fa-user" style="color: var(--primary-color); margin-right: 0.5rem;"></i> <strong>Responsable:</strong> Equipo Aloia</p>
+                                    <p style="margin-bottom: 1rem;"><i class="fas fa-envelope" style="color: var(--primary-color); margin-right: 0.5rem;"></i> contacto@aloia.ai</p>
+                                    <p><i class="fas fa-globe" style="color: var(--primary-color); margin-right: 0.5rem;"></i> aloia.ai</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 3rem;">
+                    <button style="background-color: var(--primary-color); color: white; border: none; padding: 1rem 2.5rem; border-radius: 45px; font-size: 1.2rem; font-weight: 600; cursor: pointer; box-shadow: 5px 5px 15px rgba(0,0,0,0.2);">
+                        <i class="fas fa-rocket" style="margin-right: 0.5rem;"></i> ¡Automaticemos tus ventas inmobiliarias!
+                    </button>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div>Ecosistema Inteligente Real Estate</div>
+                <div class="page-number">10/10</div>
+            </div>
+        </section>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slidesContainer = document.getElementById('slidesContainer');
+            const progressBar = document.getElementById('progressBar');
+            const totalSlides = document.querySelectorAll('.slide').length;
+            
+            slidesContainer.addEventListener('scroll', function() {
+                const scrollPosition = slidesContainer.scrollTop;
+                const slideHeight = window.innerHeight;
+                const currentSlideIndex = Math.round(scrollPosition / slideHeight) + 1;
+                
+                // Update progress bar
+                const progress = ((currentSlideIndex - 1) / (totalSlides - 1)) * 100;
+                progressBar.style.width = `${progress}%`;
+            });
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                const currentScroll = slidesContainer.scrollTop;
+                const slideHeight = window.innerHeight;
+                
+                if (e.key === 'ArrowDown' || e.key === 'PageDown') {
+                    slidesContainer.scrollTop = currentScroll + slideHeight;
+                    e.preventDefault();
+                } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+                    slidesContainer.scrollTop = currentScroll - slideHeight;
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
+</body>
+</html></html>
