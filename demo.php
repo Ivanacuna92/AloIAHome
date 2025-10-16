@@ -720,7 +720,7 @@
                         
                         <div class="chatbot-wrapper">
                             <div class="chatbot-container">
-                                <iframe src="https://fin-ai.aloia.dev/" allow="microphone; clipboard-write" frameborder="0" class="chatbot-iframe" id="chatbot-iframe" title="Aloia AI Chatbot"></iframe>
+                                <iframe src="https://fin-ai.aloia.dev/demo" allow="microphone; clipboard-write" frameborder="0" class="chatbot-iframe" id="chatbot-iframe" title="Aloia AI Chatbot"></iframe>
                             </div>
                         </div>
                     </div>
@@ -938,4 +938,5 @@
         });
     </script>
 </body>
+
 </html>
