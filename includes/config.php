@@ -54,6 +54,11 @@ function getRealIP() {
         $ip = $_SERVER['REMOTE_ADDR'] ?? '0.0.0.0';
     }
 
+    // Limpiar prefijo IPv6-mapped IPv4 (::ffff:192.168.1.1 → 192.168.1.1)
+    if (str_starts_with($ip, '::ffff:')) {
+        $ip = substr($ip, 7);
+    }
+
     // Si la IP es privada/local, consultar servicio externo para obtener la IP pública
     if (!filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE)) {
         $public_ip = @file_get_contents('https://api.ipify.org?format=text');

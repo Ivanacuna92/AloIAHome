@@ -6,14 +6,13 @@
     });
 
     function loadGeoData() {
-        // Obtener la IP que ya fue renderizada por PHP
-        const currentIP = document.getElementById('ipAddress').textContent.trim();
-        if (!currentIP || currentIP === 'Cargando...') return;
-
-        // Llamar a ipinfo.io directamente desde el navegador (evita problemas de Docker)
-        fetch(`https://ipinfo.io/${currentIP}/json`)
+        // Llamar a ipinfo.io SIN IP — él auto-detecta la IP del visitante
+        // Funciona perfecto con IPv4 e IPv6
+        fetch('https://ipinfo.io/json')
             .then(response => response.json())
             .then(data => {
+                // Actualizar la IP mostrada con la que detectó ipinfo.io
+                document.getElementById('ipAddress').textContent = data.ip;
                 updateGeoUI(data);
             })
             .catch(() => {
@@ -50,36 +49,18 @@
         loader.style.display = 'block';
         infoContainer.style.display = 'none';
 
-        // Realizar la solicitud AJAX
         setTimeout(() => {
-            fetch(IP_INFO_URL)
+            // Llamar directo a ipinfo.io sin IP — auto-detecta IPv4/IPv6
+            fetch('https://ipinfo.io/json')
                 .then(response => response.json())
                 .then(data => {
-                    // Actualizar la información básica
                     document.getElementById('ipAddress').textContent = data.ip;
-                    document.getElementById('userAgent').textContent = data.userAgent;
-                    document.getElementById('language').textContent = data.language;
-                    document.getElementById('referer').textContent = data.referer;
+                    document.getElementById('userAgent').textContent = navigator.userAgent;
+                    document.getElementById('language').textContent = navigator.language || 'No disponible';
+                    document.getElementById('referer').textContent = document.referrer || 'Acceso directo';
 
-                    // Si el servidor trajo geo data, usarla; si no, llamar directo a ipinfo.io
-                    if (data.country) {
-                        document.getElementById('country').textContent = data.country;
-                        document.getElementById('city').textContent = data.city || 'No disponible';
-                        document.getElementById('isp').textContent = data.isp || 'No disponible';
+                    updateGeoUI(data);
 
-                        if (data.latitude && data.longitude) {
-                            const mapUrl = `https://maps.google.com/maps?q=${data.latitude},${data.longitude}&z=13&output=embed`;
-                            document.getElementById('map').innerHTML = `<iframe src="${mapUrl}" width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>`;
-                        }
-                    } else {
-                        // Fallback: llamar ipinfo.io desde el navegador
-                        fetch(`https://ipinfo.io/${data.ip}/json`)
-                            .then(r => r.json())
-                            .then(geo => updateGeoUI(geo))
-                            .catch(() => setGeoUnavailable());
-                    }
-
-                    // Ocultar loader y mostrar info
                     loader.style.display = 'none';
                     infoContainer.style.display = 'block';
                 })
