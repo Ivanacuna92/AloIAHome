@@ -53,7 +53,7 @@
                 <table cellpadding="0" cellspacing="0" style="font-family: sans-serif; line-height: 1.4; color: ${textoColor}; width: 100%; margin-top: 10px;">
                     <tr>
                         <td style="vertical-align: middle; text-align: center; padding: 15px 20px; width: 160px;">
-                            ${imgLogo ? `<img src="${imgLogo}" alt="Logo empresa" style="max-width: 120px; height: auto; border-radius: 8px; ">` : ''}
+                            ${imgLogo ? `<img src="${imgLogo}" alt="Logo empresa" style="max-width: 120px; height: 120px; border-radius: 8px;">` : ''}
                         </td>
                         <td style="vertical-align: middle; border-left: 2px solid ${temaColor}; padding: 15px 20px;">
                             ${telOficina ? `
