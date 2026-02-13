@@ -15,7 +15,7 @@ $server_port = $_SERVER['SERVER_PORT'] ?? '80';
 <?php include __DIR__ . '/../partials/layout/header.php'; ?>
 
 <!-- Estilos personalizados para el localizador IP -->
-<link rel="stylesheet" href="<?= CSS_PATH ?>get-ip.css">
+<link rel="stylesheet" href="<?= v(CSS_PATH . 'get-ip.css') ?>">
 
 <!-- Header específico para la página de Chatbot -->
 <section class="bg-aloia-dark text-aloia-white py-20 md:py-24 relative overflow-hidden">
@@ -839,7 +839,7 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
 
 <!-- Script para las partículas -->
-<script src="<?= JS_PATH ?>particles.js"></script>
+<script src="<?= v(JS_PATH . 'particles.js') ?>"></script>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         if (typeof initParticlesCanvas === 'function') {
@@ -847,6 +847,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 </script>
-<script src="<?= JS_PATH ?>main.js"></script>
+<script src="<?= v(JS_PATH . 'main.js') ?>"></script>
 <?php include __DIR__ . '/../partials/layout/chatwidget.php'; ?>
 <?php include __DIR__ . '/../partials/layout/footer.php'; ?>

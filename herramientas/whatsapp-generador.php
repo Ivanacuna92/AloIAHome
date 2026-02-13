@@ -7,7 +7,7 @@ $activePage = 'herramientas';
 <?php include __DIR__ . '/../partials/layout/head.php'; ?>
 <?php include __DIR__ . '/../partials/layout/header.php'; ?>
 
-<link rel="stylesheet" href="<?= CSS_PATH ?>whatsapp-generator.css">
+<link rel="stylesheet" href="<?= v(CSS_PATH . 'whatsapp-generator.css') ?>">
 
 <!-- Header específico para la página de WhatsApp con efecto de partículas -->
 <section class="whatsapp-header bg-aloia-dark text-aloia-white py-20 md:py-24 relative overflow-hidden">
@@ -264,13 +264,13 @@ $activePage = 'herramientas';
     </div>
 </section>
 
-<script src="<?= JS_PATH ?>particles.js"></script>
+<script src="<?= v(JS_PATH . 'particles.js') ?>"></script>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
       initParticlesCanvas(); // Solo si hay <canvas id="particles-canvas">
     });
 </script>
-<script src="<?= JS_PATH ?>main.js"></script>
-<script src="<?= JS_PATH ?>whatsapp-generator.js"></script>
+<script src="<?= v(JS_PATH . 'main.js') ?>"></script>
+<script src="<?= v(JS_PATH . 'whatsapp-generator.js') ?>"></script>
 <?php include __DIR__ . '/../partials/layout/chatwidget.php'; ?>
 <?php include __DIR__ . '/../partials/layout/footer.php'; ?>

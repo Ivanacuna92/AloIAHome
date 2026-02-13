@@ -978,7 +978,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['enviar_demo'])) {
 <?php include 'partials/layout/header.php'; ?>
 
 <!-- Estilos personalizados para la página sobre nosotros -->
-<link rel="stylesheet" href="<?= CSS_PATH ?>/contacto.css">
+<link rel="stylesheet" href="<?= v(CSS_PATH . 'contacto.css') ?>">
 <style>
     /* Esto puede ir en contacto.css */
 .success-message,
@@ -1295,12 +1295,12 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-<script src="<?= JS_PATH ?>particles.js"></script>
+<script src="<?= v(JS_PATH . 'particles.js') ?>"></script>
 <script>
     if (document.getElementById('particles-canvas')) {
         initParticlesCanvas();
     }
 </script>
-<script src="<?= JS_PATH ?>main.js"></script>
+<script src="<?= v(JS_PATH . 'main.js') ?>"></script>
 <?php include 'partials/layout/chatwidget.php'; ?>
 <?php include 'partials/layout/footer.php'; ?>

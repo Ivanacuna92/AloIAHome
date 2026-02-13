@@ -8,7 +8,7 @@ $activePage = 'herramientas';
 <?php include __DIR__ . '/../partials/layout/header.php'; ?>
 
 <!-- Estilos personalizados para la herramienta de colores -->
-<link rel="stylesheet" href="<?= CSS_PATH ?>herramienta-colores.css">
+<link rel="stylesheet" href="<?= v(CSS_PATH . 'herramienta-colores.css') ?>">
 
 <!-- Header específico para la página de colores con efecto de partículas -->
 <section class="color-header bg-aloia-dark text-aloia-white py-20 md:py-24 relative overflow-hidden">
@@ -323,10 +323,10 @@ $activePage = 'herramientas';
 </section>
 
 <!-- Script para la herramienta de colores -->
-<script src="<?= JS_PATH ?>herramienta-colores.js"></script>
+<script src="<?= v(JS_PATH . 'herramienta-colores.js') ?>"></script>
 
 <!-- Script para las partículas -->
-<script src="<?= JS_PATH ?>particles.js"></script>
+<script src="<?= v(JS_PATH . 'particles.js') ?>"></script>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         if (typeof initParticlesCanvas === 'function') {
@@ -334,6 +334,6 @@ $activePage = 'herramientas';
         }
     });
 </script>
-<script src="<?= JS_PATH ?>main.js"></script>
+<script src="<?= v(JS_PATH . 'main.js') ?>"></script>
 <?php include __DIR__ . '/../partials/layout/chatwidget.php'; ?>
 <?php include __DIR__ . '/../partials/layout/footer.php'; ?>

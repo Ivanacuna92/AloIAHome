@@ -735,7 +735,7 @@ $page_title = "Aviso de privacidad | Aloia";
 </html>
 
 <!-- Script para las partículas -->
-<script src="<?= JS_PATH ?>particles.js"></script>
+<script src="<?= v(JS_PATH . 'particles.js') ?>"></script>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         if (typeof initParticlesCanvas === 'function') {
@@ -743,6 +743,6 @@ $page_title = "Aviso de privacidad | Aloia";
         }
     });
 </script>
-<script src="<?= JS_PATH ?>main.js"></script>
+<script src="<?= v(JS_PATH . 'main.js') ?>"></script>
 <?php include 'partials/layout/chatwidget.php'; ?>
 <?php include 'partials/layout/footer.php'; ?>

@@ -15,6 +15,15 @@ define('IMG_PATH', BASE_URL . '/assets/img/');
 define('CSS_PATH', BASE_URL . '/assets/css/');
 define('JS_PATH',  BASE_URL . '/assets/js/');
 
+// Cache busting: agrega ?v=timestamp al asset para forzar descarga en cada cambio
+function v($asset_url) {
+    $file = $_SERVER['DOCUMENT_ROOT'] . '/' . ltrim($asset_url, '/');
+    if (file_exists($file)) {
+        return $asset_url . '?v=' . filemtime($file);
+    }
+    return $asset_url . '?v=' . time();
+}
+
 // Página actual (útil para navegación activa o SEO)
 $current_path = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/') ?: 'home';
 

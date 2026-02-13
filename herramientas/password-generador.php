@@ -8,7 +8,7 @@ $activePage = 'herramientas';
 <?php include __DIR__ . '/../partials/layout/header.php'; ?>
 
 <!-- Estilos personalizados para el generador de contraseñas -->
-<link rel="stylesheet" href="<?= CSS_PATH ?>password-generador.css">
+<link rel="stylesheet" href="<?= v(CSS_PATH . 'password-generador.css') ?>">
 
 <!-- Header específico para la página de contraseñas con efecto de partículas -->
 <section class="password-header bg-aloia-dark text-aloia-white py-20 md:py-24 relative overflow-hidden">
@@ -188,10 +188,10 @@ $activePage = 'herramientas';
 </section>
 
 <!-- Script para el generador de contraseñas -->
-<script src="<?= JS_PATH ?>password-generador.js"></script>
+<script src="<?= v(JS_PATH . 'password-generador.js') ?>"></script>
 
 <!-- Script para las partículas -->
-<script src="<?= JS_PATH ?>particles.js"></script>
+<script src="<?= v(JS_PATH . 'particles.js') ?>"></script>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         if (typeof initParticlesCanvas === 'function') {
@@ -199,6 +199,6 @@ $activePage = 'herramientas';
         }
     });
 </script>
-<script src="<?= JS_PATH ?>main.js"></script>
+<script src="<?= v(JS_PATH . 'main.js') ?>"></script>
 <?php include __DIR__ . '/../partials/layout/chatwidget.php'; ?>
 <?php include __DIR__ . '/../partials/layout/footer.php'; ?>

@@ -8,7 +8,7 @@ $activePage = 'herramientas';
 <?php include __DIR__ . '/../partials/layout/header.php'; ?>
 
 <!-- Estilos personalizados para el generador de QR -->
-<link rel="stylesheet" href="<?= CSS_PATH ?>qr-generador.css">
+<link rel="stylesheet" href="<?= v(CSS_PATH . 'qr-generador.css') ?>">
 
 <!-- Header específico para la página de QR con efecto de partículas -->
 <section class="qr-header bg-aloia-dark text-aloia-white py-20 md:py-24 relative overflow-hidden">
@@ -196,10 +196,10 @@ $activePage = 'herramientas';
 </section>
 
 <!-- Script para el generador de QR usando Google Charts API -->
-<script src="<?= JS_PATH ?>qr-generador.js"></script>
+<script src="<?= v(JS_PATH . 'qr-generador.js') ?>"></script>
 
 <!-- Script para las partículas -->
-<script src="<?= JS_PATH ?>particles.js"></script>
+<script src="<?= v(JS_PATH . 'particles.js') ?>"></script>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         if (typeof initParticlesCanvas === 'function') {
@@ -207,6 +207,6 @@ $activePage = 'herramientas';
         }
     });
 </script>
-<script src="<?= JS_PATH ?>main.js"></script>
+<script src="<?= v(JS_PATH . 'main.js') ?>"></script>
 <?php include __DIR__ . '/../partials/layout/chatwidget.php'; ?>
 <?php include __DIR__ . '/../partials/layout/footer.php'; ?>

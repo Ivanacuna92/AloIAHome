@@ -59,7 +59,7 @@ $tools = [
 <?php include __DIR__ . '/../partials/layout/header.php'; ?>
 
 <!-- Estilos personalizados para la página de herramientas -->
-<link rel="stylesheet" href="<?= CSS_PATH ?>herramientas.css">
+<link rel="stylesheet" href="<?= v(CSS_PATH . 'herramientas.css') ?>">
 
 <!-- Header específico para la página de herramientas con efecto de partículas -->
 <section class="tools-header bg-aloia-dark text-aloia-white py-20 md:py-24 relative overflow-hidden">
@@ -222,10 +222,10 @@ $tools = [
 </section>
 
 <!-- Script para la funcionalidad de la página -->
-<script src="<?= JS_PATH ?>herramientas.js"></script>
+<script src="<?= v(JS_PATH . 'herramientas.js') ?>"></script>
 
 <!-- Script para las partículas -->
-<script src="<?= JS_PATH ?>particles.js"></script>
+<script src="<?= v(JS_PATH . 'particles.js') ?>"></script>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         if (typeof initParticlesCanvas === 'function') {
@@ -233,6 +233,6 @@ $tools = [
         }
     });
 </script>
-<script src="<?= JS_PATH ?>main.js"></script>
+<script src="<?= v(JS_PATH . 'main.js') ?>"></script>
 <?php include __DIR__ . '/../partials/layout/chatwidget.php'; ?>
 <?php include __DIR__ . '/../partials/layout/footer.php'; ?>

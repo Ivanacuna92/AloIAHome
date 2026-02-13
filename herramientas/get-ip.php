@@ -15,7 +15,7 @@ $server_port = $_SERVER['SERVER_PORT'] ?? '80';
 <?php include __DIR__ . '/../partials/layout/header.php'; ?>
 
 <!-- Estilos personalizados para el localizador IP -->
-<link rel="stylesheet" href="<?= CSS_PATH ?>get-ip.css">
+<link rel="stylesheet" href="<?= v(CSS_PATH . 'get-ip.css') ?>">
 
 <!-- Header específico para la página de IP con efecto de partículas -->
 <section class="ip-header bg-aloia-dark text-aloia-white py-20 md:py-24 relative overflow-hidden">
@@ -244,11 +244,11 @@ $server_port = $_SERVER['SERVER_PORT'] ?? '80';
 <script>
     const IP_INFO_URL = "<?= BASE_URL ?>/api/get_ip_info.php";
 </script>
-<script src="<?= JS_PATH ?>get-ip.js"></script>
+<script src="<?= v(JS_PATH . 'get-ip.js') ?>"></script>
 
 
 <!-- Script para las partículas -->
-<script src="<?= JS_PATH ?>particles.js"></script>
+<script src="<?= v(JS_PATH . 'particles.js') ?>"></script>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         if (typeof initParticlesCanvas === 'function') {
@@ -256,6 +256,6 @@ $server_port = $_SERVER['SERVER_PORT'] ?? '80';
         }
     });
 </script>
-<script src="<?= JS_PATH ?>main.js"></script>
+<script src="<?= v(JS_PATH . 'main.js') ?>"></script>
 <?php include __DIR__ . '/../partials/layout/chatwidget.php'; ?>
 <?php include __DIR__ . '/../partials/layout/footer.php'; ?>

@@ -8,7 +8,7 @@ $activePage = 'nosotros';
 <?php include 'partials/layout/header.php'; ?>
 
 <!-- Estilos personalizados para la página sobre nosotros -->
-<link rel="stylesheet" href="<?= CSS_PATH ?>about-us.css">
+<link rel="stylesheet" href="<?= v(CSS_PATH . 'about-us.css') ?>">
 
 <!-- Hero Section Rediseñado -->
 <section class="hero-redesigned bg-aloia-dark text-aloia-white">
@@ -495,13 +495,13 @@ $activePage = 'nosotros';
 </section>
 
 
-<script src="<?= JS_PATH ?>about-us.js"></script>
-<script src="<?= JS_PATH ?>particles.js"></script>
+<script src="<?= v(JS_PATH . 'about-us.js') ?>"></script>
+<script src="<?= v(JS_PATH . 'particles.js') ?>"></script>
 <script>
     if (document.getElementById('particles-canvas')) {
         initParticlesCanvas();
     }
 </script>
-<script src="<?= JS_PATH ?>main.js"></script>
+<script src="<?= v(JS_PATH . 'main.js') ?>"></script>
 <?php include 'partials/layout/chatwidget.php'; ?>
 <?php include 'partials/layout/footer.php'; ?>

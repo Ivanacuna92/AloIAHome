@@ -13,13 +13,13 @@ $activePage = 'home';
 <?php include 'partials/sections/questions.php'; ?>
 <?php include 'partials/sections/superpowers.php'; ?>
 
-<script src="<?= JS_PATH ?>particles.js"></script>
+<script src="<?= v(JS_PATH . 'particles.js') ?>"></script>
 <script>
     if (document.getElementById('particles-canvas')) {
         initParticlesCanvas();
     }
 </script>
-<script src="<?= JS_PATH ?>main.js"></script>
+<script src="<?= v(JS_PATH . 'main.js') ?>"></script>
 <?php include 'partials/layout/chatwidget.php'; ?>
 <?php include 'partials/layout/footer.php'; ?>
 

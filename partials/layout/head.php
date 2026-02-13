@@ -49,8 +49,8 @@
 
 
     <!-- Estilos personalizados -->
-    <link rel="stylesheet" href="<?= CSS_PATH ?>tailwind-utilities.css">
-    <link rel="stylesheet" href="<?= CSS_PATH ?>chatbot.css">
+    <link rel="stylesheet" href="<?= v(CSS_PATH . 'tailwind-utilities.css') ?>">
+    <link rel="stylesheet" href="<?= v(CSS_PATH . 'chatbot.css') ?>">
 
     <!-- LinkedIn Insight Tag -->
     <script type="text/javascript">

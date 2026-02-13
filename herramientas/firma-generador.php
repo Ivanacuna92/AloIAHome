@@ -7,7 +7,7 @@ $activePage = 'herramientas';
 <?php include __DIR__ . '/../partials/layout/header.php'; ?>
 
 <!-- Estilos personalizados para el generador de firmas -->
-<link rel="stylesheet" href="<?= CSS_PATH ?>firma-generador.css">
+<link rel="stylesheet" href="<?= v(CSS_PATH . 'firma-generador.css') ?>">
 
 <!-- Header de Firmas -->
 <section class="signature-header bg-aloia-dark text-aloia-white py-20 md:py-24 relative overflow-hidden">
@@ -260,10 +260,10 @@ $activePage = 'herramientas';
 </section>
 
 <!-- Script para el generador de firmas -->
-<script src="<?= JS_PATH ?>firma-generador.js"></script>
+<script src="<?= v(JS_PATH . 'firma-generador.js') ?>"></script>
 
 <!-- Script para las partículas -->
-<script src="<?= JS_PATH ?>particles.js"></script>
+<script src="<?= v(JS_PATH . 'particles.js') ?>"></script>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         initParticlesCanvas(); // Solo si hay <canvas id="particles-canvas">
@@ -271,6 +271,6 @@ $activePage = 'herramientas';
 </script>
 
 
-<script src="<?= JS_PATH ?>main.js"></script>
+<script src="<?= v(JS_PATH . 'main.js') ?>"></script>
 <?php include __DIR__ . '/../partials/layout/chatwidget.php'; ?>
 <?php include __DIR__ . '/../partials/layout/footer.php'; ?>
