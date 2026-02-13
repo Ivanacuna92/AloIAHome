@@ -94,7 +94,7 @@ $activePage = 'herramientas';
                                     <input type="url" class="form-control" id="linkedin" placeholder="https://linkedin.com/in/...">
                                 </div>
                                 <div>
-                                    <label class="form-label">Twitter</label>
+                                    <label class="form-label">Twitter / X</label>
                                     <input type="url" class="form-control" id="twitter" placeholder="https://twitter.com/...">
                                 </div>
                                 <div>
@@ -131,9 +131,6 @@ $activePage = 'herramientas';
                             <button type="button" id="btnBorrar" class="btn-aloia-outline">
                                 Borrar todo
                             </button>
-                            <button type="button" id="btnCrear" class="btn-aloia-primary">
-                                Crear firma
-                            </button>
                         </div>
                     </form>
                 </div>
@@ -148,9 +145,14 @@ $activePage = 'herramientas';
                             <!-- El preview se actualiza via JavaScript -->
                         </div>
                     </div>
-                    <button id="btnCopiar" class="btn-aloia-primary hidden">
-                        Copiar firma
-                    </button>
+                    <div class="flex gap-4 mt-4">
+                        <button id="btnCopiar" class="btn-aloia-primary">
+                            Copiar codigo HTML
+                        </button>
+                        <button id="btnDescargar" class="btn-aloia-outline">
+                            Descargar HTML
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

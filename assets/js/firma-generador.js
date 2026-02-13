@@ -4,8 +4,8 @@
         const inputs = document.querySelectorAll('input');
         const previewContent = document.getElementById('previewContent');
         const btnBorrar = document.getElementById('btnBorrar');
-        const btnCrear = document.getElementById('btnCrear');
         const btnCopiar = document.getElementById('btnCopiar');
+        const btnDescargar = document.getElementById('btnDescargar');
         const colorTema = document.getElementById('colorTema');
         const colorTexto = document.getElementById('colorTexto');
         const colorEnlaces = document.getElementById('colorEnlaces');
@@ -31,78 +31,61 @@
             const facebook = document.getElementById('facebook').value;
 
             previewContent.innerHTML = `
-                <table cellpadding="0" cellspacing="0" style="font-family: sans-serif; line-height: 1.4; color: ${textoColor};">
+                <!-- Card 1: Identidad personal -->
+                <table cellpadding="0" cellspacing="0" style="font-family: sans-serif; line-height: 1.4; color: ${textoColor}; width: 100%;">
                     <tr>
-                        <td style="vertical-align: top; padding-right: 15px;">
-                            ${imgPerfil ? `<img src="${imgPerfil}" alt="Foto de perfil" style="width: 120px; height: 120px; border-radius: 8px; border: 3px solid ${temaColor};">` : ''}
+                        <td style="vertical-align: middle; text-align: center; padding: 15px 20px; width: 160px;">
+                            ${imgPerfil ? `<img src="${imgPerfil}" alt="Foto de perfil" style="width: 120px; height: 120px; border-radius: 8px;  object-fit: cover;">` : ''}
                         </td>
-                        <td style="vertical-align: top;">
-                            <div style="font-size: 22px; font-weight: bold; color: ${temaColor}; margin-bottom: 5px;">
+                        <td style="vertical-align: middle; border-left: 2px solid ${temaColor}; padding: 15px 20px;">
+                            <div style="font-size: 22px; font-weight: bold; color: ${temaColor}; margin-bottom: 4px;">
                                 ${nombre} ${apellido}
                             </div>
-                            ${puesto ? `
-                                <div style="font-size: 16px; color: ${textoColor}; margin-bottom: 3px;">${puesto}</div>
+                            ${puesto ? `<div style="font-size: 14px; color: ${textoColor}; margin-bottom: 2px;">${puesto}</div>` : ''}
+                            ${departamento ? `<div style="font-size: 14px; color: ${textoColor}; margin-bottom: 2px;">${departamento}</div>` : ''}
+                            ${empresa ? `<div style="font-size: 14px; font-weight: 600; color: ${temaColor};">${empresa}</div>` : ''}
+                        </td>
+                    </tr>
+                </table>
+
+                <!-- Card 2: Contacto y empresa -->
+                ${(imgLogo || telOficina || telMovil || email || linkedin || twitter || instagram || facebook) ? `
+                <table cellpadding="0" cellspacing="0" style="font-family: sans-serif; line-height: 1.4; color: ${textoColor}; width: 100%; margin-top: 10px;">
+                    <tr>
+                        <td style="vertical-align: middle; text-align: center; padding: 15px 20px; width: 160px;">
+                            ${imgLogo ? `<img src="${imgLogo}" alt="Logo empresa" style="max-width: 120px; height: auto; border-radius: 8px; ">` : ''}
+                        </td>
+                        <td style="vertical-align: middle; border-left: 2px solid ${temaColor}; padding: 15px 20px;">
+                            ${telOficina ? `
+                                <div style="margin: 4px 0;">
+                                    <span style="color: ${temaColor}; font-weight: bold;">Tel:</span>
+                                    <a href="tel:${telOficina}" style="color: ${enlacesColor}; text-decoration: none; margin-left: 8px;">${telOficina}</a>
+                                </div>
                             ` : ''}
-                            ${departamento ? `
-                                <div style="font-size: 16px; color: ${textoColor}; margin-bottom: 3px;">${departamento}</div>
+                            ${telMovil ? `
+                                <div style="margin: 4px 0;">
+                                    <span style="color: ${temaColor}; font-weight: bold;">Movil:</span>
+                                    <a href="tel:${telMovil}" style="color: ${enlacesColor}; text-decoration: none; margin-left: 8px;">${telMovil}</a>
+                                </div>
                             ` : ''}
-                            ${empresa ? `
-                                <div style="font-size: 16px; color: ${textoColor}; margin-bottom: 15px;">${empresa}</div>
+                            ${email ? `
+                                <div style="margin: 4px 0;">
+                                    <span style="color: ${temaColor}; font-weight: bold;">Email:</span>
+                                    <a href="mailto:${email}" style="color: ${enlacesColor}; text-decoration: none; margin-left: 8px;">${email}</a>
+                                </div>
                             ` : ''}
-                            
-                            <div style="border-top: 2px solid ${temaColor}; padding-top: 10px; margin: 10px 0;">
-                                ${telOficina ? `
-                                    <div style="margin: 5px 0;">
-                                        <span style="color: ${temaColor}; font-weight: bold;">Tel:</span>
-                                        <a href="tel:${telOficina}" style="color: ${enlacesColor}; text-decoration: none; margin-left: 10px;">${telOficina}</a>
-                                    </div>
-                                ` : ''}
-                                ${telMovil ? `
-                                    <div style="margin: 5px 0;">
-                                        <span style="color: ${temaColor}; font-weight: bold;">Móvil:</span>
-                                        <a href="tel:${telMovil}" style="color: ${enlacesColor}; text-decoration: none; margin-left: 10px;">${telMovil}</a>
-                                    </div>
-                                ` : ''}
-                                ${email ? `
-                                    <div style="margin: 5px 0;">
-                                        <span style="color: ${temaColor}; font-weight: bold;">Email:</span>
-                                        <a href="mailto:${email}" style="color: ${enlacesColor}; text-decoration: none; margin-left: 10px;">${email}</a>
-                                    </div>
-                                ` : ''}
-                                ${(linkedin || twitter || instagram || facebook) ? `
-                                <div style="margin-top: 10px;">
-                                    ${linkedin ? `
-                                        <a href="${linkedin}" style="color: ${enlacesColor}; text-decoration: none; margin-right: 15px;" target="_blank">
-                                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v5/icons/linkedin.svg" alt="LinkedIn" style="width: 20px; height: 20px; vertical-align: middle;">
-                                        </a>
-                                    ` : ''}
-                                    ${twitter ? `
-                                        <a href="${twitter}" style="color: ${enlacesColor}; text-decoration: none; margin-right: 15px;" target="_blank">
-                                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v5/icons/twitter.svg" alt="Twitter" style="width: 20px; height: 20px; vertical-align: middle;">
-                                        </a>
-                                    ` : ''}
-                                    ${instagram ? `
-                                        <a href="${instagram}" style="color: ${enlacesColor}; text-decoration: none; margin-right: 15px;" target="_blank">
-                                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v5/icons/instagram.svg" alt="Instagram" style="width: 20px; height: 20px; vertical-align: middle;">
-                                        </a>
-                                    ` : ''}
-                                    ${facebook ? `
-                                        <a href="${facebook}" style="color: ${enlacesColor}; text-decoration: none; margin-right: 15px;" target="_blank">
-                                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v5/icons/facebook.svg" alt="Facebook" style="width: 20px; height: 20px; vertical-align: middle;">
-                                        </a>
-                                    ` : ''}
+                            ${(linkedin || twitter || instagram || facebook) ? `
+                                <div style="margin-top: 10px; display: flex; align-items: center; gap: 10px;">
+                                    ${linkedin ? `<a href="${linkedin}" style="text-decoration: none;" target="_blank"><img src="https://cdn-icons-png.flaticon.com/24/3536/3536505.png" alt="LinkedIn" width="20" height="20" style="width: 20px; height: 20px;"></a>` : ''}
+                                    ${twitter ? `<a href="${twitter}" style="text-decoration: none;" target="_blank"><img src="https://cdn-icons-png.flaticon.com/24/5968/5968958.png" alt="Twitter / X" width="20" height="20" style="width: 20px; height: 20px;"></a>` : ''}
+                                    ${instagram ? `<a href="${instagram}" style="text-decoration: none;" target="_blank"><img src="https://cdn-icons-png.flaticon.com/24/2111/2111463.png" alt="Instagram" width="20" height="20" style="width: 20px; height: 20px;"></a>` : ''}
+                                    ${facebook ? `<a href="${facebook}" style="text-decoration: none;" target="_blank"><img src="https://cdn-icons-png.flaticon.com/24/5968/5968764.png" alt="Facebook" width="20" height="20" style="width: 20px; height: 20px;"></a>` : ''}
                                 </div>
                             ` : ''}
                         </td>
                     </tr>
-                    ${imgLogo ? `
-                        <tr>
-                            <td colspan="2" style="padding-top: 15px;">
-                                <img src="${imgLogo}" alt="Logo empresa" style="max-width: 180px; height: auto;">
-                            </td>
-                        </tr>
-                    ` : ''}
                 </table>
+                ` : ''}
             `;
         }
 
@@ -117,31 +100,46 @@
             colorTexto.value = '#000000';
             colorEnlaces.value = '#FD6144';
             updatePreview();
-            btnCopiar.classList.add('hidden');
         });
 
-        btnCrear.addEventListener('click', () => {
-            if(document.getElementById('signatureForm').checkValidity()) {
-                btnCopiar.classList.remove('hidden');
-            } else {
+        btnCopiar.addEventListener('click', async () => {
+            if(!document.getElementById('signatureForm').checkValidity()) {
                 alert('Por favor completa los campos obligatorios');
+                return;
             }
-        });
-
-        btnCopiar.addEventListener('click', () => {
-            const range = document.createRange();
-            range.selectNode(previewContent);
-            window.getSelection().removeAllRanges();
-            window.getSelection().addRange(range);
-            document.execCommand('copy');
-            window.getSelection().removeAllRanges();
-            
-            btnCopiar.textContent = '¡Copiado!';
+            try {
+                await navigator.clipboard.writeText(previewContent.innerHTML);
+                btnCopiar.textContent = '¡Codigo copiado!';
+            } catch (e) {
+                // Fallback
+                const ta = document.createElement('textarea');
+                ta.value = previewContent.innerHTML;
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                document.body.removeChild(ta);
+                btnCopiar.textContent = '¡Codigo copiado!';
+            }
             setTimeout(() => {
-                btnCopiar.textContent = 'Copiar firma';
+                btnCopiar.textContent = 'Copiar codigo HTML';
             }, 2000);
         });
-        
+
+        btnDescargar.addEventListener('click', () => {
+            if(!document.getElementById('signatureForm').checkValidity()) {
+                alert('Por favor completa los campos obligatorios');
+                return;
+            }
+            const html = `<!DOCTYPE html><html><head><meta charset="utf-8"></head><body>${previewContent.innerHTML}</body></html>`;
+            const blob = new Blob([html], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'firma-email.html';
+            a.click();
+            URL.revokeObjectURL(url);
+        });
+
         // Inicializar la vista previa
         updatePreview();
     });
