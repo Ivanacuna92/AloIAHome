@@ -2,8 +2,10 @@
 // Establecer encabezados para JSON
 header('Content-Type: application/json');
 
+require_once __DIR__ . '/../includes/config.php';
+
 // Obtener información básica del usuario
-$user_ip = $_SERVER['REMOTE_ADDR']; 
+$user_ip = getRealIP();
 $user_agent = $_SERVER['HTTP_USER_AGENT'];
 $user_language = $_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? 'No disponible';
 $user_referer = $_SERVER['HTTP_REFERER'] ?? 'Acceso directo';

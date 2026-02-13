@@ -38,3 +38,29 @@ function getCurrentUrl() {
     $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https://' : 'http://';
     return rtrim($protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'], '/');
 }
+
+// Función para obtener la IP real del usuario (compatible con Docker/proxy/Cloudflare)
+function getRealIP() {
+    $ip = '';
+
+    if (!empty($_SERVER['HTTP_CF_CONNECTING_IP'])) {
+        $ip = $_SERVER['HTTP_CF_CONNECTING_IP'];
+    } elseif (!empty($_SERVER['HTTP_X_REAL_IP'])) {
+        $ip = $_SERVER['HTTP_X_REAL_IP'];
+    } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+        $ips = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
+        $ip = trim($ips[0]);
+    } else {
+        $ip = $_SERVER['REMOTE_ADDR'] ?? '0.0.0.0';
+    }
+
+    // Si la IP es privada/local, consultar servicio externo para obtener la IP pública
+    if (!filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE)) {
+        $public_ip = @file_get_contents('https://api.ipify.org?format=text');
+        if ($public_ip && filter_var(trim($public_ip), FILTER_VALIDATE_IP)) {
+            $ip = trim($public_ip);
+        }
+    }
+
+    return $ip;
+}
