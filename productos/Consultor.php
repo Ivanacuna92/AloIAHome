@@ -119,7 +119,7 @@ $server_port = $_SERVER['SERVER_PORT'] ?? '80';
                     </div>
                     <h3 class="text-2xl font-bold mb-4 text-white">Optimización de Procesos</h3>
                     <p class="leading-relaxed mb-6">
-                        Identificacin y mejora de cuellos de botella operativos con IA avanzada.
+                        Identificación y mejora de cuellos de botella operativos con IA avanzada.
                     </p>
                     <div class="service-details">
                         <ul class="text-sm space-y-2 text-white">
@@ -129,7 +129,7 @@ $server_port = $_SERVER['SERVER_PORT'] ?? '80';
                             </li>
                             <li class="flex items-center text-white">
                                 <i class="fas fa-check mr-2"></i>
-                                Identificacin de ineficiencias
+                                Identificación de ineficiencias
                             </li>
                             <li class="flex items-center text-white">
                                 <i class="fas fa-check mr-2"></i>
@@ -158,7 +158,7 @@ $server_port = $_SERVER['SERVER_PORT'] ?? '80';
                             </li>
                             <li class="flex items-center">
                                 <i class="fas fa-check text-green-500 mr-2"></i>
-                                Alertas automticas
+                                Alertas automáticas
                             </li>
                             <li class="flex items-center">
                                 <i class="fas fa-check text-green-500 mr-2"></i>
@@ -305,7 +305,7 @@ $server_port = $_SERVER['SERVER_PORT'] ?? '80';
                     </div>
                 </div>
 
-                <!-- Caso 6: Atencin al Cliente -->
+                <!-- Caso 6: Atención al Cliente -->
                 <div class="use-case-card group bg-white rounded-2xl p-8 border border-gray-100 hover:border-aloia-orange/30 transition-all duration-300 shadow-lg hover:shadow-xl">
                     <div class="w-16 h-16 rounded-full bg-gradient-aloia flex items-center justify-center mb-6 group-hover:scale-110 transition-all duration-300">
                         <i class="fas fa-headset text-white text-2xl"></i>
@@ -331,7 +331,7 @@ $server_port = $_SERVER['SERVER_PORT'] ?? '80';
         </div>
     </section>
 
-    <!-- Nuestra Metodologa -->
+    <!-- Nuestra Metodología -->
     <section class="py-20">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
@@ -339,7 +339,7 @@ $server_port = $_SERVER['SERVER_PORT'] ?? '80';
                     📋 Metodología
                 </div>
                 <h2 class="text-4xl md:text-5xl font-bold mb-6 text-aloia-dark">
-                    Nuestra <span class="text-gradient bg-gradient-aloia">Metodologa</span>
+                    Nuestra <span class="text-gradient bg-gradient-aloia">Metodología</span>
                 </h2>
                 <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
                     Proceso estructurado que garantiza el éxito de tu transformación con IA
@@ -361,7 +361,7 @@ $server_port = $_SERVER['SERVER_PORT'] ?? '80';
                                 <ul class="text-left space-y-2 text-gray-500">
                                     <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i>Evaluación de procesos actuales</li>
                                     <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i>Identificación de oportunidades IA</li>
-                                    <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i>Definicin de KPIs inteligentes</li>
+                                    <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i>Definición de KPIs inteligentes</li>
                                 </ul>
                             </div>
                         </div>
@@ -382,7 +382,7 @@ $server_port = $_SERVER['SERVER_PORT'] ?? '80';
                                 <h3 class="text-2xl font-bold mb-4 text-aloia-dark">2. Diseño de Estrategia IA</h3>
                                 <p class="text-gray-600 mb-6">Creamos el plan de acción personalizado con tecnologías IA específicas.</p>
                                 <ul class="space-y-2 text-gray-500">
-                                    <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i>Roadmap de implementacin IA</li>
+                                    <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i>Roadmap de implementación IA</li>
                                     <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i>Selección de modelos ML</li>
                                     <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i>Plan de datos y recursos</li>
                                 </ul>
@@ -439,7 +439,7 @@ $server_port = $_SERVER['SERVER_PORT'] ?? '80';
             <div class="text-center mb-16">
                 <h2 class="text-4xl md:text-5xl font-bold mb-6">
                     Impacto Real de la 
-                    IA Estratgica
+                    IA Estratégica
                 </h2>
                 <p class="text-xl opacity-90 max-w-2xl mx-auto">
                     Métricas reales de empresas que implementaron consultoría IA con nosotros
@@ -929,7 +929,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             });
 
-            // Limpia la bsqueda
+            // Limpia la búsqueda
             if (searchInput) {
                 searchInput.value = '';
             }

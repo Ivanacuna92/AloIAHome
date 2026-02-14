@@ -100,7 +100,7 @@ $server_port = $_SERVER['SERVER_PORT'] ?? '80';
                             </li>
                             <li class="flex items-center">
                                 <i class="fas fa-check text-green-500 mr-2"></i>
-                                Sin das festivos
+                                Sin días festivos
                             </li>
                             <li class="flex items-center">
                                 <i class="fas fa-check text-green-500 mr-2"></i>
@@ -323,7 +323,7 @@ $server_port = $_SERVER['SERVER_PORT'] ?? '80';
                                     <i class="fas fa-robot text-white text-xs"></i>
                                 </div>
                                 <div class="bg-gray-100 rounded-2xl rounded-tl-md px-6 py-4 max-w-xs">
-                                    <p class="text-gray-800">¡Excelente pregunta! 🕐 Estamos disponibles <strong>24/7</strong> los 365 das del año. Nunca cerramos, siempre listos para ayudarte.</p>
+                                    <p class="text-gray-800">¡Excelente pregunta! 🕐 Estamos disponibles <strong>24/7</strong> los 365 días del año. Nunca cerramos, siempre listos para ayudarte.</p>
                                     <div class="mt-3 flex items-center gap-2 text-xs text-green-600">
                                         <i class="fas fa-check-double"></i>
                                         <span>Respondido en 0.3s</span>
@@ -396,7 +396,7 @@ $server_port = $_SERVER['SERVER_PORT'] ?? '80';
                 </div>
                 <div class="faq-content" id="q1">
                     <div class="px-6 pb-6 text-gray-600 leading-relaxed">
-                        <p>Un Chatbot es un asistente virtual basado en IA que interactúa con tus clientes a travs de texto. Usa GPT-4 para entender y responder preguntas, procesar solicitudes y mantener conversaciones naturales 24/7.</p>
+                        <p>Un Chatbot es un asistente virtual basado en IA que interactúa con tus clientes a través de texto. Usa GPT-4 para entender y responder preguntas, procesar solicitudes y mantener conversaciones naturales 24/7.</p>
                     </div>
                 </div>
             </div>
@@ -408,7 +408,7 @@ $server_port = $_SERVER['SERVER_PORT'] ?? '80';
                 </div>
                 <div class="faq-content" id="q2">
                     <div class="px-6 pb-6 text-gray-600 leading-relaxed">
-                        <p>La implementacin toma entre 2-3 semanas. Incluye setup inicial, entrenamiento con tu info, pruebas y ajustes.</p>
+                        <p>La implementación toma entre 2-3 semanas. Incluye setup inicial, entrenamiento con tu info, pruebas y ajustes.</p>
                     </div>
                 </div>
             </div>
@@ -512,7 +512,7 @@ $server_port = $_SERVER['SERVER_PORT'] ?? '80';
 
             <div class="faq-item question-item tecnica" data-category="tecnica">
                 <div class="flex justify-between items-center cursor-pointer p-6" data-faq="q13">
-                    <h3 class="text-xl font-bold text-aloia-dark flex-1 pr-4">¿Qu métricas proporciona?</h3>
+                    <h3 class="text-xl font-bold text-aloia-dark flex-1 pr-4">¿Qué métricas proporciona?</h3>
                     <div class="faq-icon"><i class="fas fa-chevron-down text-white transform transition-transform duration-300"></i></div>
                 </div>
                 <div class="faq-content" id="q13">

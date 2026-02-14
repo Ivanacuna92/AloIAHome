@@ -186,7 +186,7 @@ $server_port = $_SERVER['SERVER_PORT'] ?? '80';
                     Transforman
                 </h2>
                 <p class="text-xl opacity-90 max-w-2xl mx-auto">
-                    Mtricas reales de empresas que ya automatizaron sus procesos crticos
+                    Métricas reales de empresas que ya automatizaron sus procesos crticos
                 </p>
             </div>
             
@@ -261,7 +261,7 @@ $server_port = $_SERVER['SERVER_PORT'] ?? '80';
                     <div class="timeline-step flex items-center mb-16">
                         <div class="w-1/2 pr-8 text-right">
                             <div class="timeline-content bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:border-aloia-orange/30 transition-all duration-300">
-                                <h3 class="text-2xl font-bold mb-4 text-aloia-dark">1. Anlisis de Procesos</h3>
+                                <h3 class="text-2xl font-bold mb-4 text-aloia-dark">1. Análisis de Procesos</h3>
                                 <p class="text-gray-600 mb-6">Identificamos los procesos más repetitivos y que consumen más tiempo en tu operación.</p>
                                 <ul class="text-left space-y-2 text-gray-500">
                                     <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i>Mapeo de procesos actuales</li>
@@ -440,7 +440,7 @@ $server_port = $_SERVER['SERVER_PORT'] ?? '80';
                 <!-- Proceso Manual -->
                 <div class="comparison-card manual bg-white rounded-2xl p-8 border-2 border-red-200 relative overflow-hidden">
                     <div class="absolute top-0 right-0 bg-red-500 text-white px-4 py-1 text-sm font-bold">
-                        Mtodo Tradicional
+                        Método Tradicional
                     </div>
                     <div class="comparison-header text-center mb-8">
                         <div class="w-20 h-20 rounded-full bg-red-100 flex items-center justify-center mx-auto mb-4">
@@ -591,7 +591,7 @@ $server_port = $_SERVER['SERVER_PORT'] ?? '80';
                     Preguntas <span class="text-gradient bg-gradient-aloia">Frecuentes</span>
                 </h2>
                 <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                    Resolvemos todas tus dudas sobre automatizacin robótica de procesos
+                    Resolvemos todas tus dudas sobre automatización robótica de procesos
                 </p>
             </div>
 
@@ -661,7 +661,7 @@ $server_port = $_SERVER['SERVER_PORT'] ?? '80';
                     </div>
                     <div class="faq-content" id="q3">
                         <div class="px-6 pb-6 text-gray-600 leading-relaxed">
-                            <p>Cualquier proceso repetitivo y basado en reglas: procesamiento de facturas, gestin de datos, conciliaciones bancarias, reportes, entrada de datos, procesamiento de pedidos y mucho más.</p>
+                            <p>Cualquier proceso repetitivo y basado en reglas: procesamiento de facturas, gestión de datos, conciliaciones bancarias, reportes, entrada de datos, procesamiento de pedidos y mucho más.</p>
                         </div>
                     </div>
                 </div>
@@ -698,7 +698,7 @@ $server_port = $_SERVER['SERVER_PORT'] ?? '80';
                     </div>
                     <div class="faq-content" id="q6">
                         <div class="px-6 pb-6 text-gray-600 leading-relaxed">
-                            <p>Nuestros RPA son flexibles y adaptables. Podemos ajustar la automatizacin rápidamente para acomodar cambios en los procesos, nuevas reglas o requisitos adicionales.</p>
+                            <p>Nuestros RPA son flexibles y adaptables. Podemos ajustar la automatización rápidamente para acomodar cambios en los procesos, nuevas reglas o requisitos adicionales.</p>
                         </div>
                     </div>
                 </div>
@@ -1006,7 +1006,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Animacin de contadores
+    // Animación de contadores
     function animateCounters() {
         const counters = document.querySelectorAll('.counter');
         

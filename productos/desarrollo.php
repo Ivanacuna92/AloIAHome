@@ -90,7 +90,7 @@ $server_port = $_SERVER['SERVER_PORT'] ?? '80';
                     </div>
                     <h3 class="text-2xl font-bold mb-4 text-aloia-dark">Aplicaciones Web</h3>
                     <p class="text-gray-600 leading-relaxed mb-6">
-                        Desarrollo web responsivo y escalable con las últimas tecnologías para mximo rendimiento.
+                        Desarrollo web responsivo y escalable con las últimas tecnologías para máximo rendimiento.
                     </p>
                     <div class="service-details">
                         <ul class="text-sm text-gray-500 space-y-2">
@@ -117,7 +117,7 @@ $server_port = $_SERVER['SERVER_PORT'] ?? '80';
                     <div class="feature-icon">
                         <i class="fas fa-mobile-alt"></i>
                     </div>
-                    <h3 class="text-2xl font-bold mb-4 text-aloia-dark">Apps Mviles</h3>
+                    <h3 class="text-2xl font-bold mb-4 text-aloia-dark">Apps Móviles</h3>
                     <p class="leading-relaxed mb-6">
                         Apps nativas y multiplataforma para iOS y Android con experiencia de usuario excepcional.
                     </p>
@@ -385,7 +385,7 @@ $server_port = $_SERVER['SERVER_PORT'] ?? '80';
                     </div>
                     <div class="faq-content" id="q1">
                         <div class="px-6 pb-6 text-gray-600 leading-relaxed">
-                            <p>Incluye análisis completo de requerimientos, diseo UX/UI, desarrollo full-stack, testing exhaustivo, implementación, capacitación y soporte continuo. Todo personalizado para tu negocio específico.</p>
+                            <p>Incluye análisis completo de requerimientos, diseño UX/UI, desarrollo full-stack, testing exhaustivo, implementación, capacitación y soporte continuo. Todo personalizado para tu negocio específico.</p>
                         </div>
                     </div>
                 </div>

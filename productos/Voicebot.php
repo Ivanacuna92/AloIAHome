@@ -402,7 +402,7 @@ elevenlabs-convai::part(fab) {
                         </li>
                         <li class="flex items-start gap-3">
                             <i class="fas fa-check-circle text-green-500 mt-1"></i>
-                            <span>Confirmacin de entregas</span>
+                            <span>Confirmación de entregas</span>
                         </li>
                     </ul>
                     <div class="text-aloia-red font-medium group-hover:text-aloia-orange transition-colors">
@@ -527,7 +527,7 @@ elevenlabs-convai::part(fab) {
                     <i class="fas fa-info-circle mr-2"></i>Generales
                 </button>
                 <button class="filter-btn" data-filter="tecnica">
-                    <i class="fas fa-cog mr-2"></i>Tcnicas
+                    <i class="fas fa-cog mr-2"></i>Técnicas
                 </button>
                 <button class="filter-btn" data-filter="precio">
                     <i class="fas fa-dollar-sign mr-2"></i>Precios
@@ -540,7 +540,7 @@ elevenlabs-convai::part(fab) {
                 <!-- GENERALES -->
                 <div class="faq-item question-item general" data-category="general">
                     <div class="flex justify-between items-center cursor-pointer p-6" data-faq="q1">
-                        <h3 class="text-xl font-bold text-aloia-dark flex-1 pr-4">¿Qué es un Voicebot y cmo funciona?</h3>
+                        <h3 class="text-xl font-bold text-aloia-dark flex-1 pr-4">¿Qué es un Voicebot y cómo funciona?</h3>
                         <div class="faq-icon"><i class="fas fa-chevron-down text-white transform transition-transform duration-300"></i></div>
                     </div>
                     <div class="faq-content" id="q1">
@@ -593,7 +593,7 @@ elevenlabs-convai::part(fab) {
                     </div>
                     <div class="faq-content" id="q15">
                         <div class="px-6 pb-6 text-gray-600 leading-relaxed">
-                            <p>Configuramos horarios personalizados respetando regulaciones locales. Típicamente de 9 AM a 8 PM, pero es completamente personalizable segn tus necesidades.</p>
+                            <p>Configuramos horarios personalizados respetando regulaciones locales. Típicamente de 9 AM a 8 PM, pero es completamente personalizable según tus necesidades.</p>
                         </div>
                     </div>
                 </div>
@@ -649,7 +649,7 @@ elevenlabs-convai::part(fab) {
 
                 <div class="faq-item question-item tecnica" data-category="tecnica">
                     <div class="flex justify-between items-center cursor-pointer p-6" data-faq="q13">
-                        <h3 class="text-xl font-bold text-aloia-dark flex-1 pr-4">¿Que métricas y reportes proporciona?</h3>
+                        <h3 class="text-xl font-bold text-aloia-dark flex-1 pr-4">¿Qué métricas y reportes proporciona?</h3>
                         <div class="faq-icon"><i class="fas fa-chevron-down text-white transform transition-transform duration-300"></i></div>
                     </div>
                     <div class="faq-content" id="q13">
@@ -940,7 +940,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Ejecutar animacin de contadores cuando sea visible
+    // Ejecutar animación de contadores cuando sea visible
     const statsSection = document.querySelector('.py-20.bg-gradient-to-r');
     if (statsSection) {
         const observer = new IntersectionObserver((entries) => {
