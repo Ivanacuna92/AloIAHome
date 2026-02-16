@@ -5,7 +5,6 @@
         const previewContent = document.getElementById('previewContent');
         const btnBorrar = document.getElementById('btnBorrar');
         const btnCopiar = document.getElementById('btnCopiar');
-        const btnDescargar = document.getElementById('btnDescargar');
         const colorTema = document.getElementById('colorTema');
         const colorTexto = document.getElementById('colorTexto');
         const colorEnlaces = document.getElementById('colorEnlaces');
@@ -34,8 +33,8 @@
                 <!-- Card 1: Identidad personal -->
                 <table cellpadding="0" cellspacing="0" style="font-family: sans-serif; line-height: 1.4; color: ${textoColor}; width: 100%;">
                     <tr>
-                        <td style="vertical-align: middle; text-align: center; padding: 15px 20px; width: 160px;">
-                            ${imgPerfil ? `<img src="${imgPerfil}" alt="Foto de perfil" style="width: 120px; height: 120px; border-radius: 8px;  object-fit: cover;">` : ''}
+                        <td style="vertical-align: middle; text-align: center; padding: 15px 20px; width: 160px; max-width: 160px; overflow: hidden;">
+                            ${imgPerfil ? `<img src="${imgPerfil}" alt="Foto de perfil" width="120" height="100" style="width: 120px; height: 100px; border-radius: 8px; object-fit: cover; display: block; margin: 0 auto;">` : ''}
                         </td>
                         <td style="vertical-align: middle; border-left: 2px solid ${temaColor}; padding: 15px 20px;">
                             <div style="font-size: 22px; font-weight: bold; color: ${temaColor}; margin-bottom: 4px;">
@@ -52,8 +51,8 @@
                 ${(imgLogo || telOficina || telMovil || email || linkedin || twitter || instagram || facebook) ? `
                 <table cellpadding="0" cellspacing="0" style="font-family: sans-serif; line-height: 1.4; color: ${textoColor}; width: 100%; margin-top: 10px;">
                     <tr>
-                        <td style="vertical-align: middle; text-align: center; padding: 15px 20px; width: 160px;">
-                            ${imgLogo ? `<img src="${imgLogo}" alt="Logo empresa" style="max-width: 120px; height: 120px; border-radius: 8px;">` : ''}
+                        <td style="vertical-align: middle; text-align: center; padding: 15px 20px; width: 160px; max-width: 160px; overflow: hidden;">
+                            ${imgLogo ? `<img src="${imgLogo}" alt="Logo empresa" width="120" height="100" style="width: 120px; height: 100px; border-radius: 8px; object-fit: contain; display: block; margin: 0 auto;">` : ''}
                         </td>
                         <td style="vertical-align: middle; border-left: 2px solid ${temaColor}; padding: 15px 20px;">
                             ${telOficina ? `
@@ -75,12 +74,12 @@
                                 </div>
                             ` : ''}
                             ${(linkedin || twitter || instagram || facebook) ? `
-                                <div style="margin-top: 10px; display: flex; align-items: center; gap: 10px;">
-                                    ${linkedin ? `<a href="${linkedin}" style="text-decoration: none;" target="_blank"><img src="https://cdn-icons-png.flaticon.com/24/3536/3536505.png" alt="LinkedIn" width="20" height="20" style="width: 20px; height: 20px;"></a>` : ''}
-                                    ${twitter ? `<a href="${twitter}" style="text-decoration: none;" target="_blank"><img src="https://cdn-icons-png.flaticon.com/24/5968/5968958.png" alt="Twitter / X" width="20" height="20" style="width: 20px; height: 20px;"></a>` : ''}
-                                    ${instagram ? `<a href="${instagram}" style="text-decoration: none;" target="_blank"><img src="https://cdn-icons-png.flaticon.com/24/2111/2111463.png" alt="Instagram" width="20" height="20" style="width: 20px; height: 20px;"></a>` : ''}
-                                    ${facebook ? `<a href="${facebook}" style="text-decoration: none;" target="_blank"><img src="https://cdn-icons-png.flaticon.com/24/5968/5968764.png" alt="Facebook" width="20" height="20" style="width: 20px; height: 20px;"></a>` : ''}
-                                </div>
+                                <table cellpadding="0" cellspacing="0" style="margin-top: 10px;"><tr>
+                                    ${linkedin ? `<td style="padding-right: 8px;"><a href="${linkedin}" style="text-decoration: none;" target="_blank"><img src="https://cdn-icons-png.flaticon.com/24/3536/3536505.png" alt="LinkedIn" width="20" height="20" style="width: 20px; height: 20px; display: block;"></a></td>` : ''}
+                                    ${twitter ? `<td style="padding-right: 8px;"><a href="${twitter}" style="text-decoration: none;" target="_blank"><img src="https://cdn-icons-png.flaticon.com/24/5968/5968958.png" alt="Twitter / X" width="20" height="20" style="width: 20px; height: 20px; display: block;"></a></td>` : ''}
+                                    ${instagram ? `<td style="padding-right: 8px;"><a href="${instagram}" style="text-decoration: none;" target="_blank"><img src="https://cdn-icons-png.flaticon.com/24/2111/2111463.png" alt="Instagram" width="20" height="20" style="width: 20px; height: 20px; display: block;"></a></td>` : ''}
+                                    ${facebook ? `<td><a href="${facebook}" style="text-decoration: none;" target="_blank"><img src="https://cdn-icons-png.flaticon.com/24/5968/5968764.png" alt="Facebook" width="20" height="20" style="width: 20px; height: 20px; display: block;"></a></td>` : ''}
+                                </tr></table>
                             ` : ''}
                         </td>
                     </tr>
@@ -108,37 +107,28 @@
                 return;
             }
             try {
-                await navigator.clipboard.writeText(previewContent.innerHTML);
-                btnCopiar.textContent = '¡Codigo copiado!';
+                // Copiar como HTML rico para que Gmail lo acepte al pegar en firma
+                const htmlContent = previewContent.innerHTML;
+                const blob = new Blob([htmlContent], { type: 'text/html' });
+                const clipboardItem = new ClipboardItem({ 'text/html': blob });
+                await navigator.clipboard.write([clipboardItem]);
+                btnCopiar.textContent = '¡Firma copiada! Pégala en tu correo';
             } catch (e) {
-                // Fallback
-                const ta = document.createElement('textarea');
-                ta.value = previewContent.innerHTML;
-                document.body.appendChild(ta);
-                ta.select();
+                // Fallback: seleccionar el contenido visual y copiar
+                const range = document.createRange();
+                range.selectNodeContents(previewContent);
+                const selection = window.getSelection();
+                selection.removeAllRanges();
+                selection.addRange(range);
                 document.execCommand('copy');
-                document.body.removeChild(ta);
-                btnCopiar.textContent = '¡Codigo copiado!';
+                selection.removeAllRanges();
+                btnCopiar.textContent = '¡Firma copiada! Pégala en tu correo';
             }
             setTimeout(() => {
-                btnCopiar.textContent = 'Copiar codigo HTML';
+                btnCopiar.textContent = 'Copiar firma';
             }, 2000);
         });
 
-        btnDescargar.addEventListener('click', () => {
-            if(!document.getElementById('signatureForm').checkValidity()) {
-                alert('Por favor completa los campos obligatorios');
-                return;
-            }
-            const html = `<!DOCTYPE html><html><head><meta charset="utf-8"></head><body>${previewContent.innerHTML}</body></html>`;
-            const blob = new Blob([html], { type: 'text/html' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'firma-email.html';
-            a.click();
-            URL.revokeObjectURL(url);
-        });
 
         // Inicializar la vista previa
         updatePreview();

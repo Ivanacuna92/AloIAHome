@@ -145,12 +145,9 @@ $activePage = 'herramientas';
                             <!-- El preview se actualiza via JavaScript -->
                         </div>
                     </div>
-                    <div class="flex gap-4 mt-4">
+                    <div class="mt-4">
                         <button id="btnCopiar" class="btn-aloia-primary">
-                            Copiar codigo HTML
-                        </button>
-                        <button id="btnDescargar" class="btn-aloia-outline">
-                            Descargar HTML
+                            Copiar firma
                         </button>
                     </div>
                 </div>
